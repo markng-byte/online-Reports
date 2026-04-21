@@ -1,0 +1,1398 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OneIBC — Báo Cáo Quản Trị Nội Bộ 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --ink:#0A0F1E;
+  --ink2:#1C2535;
+  --ink3:#374151;
+  --ink4:#6B7280;
+  --white:#FFFFFF;
+  --off:#F8F9FB;
+  --border:#E2E6ED;
+  --border2:#CBD2DC;
+
+  --blue:#1549CC;
+  --blue-lt:#EBF0FF;
+  --blue-mid:#3B62D4;
+
+  --red:#C0392B;
+  --red-lt:#FEF0EF;
+  --red-dark:#991B1B;
+
+  --green:#0A6640;
+  --green-lt:#EDFAF3;
+  --green-dark:#065F46;
+
+  --amber:#92400E;
+  --amber-lt:#FFFBEB;
+  --amber-mid:#D97706;
+
+  --purple:#4C1D95;
+  --purple-lt:#F5F3FF;
+
+  --teal:#0F5E5E;
+  --teal-lt:#F0FDFA;
+
+  --coal:#1E293B;
+
+  --ff-sans:'IBM Plex Sans',system-ui,sans-serif;
+  --ff-mono:'IBM Plex Mono',monospace;
+
+  --r4:4px;--r8:8px;--r12:12px;--r16:16px;
+
+  --shadow-sm:0 1px 3px rgba(0,0,0,.06),0 1px 2px rgba(0,0,0,.04);
+  --shadow:0 2px 8px rgba(0,0,0,.07),0 4px 16px rgba(0,0,0,.05);
+  --shadow-lg:0 4px 20px rgba(0,0,0,.1),0 8px 32px rgba(0,0,0,.07);
+}
+
+html{scroll-behavior:smooth;font-size:14px}
+body{
+  font-family:var(--ff-sans);
+  background:var(--off);
+  color:var(--ink);
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+.mono{font-family:var(--ff-mono)}
+
+/* ── TOPBAR ── */
+.topbar{
+  background:var(--ink);
+  color:var(--white);
+  padding:0;
+  position:sticky;top:0;z-index:200;
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+.topbar-inner{
+  max-width:1200px;margin:0 auto;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 32px;height:48px;
+}
+.topbar-brand{
+  font-family:var(--ff-mono);font-size:11px;font-weight:600;
+  letter-spacing:.12em;text-transform:uppercase;color:#93C5FD;
+}
+.topbar-nav{display:flex;gap:2px}
+.topbar-nav a{
+  font-size:11px;color:#94A3B8;padding:6px 12px;
+  border-radius:var(--r4);text-decoration:none;
+  transition:.15s;white-space:nowrap;
+  font-family:var(--ff-mono);letter-spacing:.04em;
+}
+.topbar-nav a:hover{background:rgba(255,255,255,.08);color:white}
+.topbar-date{font-family:var(--ff-mono);font-size:10px;color:#64748B}
+
+/* ── HERO ── */
+.hero{
+  background:var(--ink);
+  color:white;
+  padding:56px 0 48px;
+  position:relative;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 70% 80% at 85% 50%, rgba(21,73,204,.18) 0%,transparent 55%),
+    radial-gradient(ellipse 50% 60% at 15% 20%, rgba(21,73,204,.08) 0%,transparent 50%);
+  pointer-events:none;
+}
+/* subtle grid lines */
+.hero::after{
+  content:'';position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+  background-size:48px 48px;
+  pointer-events:none;
+}
+.hero-inner{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:0 32px}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--ff-mono);font-size:10px;font-weight:500;
+  color:#60A5FA;letter-spacing:.14em;text-transform:uppercase;
+  margin-bottom:20px;
+}
+.hero-eyebrow::before{
+  content:'';width:6px;height:6px;border-radius:50%;
+  background:#60A5FA;animation:blink 2s ease-in-out infinite;
+}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.hero h1{
+  font-size:clamp(26px,3.5vw,44px);
+  font-weight:700;line-height:1.1;
+  letter-spacing:-.02em;
+  color:white;margin-bottom:12px;
+}
+.hero h1 em{color:#60A5FA;font-style:normal}
+.hero-sub{
+  font-size:14px;color:#94A3B8;
+  max-width:640px;margin-bottom:36px;
+  font-weight:300;line-height:1.7;
+}
+.hero-stats{
+  display:flex;gap:0;
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:var(--r12);
+  overflow:hidden;
+  max-width:740px;
+}
+.hero-stat{
+  flex:1;padding:18px 20px;
+  border-right:1px solid rgba(255,255,255,.08);
+  position:relative;
+}
+.hero-stat:last-child{border-right:none}
+.hs-val{
+  font-family:var(--ff-mono);font-size:22px;font-weight:600;
+  line-height:1;margin-bottom:5px;
+}
+.hs-lbl{font-size:10px;color:#64748B;text-transform:uppercase;letter-spacing:.08em;margin-bottom:2px;font-family:var(--ff-mono)}
+.hs-delta{font-size:11px;font-family:var(--ff-mono)}
+.hs-red .hs-val{color:#F87171}
+.hs-amber .hs-val{color:#FCD34D}
+.hs-green .hs-val{color:#6EE7B7}
+.hs-blue .hs-val{color:#93C5FD}
+.hs-red .hs-delta{color:#FCA5A5}
+.hs-amber .hs-delta{color:#FDE68A}
+.hs-green .hs-delta{color:#A7F3D0}
+.hs-blue .hs-delta{color:#BFDBFE}
+
+/* ── LAYOUT ── */
+.wrap{max-width:1200px;margin:0 auto;padding:0 32px}
+section{padding:52px 0 36px}
+.divider{height:1px;background:var(--border);margin:4px 0}
+
+/* ── SECTION HEADERS ── */
+.sec-eyebrow{
+  display:flex;align-items:center;gap:10px;
+  font-family:var(--ff-mono);font-size:10px;font-weight:500;
+  color:var(--blue);letter-spacing:.12em;text-transform:uppercase;
+  margin-bottom:10px;
+}
+.sec-eyebrow::after{content:'';flex:1;height:1px;background:var(--blue-lt)}
+.sec-title{
+  font-size:clamp(18px,2.2vw,24px);font-weight:700;
+  color:var(--ink);margin-bottom:6px;letter-spacing:-.01em;
+}
+.sec-sub{font-size:13px;color:var(--ink4);max-width:680px;margin-bottom:28px;line-height:1.65}
+
+/* ── GRID ── */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.g5{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+@media(max-width:900px){.g2,.g3,.g4,.g5{grid-template-columns:1fr}}
+
+/* ── CARD ── */
+.card{
+  background:var(--white);
+  border:1px solid var(--border);
+  border-radius:var(--r12);
+  padding:22px 24px;
+  box-shadow:var(--shadow-sm);
+}
+.card-title{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:10px}
+.card-body{font-size:12.5px;color:var(--ink3);line-height:1.7}
+
+/* ── DEPT SCORECARD ── */
+.dept-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-bottom:28px}
+@media(max-width:900px){.dept-grid{grid-template-columns:1fr 1fr}}
+.dept-card{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:var(--r12);padding:18px 16px;
+  position:relative;overflow:hidden;
+}
+.dept-card::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:3px;
+}
+.d-red::before{background:var(--red)}
+.d-amber::before{background:var(--amber-mid)}
+.d-green::before{background:var(--green)}
+.dept-name{font-size:11px;font-weight:600;color:var(--ink4);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;font-family:var(--ff-mono)}
+.dept-pct{font-family:var(--ff-mono);font-size:28px;font-weight:600;line-height:1;margin-bottom:4px}
+.d-red .dept-pct{color:var(--red)}
+.d-amber .dept-pct{color:var(--amber-mid)}
+.d-green .dept-pct{color:var(--green)}
+.dept-row{display:flex;justify-content:space-between;font-size:11px;font-family:var(--ff-mono);margin-bottom:3px;color:var(--ink4)}
+.dept-row strong{color:var(--ink3)}
+.dept-status{
+  margin-top:10px;display:inline-block;
+  font-family:var(--ff-mono);font-size:9px;font-weight:600;
+  padding:3px 8px;border-radius:var(--r4);
+  text-transform:uppercase;letter-spacing:.08em;
+}
+.s-red{background:var(--red-lt);color:var(--red)}
+.s-amber{background:var(--amber-lt);color:var(--amber)}
+.s-green{background:var(--green-lt);color:var(--green)}
+
+/* ── PROGRESS BAR ── */
+.prog-wrap{margin-bottom:14px}
+.prog-header{display:flex;justify-content:space-between;margin-bottom:5px}
+.prog-label{font-size:12px;font-weight:500;color:var(--ink)}
+.prog-val{font-family:var(--ff-mono);font-size:11px;color:var(--blue)}
+.prog-track{height:7px;background:var(--border);border-radius:100px;overflow:hidden}
+.prog-fill{height:100%;border-radius:100px;transition:width .6s ease}
+.fill-red{background:linear-gradient(90deg,#EF4444,#DC2626)}
+.fill-amber{background:linear-gradient(90deg,#F59E0B,#D97706)}
+.fill-green{background:linear-gradient(90deg,#10B981,#059669)}
+.fill-blue{background:linear-gradient(90deg,#3B82F6,#2563EB)}
+
+/* ── MONTHLY TABLE ── */
+.tbl-wrap{overflow-x:auto;border-radius:var(--r12);border:1px solid var(--border)}
+table{width:100%;border-collapse:collapse;font-size:12px}
+thead tr{background:var(--coal);color:white}
+thead th{
+  padding:10px 14px;text-align:right;
+  font-family:var(--ff-mono);font-size:10px;font-weight:500;
+  letter-spacing:.06em;white-space:nowrap;
+}
+thead th:first-child{text-align:left}
+tbody tr{border-bottom:1px solid var(--border)}
+tbody tr:last-child{border-bottom:none;font-weight:600;background:var(--off)}
+tbody tr:nth-child(even){background:#FAFBFC}
+tbody td{
+  padding:9px 14px;color:var(--ink3);
+  font-family:var(--ff-mono);font-size:11px;
+  text-align:right;white-space:nowrap;
+}
+tbody td:first-child{text-align:left;font-family:var(--ff-sans);font-weight:500;color:var(--ink);font-size:12px}
+.q-label{
+  display:inline-block;font-size:9px;font-family:var(--ff-mono);
+  padding:2px 6px;border-radius:3px;font-weight:600;margin-left:6px;
+}
+.q1{background:#EFF6FF;color:#1D4ED8}
+.q2{background:#F0FDF4;color:#065F46}
+.q3{background:#FFF7ED;color:#C2410C}
+.q4{background:#F5F3FF;color:#5B21B6}
+.num-red{color:var(--red)}
+.num-green{color:var(--green)}
+.num-amber{color:var(--amber-mid)}
+
+/* ── FORECAST TABLE ── */
+.fc-table{width:100%;border-collapse:collapse;font-size:12px}
+.fc-table th{
+  padding:10px 14px;background:var(--ink2);color:white;
+  font-family:var(--ff-mono);font-size:10px;font-weight:500;
+  letter-spacing:.06em;text-align:right;
+}
+.fc-table th:first-child{text-align:left}
+.fc-table td{
+  padding:9px 14px;border-bottom:1px solid var(--border);
+  font-family:var(--ff-mono);font-size:11px;text-align:right;
+}
+.fc-table td:first-child{text-align:left;font-family:var(--ff-sans);font-weight:500;font-size:12px;color:var(--ink)}
+.fc-table tr:last-child td{background:var(--off);font-weight:600}
+.gap-neg{color:var(--red)}
+.gap-zero{color:var(--ink4)}
+.fc-badge{
+  display:inline-block;font-family:var(--ff-mono);font-size:9px;font-weight:600;
+  padding:2px 7px;border-radius:3px;
+}
+.fc-on{background:var(--green-lt);color:var(--green)}
+.fc-risk{background:var(--amber-lt);color:var(--amber)}
+
+/* ── ALERT ── */
+.alert{
+  border-radius:var(--r8);padding:16px 20px;
+  display:flex;gap:14px;align-items:flex-start;
+  margin-bottom:12px;
+}
+.alert-crit{background:var(--red-lt);border-left:3px solid var(--red)}
+.alert-warn{background:var(--amber-lt);border-left:3px solid var(--amber-mid)}
+.alert-ok{background:var(--green-lt);border-left:3px solid var(--green)}
+.alert-info{background:var(--blue-lt);border-left:3px solid var(--blue)}
+.alert-icon{font-size:16px;flex-shrink:0;margin-top:1px}
+.alert-title{font-size:12.5px;font-weight:600;color:var(--ink);margin-bottom:3px}
+.alert-body{font-size:12px;color:var(--ink3);line-height:1.65}
+.alert-body strong{color:var(--ink);font-weight:600}
+
+/* ── GAP ANALYSIS BOX ── */
+.gap-box{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:var(--r12);overflow:hidden;margin-bottom:20px;
+}
+.gap-box-header{
+  background:var(--coal);color:white;
+  padding:14px 20px;
+  display:flex;align-items:center;gap:10px;
+}
+.gap-box-title{font-size:12px;font-weight:600;font-family:var(--ff-mono);letter-spacing:.04em}
+.gap-box-badge{
+  font-family:var(--ff-mono);font-size:9px;font-weight:600;
+  padding:3px 8px;border-radius:3px;
+  background:rgba(255,255,255,.12);color:#E2E8F0;
+}
+.gap-box-body{padding:20px}
+
+/* ── BSC FRAMEWORK ── */
+.bsc-grid{display:grid;grid-template-columns:1fr;gap:16px}
+.bsc-card{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:var(--r12);overflow:hidden;
+  display:grid;grid-template-columns:168px 200px 1fr 1fr;
+}
+@media(max-width:1100px){.bsc-card{grid-template-columns:1fr}}
+.bsc-perspective{
+  padding:20px 16px;
+  display:flex;flex-direction:column;justify-content:center;align-items:center;
+  text-align:center;
+}
+.bsc-p-icon{font-size:22px;margin-bottom:8px}
+.bsc-p-title{font-size:11px;font-weight:700;font-family:var(--ff-mono);letter-spacing:.06em;text-transform:uppercase;color:white;line-height:1.3}
+.bsc-focus{
+  padding:18px 16px;
+  border-left:1px solid var(--border);
+  display:flex;flex-direction:column;justify-content:center;
+}
+.bsc-focus-label{
+  font-family:var(--ff-mono);font-size:9px;font-weight:600;
+  text-transform:uppercase;letter-spacing:.1em;
+  color:var(--ink4);margin-bottom:8px;
+}
+.bsc-focus-val{font-size:12px;font-weight:600;color:var(--ink);line-height:1.4}
+.bsc-focus-sub{font-family:var(--ff-mono);font-size:11px;color:var(--ink4);margin-top:4px}
+.bsc-analysis{
+  padding:18px 16px;
+  border-left:1px solid var(--border);
+  background:#FAFBFC;
+}
+.bsc-analysis-label{
+  font-family:var(--ff-mono);font-size:9px;font-weight:600;
+  text-transform:uppercase;letter-spacing:.1em;
+  color:var(--ink4);margin-bottom:8px;
+}
+.bsc-analysis-text{font-size:12px;color:var(--ink3);line-height:1.65}
+.bsc-actions{
+  padding:18px 16px;
+  border-left:1px solid var(--border);
+}
+.bsc-actions-label{
+  font-family:var(--ff-mono);font-size:9px;font-weight:600;
+  text-transform:uppercase;letter-spacing:.1em;
+  color:var(--ink4);margin-bottom:8px;
+}
+.bsc-action-item{
+  display:flex;gap:8px;margin-bottom:7px;font-size:12px;color:var(--ink3);
+  line-height:1.55;
+}
+.bsc-action-num{
+  font-family:var(--ff-mono);font-size:10px;font-weight:600;
+  color:white;padding:1px 5px;border-radius:3px;
+  flex-shrink:0;height:fit-content;margin-top:2px;
+}
+
+/* BSC colour overrides */
+.bsc-fin .bsc-perspective{background:#0F3460}
+.bsc-fin .bsc-action-num{background:#0F3460}
+.bsc-cust .bsc-perspective{background:#1B4332}
+.bsc-cust .bsc-action-num{background:#1B4332}
+.bsc-proc .bsc-perspective{background:#7C2D12}
+.bsc-proc .bsc-action-num{background:#7C2D12}
+.bsc-learn .bsc-perspective{background:#4C1D95}
+.bsc-learn .bsc-action-num{background:#4C1D95}
+.bsc-agg .bsc-perspective{background:#9B2226}
+.bsc-agg .bsc-action-num{background:#9B2226}
+
+/* ── KPI TRACKER ── */
+.kpi-track-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.kpi-track-card{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:var(--r12);padding:20px;
+}
+.kpi-track-title{
+  font-size:11px;font-weight:700;color:var(--ink);
+  display:flex;align-items:center;gap:8px;margin-bottom:14px;
+}
+.kpi-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+
+/* ── RECOVERY PLAN ── */
+.recovery-timeline{display:flex;flex-direction:column;gap:12px}
+.rt-item{
+  display:grid;grid-template-columns:80px 1fr;
+  gap:16px;align-items:flex-start;
+}
+.rt-when{
+  font-family:var(--ff-mono);font-size:10px;font-weight:600;
+  padding:5px 8px;border-radius:var(--r4);text-align:center;
+  line-height:1.3;
+}
+.rt-now{background:var(--red-lt);color:var(--red)}
+.rt-t4{background:var(--blue-lt);color:var(--blue)}
+.rt-t45{background:var(--blue-lt);color:var(--blue)}
+.rt-t5{background:var(--teal-lt);color:var(--teal)}
+.rt-h2{background:var(--purple-lt);color:var(--purple)}
+.rt-body{font-size:12.5px;color:var(--ink3);line-height:1.65}
+.rt-body strong{color:var(--ink);font-weight:600}
+
+/* ── FOOTER ── */
+footer{
+  background:var(--ink);color:#475569;
+  padding:36px 0;margin-top:40px;
+  font-size:11px;font-family:var(--ff-mono);
+}
+.footer-inner{
+  max-width:1200px;margin:0 auto;padding:0 32px;
+  display:flex;justify-content:space-between;
+  align-items:flex-end;flex-wrap:wrap;gap:16px;
+}
+.footer-brand{color:#94A3B8;font-weight:600;margin-bottom:4px;font-size:12px}
+
+/* ── BACK TO TOP ── */
+.back-top{
+  position:fixed;bottom:24px;right:24px;z-index:100;
+  width:38px;height:38px;border-radius:50%;
+  background:var(--ink);color:white;border:1px solid rgba(255,255,255,.15);
+  display:flex;align-items:center;justify-content:center;
+  font-size:16px;cursor:pointer;text-decoration:none;
+  box-shadow:var(--shadow);opacity:.85;transition:.2s;
+}
+.back-top:hover{opacity:1;transform:translateY(-2px)}
+
+/* ── CHIPS ── */
+.chip{
+  display:inline-block;font-family:var(--ff-mono);font-size:10px;
+  padding:3px 8px;border-radius:3px;font-weight:500;
+  white-space:nowrap;
+}
+.chip-red{background:var(--red-lt);color:var(--red)}
+.chip-green{background:var(--green-lt);color:var(--green)}
+.chip-amber{background:var(--amber-lt);color:var(--amber)}
+.chip-blue{background:var(--blue-lt);color:var(--blue)}
+.chip-grey{background:var(--off);color:var(--ink4);border:1px solid var(--border)}
+
+/* fade-in animation */
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.fade-in{animation:fadeUp .4s ease both}
+section{animation:fadeUp .5s ease both}
+</style>
+</head>
+<body>
+
+<!-- ── TOPBAR ── -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="topbar-brand">OneIBC · Internal Governance</div>
+    <nav class="topbar-nav">
+      <a href="#scorecard">Scorecard</a>
+      <a href="#monthly">KPI Monthly</a>
+      <a href="#q1-analysis">Q1 Analysis</a>
+      <a href="#q2-forecast">Q2 Forecast</a>
+      <a href="#recovery">Recovery Plan</a>
+      <a href="#bsc">BSC Framework</a>
+      <a href="#kpi-tracker">KPI Tracker</a>
+    </nav>
+    <div class="topbar-date">Tháng 04/2026</div>
+  </div>
+</div>
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Internal Governance Report · 2026</div>
+    <h1>Báo Cáo Quản Trị<br><em>Kế Hoạch &amp; Thực Tế</em></h1>
+    <p class="hero-sub">Tổng hợp từ KPI 2026, số liệu Q1 thực tế, rolling forecast Q2 và BSC gap analysis. Tài liệu nội bộ dành cho Ban Lãnh Đạo và Dept Leaders.</p>
+
+    <div class="hero-stats">
+      <div class="hero-stat hs-red">
+        <div class="hs-lbl">Q1 Actual / Plan</div>
+        <div class="hs-val">70.8%</div>
+        <div class="hs-delta">$954k / $1,349k</div>
+      </div>
+      <div class="hero-stat hs-red">
+        <div class="hs-lbl">Q1 Gap</div>
+        <div class="hs-val">−$394k</div>
+        <div class="hs-delta">RM + Service + Bank</div>
+      </div>
+      <div class="hero-stat hs-amber">
+        <div class="hs-lbl">Q2 Forecast</div>
+        <div class="hs-val">97.1%</div>
+        <div class="hs-delta">$1,727k / $1,778k</div>
+      </div>
+      <div class="hero-stat hs-amber">
+        <div class="hs-lbl">Q2 Gap (Forecast)</div>
+        <div class="hs-val">−$52k</div>
+        <div class="hs-delta">Renewal + Service + ATA</div>
+      </div>
+      <div class="hero-stat hs-blue">
+        <div class="hs-lbl">Plan Full Year</div>
+        <div class="hs-val">$6.41M</div>
+        <div class="hs-delta">5 depts · Gross Profit</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════
+     SECTION 1 — SCORECARD
+════════════════════════ -->
+<section id="scorecard">
+  <div class="wrap">
+    <div class="sec-eyebrow">01</div>
+    <h2 class="sec-title">Q1/2026 — Scorecard Theo Phòng Ban</h2>
+    <p class="sec-sub">Tổng hợp hiệu suất Q1 theo từng department. Mốc 100% = Level 2 Gross Profit Plan.</p>
+
+    <div class="dept-grid">
+
+      <!-- RM -->
+      <div class="dept-card d-red">
+        <div class="dept-name">RM Dept</div>
+        <div class="dept-pct">40.9%</div>
+        <div class="dept-row"><span>Actual</span><strong>$143,814</strong></div>
+        <div class="dept-row"><span>Plan Q1</span><strong>$351,509</strong></div>
+        <div class="dept-row"><span>Gap</span><strong class="num-red">−$207,695</strong></div>
+        <div class="dept-row"><span>HC</span><strong>10→20 RM</strong></div>
+        <div class="dept-status s-red">🔴 Under</div>
+      </div>
+
+      <!-- Renewal -->
+      <div class="dept-card d-amber">
+        <div class="dept-name">Renewal</div>
+        <div class="dept-pct">90.5%</div>
+        <div class="dept-row"><span>Actual</span><strong>$436,393</strong></div>
+        <div class="dept-row"><span>Plan Q1</span><strong>$482,136</strong></div>
+        <div class="dept-row"><span>Gap</span><strong class="num-amber">−$45,743</strong></div>
+        <div class="dept-row"><span>Late AR</span><strong>~$38k→T4</strong></div>
+        <div class="dept-status s-amber">⚠ Near Target</div>
+      </div>
+
+      <!-- Service -->
+      <div class="dept-card d-red">
+        <div class="dept-name">Service</div>
+        <div class="dept-pct">59.8%</div>
+        <div class="dept-row"><span>Actual</span><strong>$144,581</strong></div>
+        <div class="dept-row"><span>Plan Q1</span><strong>$241,854</strong></div>
+        <div class="dept-row"><span>Gap</span><strong class="num-red">−$97,273</strong></div>
+        <div class="dept-row"><span>Note</span><strong>Low season ✓</strong></div>
+        <div class="dept-status s-red">🔴 Seasonal</div>
+      </div>
+
+      <!-- ATA -->
+      <div class="dept-card d-green">
+        <div class="dept-name">Acctg &amp; Tax</div>
+        <div class="dept-pct">111.4%</div>
+        <div class="dept-row"><span>Actual</span><strong>$224,372</strong></div>
+        <div class="dept-row"><span>Plan Q1</span><strong>$201,390</strong></div>
+        <div class="dept-row"><span>Surplus</span><strong class="num-green">+$22,982</strong></div>
+        <div class="dept-row"><span>Peak T3</span><strong>$101k BVI/HK</strong></div>
+        <div class="dept-status s-green">✅ On Track</div>
+      </div>
+
+      <!-- Bank -->
+      <div class="dept-card d-red">
+        <div class="dept-name">Bank</div>
+        <div class="dept-pct">7.2%</div>
+        <div class="dept-row"><span>Actual</span><strong>$5,212</strong></div>
+        <div class="dept-row"><span>Plan Q1</span><strong>$72,000</strong></div>
+        <div class="dept-row"><span>Gap</span><strong class="num-red">−$66,788</strong></div>
+        <div class="dept-row"><span>HC</span><strong>6 (1+5)</strong></div>
+        <div class="dept-status s-red">🔴 Process Issue</div>
+      </div>
+
+    </div><!-- /dept-grid -->
+
+    <!-- Progress bars -->
+    <div class="card">
+      <div class="card-title">Q1 Achievement — Tổng Hợp Dept</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:4px">
+        <div>
+          <div class="prog-wrap">
+            <div class="prog-header">
+              <span class="prog-label">RM</span>
+              <span class="prog-val mono">40.9% · $143,814</span>
+            </div>
+            <div class="prog-track"><div class="prog-fill fill-red" style="width:40.9%"></div></div>
+          </div>
+          <div class="prog-wrap">
+            <div class="prog-header">
+              <span class="prog-label">Renewal</span>
+              <span class="prog-val mono">90.5% · $436,393</span>
+            </div>
+            <div class="prog-track"><div class="prog-fill fill-amber" style="width:90.5%"></div></div>
+          </div>
+          <div class="prog-wrap">
+            <div class="prog-header">
+              <span class="prog-label">Service</span>
+              <span class="prog-val mono">59.8% · $144,581</span>
+            </div>
+            <div class="prog-track"><div class="prog-fill fill-red" style="width:59.8%"></div></div>
+          </div>
+        </div>
+        <div>
+          <div class="prog-wrap">
+            <div class="prog-header">
+              <span class="prog-label">Acctg &amp; Tax</span>
+              <span class="prog-val mono">111.4% · $224,372</span>
+            </div>
+            <div class="prog-track"><div class="prog-fill fill-green" style="width:100%"></div></div>
+          </div>
+          <div class="prog-wrap">
+            <div class="prog-header">
+              <span class="prog-label">Bank</span>
+              <span class="prog-val mono">7.2% · $5,212</span>
+            </div>
+            <div class="prog-track"><div class="prog-fill fill-red" style="width:7.2%"></div></div>
+          </div>
+          <div class="prog-wrap">
+            <div class="prog-header">
+              <span class="prog-label" style="font-weight:700">TỔNG 5 DEPTS</span>
+              <span class="prog-val mono" style="font-weight:700">70.8% · $954,373</span>
+            </div>
+            <div class="prog-track" style="height:10px"><div class="prog-fill fill-amber" style="width:70.8%"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="wrap"><div class="divider"></div></div>
+
+<!-- ═══════════════════════
+     SECTION 2 — MONTHLY KPI
+════════════════════════ -->
+<section id="monthly">
+  <div class="wrap">
+    <div class="sec-eyebrow">02</div>
+    <h2 class="sec-title">KPI Gross Profit Theo Tháng — Plan 2026</h2>
+    <p class="sec-sub">Mốc 100% = Level 2 (Gross Profit). Bank = Headcount × KPI cá nhân Mức 3 ($4,000/người/tháng × 6 HC = $24,000/tháng).</p>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th style="text-align:left">Tháng</th>
+            <th>RM (L2)</th>
+            <th>Renewal (L2)</th>
+            <th>Service (L2)</th>
+            <th>ATA (L2)</th>
+            <th>Bank (Team)</th>
+            <th>Tổng Plan</th>
+            <th>Quý</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Tháng 1</td>
+            <td>$109,250</td><td>$156,827</td><td>$82,378</td><td>$71,925</td><td>$24,000</td>
+            <td style="font-weight:600">$444,380</td>
+            <td><span class="q-label q1">Q1</span></td>
+          </tr>
+          <tr>
+            <td>Tháng 2</td>
+            <td>$109,250</td><td>$172,532</td><td>$79,210</td><td>$57,540</td><td>$24,000</td>
+            <td style="font-weight:600">$442,532</td>
+            <td><span class="q-label q1">Q1</span></td>
+          </tr>
+          <tr>
+            <td>Tháng 3</td>
+            <td>$133,009</td><td>$152,777</td><td>$80,266</td><td>$71,925</td><td>$24,000</td>
+            <td style="font-weight:600">$461,977</td>
+            <td><span class="q-label q1">Q1</span></td>
+          </tr>
+          <tr style="background:#F0FDF4!important">
+            <td><strong>Tháng 4</strong></td>
+            <td>$142,500</td><td>$138,854</td><td>$82,378</td><td>$129,465</td><td>$24,000</td>
+            <td style="font-weight:600">$517,197</td>
+            <td><span class="q-label q2">Q2</span></td>
+          </tr>
+          <tr style="background:#F0FDF4!important">
+            <td><strong>Tháng 5 ⭐</strong></td>
+            <td>$185,250</td><td>$296,753</td><td>$98,220</td><td>$93,503</td><td>$24,000</td>
+            <td style="font-weight:600">$697,726</td>
+            <td><span class="q-label q2">Q2</span></td>
+          </tr>
+          <tr style="background:#F0FDF4!important">
+            <td><strong>Tháng 6</strong></td>
+            <td>$185,250</td><td>$171,455</td><td>$103,501</td><td>$79,118</td><td>$24,000</td>
+            <td style="font-weight:600">$563,324</td>
+            <td><span class="q-label q2">Q2</span></td>
+          </tr>
+          <tr>
+            <td>Tháng 7</td>
+            <td>$185,250</td><td>$104,112</td><td>$81,322</td><td>$107,888</td><td>$24,000</td>
+            <td style="font-weight:600">$502,572</td>
+            <td><span class="q-label q3">Q3</span></td>
+          </tr>
+          <tr>
+            <td>Tháng 8</td>
+            <td>$185,250</td><td>$97,135</td><td>$80,266</td><td>$129,465</td><td>$24,000</td>
+            <td style="font-weight:600">$516,116</td>
+            <td><span class="q-label q3">Q3</span></td>
+          </tr>
+          <tr>
+            <td>Tháng 9</td>
+            <td>$185,250</td><td>$91,978</td><td>$80,266</td><td>$100,695</td><td>$24,000</td>
+            <td style="font-weight:600">$482,189</td>
+            <td><span class="q-label q3">Q3</span></td>
+          </tr>
+          <tr>
+            <td>Tháng 10</td>
+            <td>$180,500</td><td>$122,038</td><td>$98,220</td><td>$86,310</td><td>$24,000</td>
+            <td style="font-weight:600">$511,068</td>
+            <td><span class="q-label q4">Q4</span></td>
+          </tr>
+          <tr>
+            <td>Tháng 11 ⭐</td>
+            <td>$156,750</td><td>$270,789</td><td>$105,613</td><td>$86,310</td><td>$24,000</td>
+            <td style="font-weight:600">$643,462</td>
+            <td><span class="q-label q4">Q4</span></td>
+          </tr>
+          <tr>
+            <td>Tháng 12 ⭐</td>
+            <td>$123,709</td><td>$319,285</td><td>$84,490</td><td>$79,118</td><td>$24,000</td>
+            <td style="font-weight:600">$630,602</td>
+            <td><span class="q-label q4">Q4</span></td>
+          </tr>
+          <tr>
+            <td><strong>TỔNG 12 THÁNG</strong></td>
+            <td><strong>$1,881,218</strong></td>
+            <td><strong>$2,094,535</strong></td>
+            <td><strong>$1,056,130</strong></td>
+            <td><strong>$1,093,262</strong></td>
+            <td><strong>$288,000</strong></td>
+            <td><strong>$6,413,145</strong></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</section>
+
+<div class="wrap"><div class="divider"></div></div>
+
+<!-- ═══════════════════════
+     SECTION 3 — Q1 ANALYSIS
+════════════════════════ -->
+<section id="q1-analysis">
+  <div class="wrap">
+    <div class="sec-eyebrow">03</div>
+    <h2 class="sec-title">Phân Tích Gap Q1/2026 — Căn Cứ Số Thực Tế</h2>
+    <p class="sec-sub">Tổng Q1 actual $954,373 / Plan $1,348,889 = đạt 70.8%, thiếu $394,516.</p>
+
+    <!-- Q1 monthly detail table -->
+    <div class="tbl-wrap" style="margin-bottom:24px">
+      <table>
+        <thead>
+          <tr>
+            <th style="text-align:left">Department</th>
+            <th>Plan T1</th><th>Actual T1</th><th>%</th>
+            <th>Plan T2</th><th>Actual T2</th><th>%</th>
+            <th>Plan T3</th><th>Actual T3</th><th>%</th>
+            <th>Q1 Plan</th><th>Q1 Actual</th><th>% Đạt Q1</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>RM (Level 2)</td>
+            <td>$109,250</td><td>$35,288</td><td class="num-red">32.3%</td>
+            <td>$109,250</td><td>$52,409</td><td class="num-red">48.0%</td>
+            <td>$133,009</td><td>$56,118</td><td class="num-red">42.2%</td>
+            <td><strong>$351,509</strong></td><td><strong>$143,814</strong></td><td class="num-red"><strong>40.9%</strong></td>
+          </tr>
+          <tr>
+            <td>Renewal (L2)</td>
+            <td>$156,827</td><td>$232,165</td><td class="num-green">148%</td>
+            <td>$172,532</td><td>$92,467</td><td class="num-red">53.6%</td>
+            <td>$152,777</td><td>$111,760</td><td class="num-amber">73.1%</td>
+            <td><strong>$482,136</strong></td><td><strong>$436,393</strong></td><td class="num-amber"><strong>90.5%</strong></td>
+          </tr>
+          <tr>
+            <td>Service (L2)</td>
+            <td>$82,378</td><td>$35,573</td><td class="num-red">43.2%</td>
+            <td>$79,210</td><td>$67,530</td><td class="num-amber">85.3%</td>
+            <td>$80,266</td><td>$41,478</td><td class="num-red">51.7%</td>
+            <td><strong>$241,854</strong></td><td><strong>$144,581</strong></td><td class="num-red"><strong>59.8%</strong></td>
+          </tr>
+          <tr>
+            <td>Acctg &amp; Tax (L2)</td>
+            <td>$71,925</td><td>$73,584</td><td class="num-green">102.3%</td>
+            <td>$57,540</td><td>$49,316</td><td class="num-amber">85.7%</td>
+            <td>$71,925</td><td>$101,473</td><td class="num-green">141.1%</td>
+            <td><strong>$201,390</strong></td><td><strong>$224,372</strong></td><td class="num-green"><strong>111.4%</strong></td>
+          </tr>
+          <tr>
+            <td>Bank (Team GP)</td>
+            <td>$24,000</td><td>$1,527</td><td class="num-red">6.4%</td>
+            <td>$24,000</td><td>$3,685</td><td class="num-red">15.4%</td>
+            <td>$24,000</td><td>—</td><td>—</td>
+            <td><strong>$72,000</strong></td><td><strong>$5,212</strong></td><td class="num-red"><strong>7.2%</strong></td>
+          </tr>
+          <tr>
+            <td><strong>TỔNG 5 DEPTS</strong></td>
+            <td><strong>$444,380</strong></td><td><strong>$378,137</strong></td><td><strong class="num-amber">85.1%</strong></td>
+            <td><strong>$442,532</strong></td><td><strong>$265,407</strong></td><td><strong class="num-red">60.0%</strong></td>
+            <td><strong>$461,977</strong></td><td><strong>$310,829</strong></td><td><strong class="num-red">67.3%</strong></td>
+            <td><strong>$1,348,889</strong></td><td><strong>$954,373</strong></td><td><strong class="num-amber">70.8%</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Per-dept analysis alerts -->
+    <div class="g2">
+      <div>
+        <div class="alert alert-crit">
+          <div class="alert-icon">🔴</div>
+          <div>
+            <div class="alert-title">RM — 40.9% · Gap $207,695</div>
+            <div class="alert-body">Nghiêm trọng nhất toàn công ty. T1-T2 chỉ có <strong>10 RM chính thức</strong> — ramp chậm hơn plan (20 RM từ T3). Gap $207k tương đương ~14 RM không đạt KPI cá nhân ($17,575/người/tháng). <strong>Action: audit headcount active thực tế vs on-paper trước 25/4.</strong></div>
+          </div>
+        </div>
+        <div class="alert alert-warn">
+          <div class="alert-icon">⚠️</div>
+          <div>
+            <div class="alert-title">Renewal — 90.5% · Gap $45,743</div>
+            <div class="alert-body">Gần đạt. Gap phần lớn do <strong>late payment T3 chưa booked</strong> (~$38k theo split pattern 40% T3→T4). T1 spike $232k → T2 drop $92k cho thấy timing issue, không phải lost revenue. <strong>Action: confirm AR outstanding với Renewal leader trước 28/4.</strong></div>
+          </div>
+        </div>
+        <div class="alert alert-warn">
+          <div class="alert-icon">📋</div>
+          <div>
+            <div class="alert-title">Service — 59.8% · Gap $97,273</div>
+            <div class="alert-body">Thấp nhưng <strong>phản ánh đúng seasonality</strong> (T1–T3 = low season). ES Filing BVI deadline 31/5 sẽ tạo natural spike T5–T6. Không phải lost revenue. <strong>Action: chuẩn bị ES Filing queue từ 1/5.</strong></div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="alert alert-ok">
+          <div class="alert-icon">✅</div>
+          <div>
+            <div class="alert-title">Acctg &amp; Tax — 111.4% · +$22,982</div>
+            <div class="alert-body">Vượt plan Q1. T3 peak $101,473 phản ánh <strong>BVI/HK audit demand</strong> (429 cty BVI, 366 cty HK). Multi-jur upsell model hoạt động tốt. <strong>Action: replicate model sang Renewal và Service cross-sell.</strong></div>
+          </div>
+        </div>
+        <div class="alert alert-crit">
+          <div class="alert-icon">🚨</div>
+          <div>
+            <div class="alert-title">Bank — 7.2% · Gap $66,788</div>
+            <div class="alert-body">Rất thấp. Convert rate thực tế dưới 10% (target 60%). Đây là <strong>process issue</strong> — account activation delay từ phía bank partner, KHÔNG phải sales issue. T3 actual = $0 (trống). <strong>Action: escalate lên Director + partner ngân hàng ngay. Báo cáo rõ: bao nhiêu case pending vs lost.</strong></div>
+          </div>
+        </div>
+        <div class="alert alert-info">
+          <div class="alert-icon">💡</div>
+          <div>
+            <div class="alert-title">Tổng Q1 — 70.8% · Gap $394,516</div>
+            <div class="alert-body">Gap thực tế <strong>$394,516</strong> (thấp hơn ước tính ban đầu $797k). Recovery khả thi: $38k Renewal late payment + Service ES Filing spike + ATA momentum = <strong>~$80–100k tự nhiên</strong> trong T4–T5. Phần còn lại (~$294k) cần H2 plan revision.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="wrap"><div class="divider"></div></div>
+
+<!-- ═══════════════════════
+     SECTION 4 — Q2 FORECAST
+════════════════════════ -->
+<section id="q2-forecast">
+  <div class="wrap">
+    <div class="sec-eyebrow">04</div>
+    <h2 class="sec-title">Q2/2026 — Rolling Forecast (T4, T5, T6)</h2>
+    <p class="sec-sub">Forecast = Plan × Adjustment factor theo pipeline visibility, seasonality và Q1 run-rate. Gap = Forecast − Plan.</p>
+
+    <div class="tbl-wrap" style="margin-bottom:24px">
+      <table class="fc-table">
+        <thead>
+          <tr>
+            <th style="text-align:left">Department</th>
+            <th>Plan T4</th><th>FC T4</th><th>Gap T4</th><th>%</th>
+            <th>Plan T5</th><th>FC T5</th><th>Gap T5</th><th>%</th>
+            <th>Plan T6</th><th>FC T6</th><th>Gap T6</th><th>%</th>
+            <th>Q2 Plan</th><th>Q2 Forecast</th><th>% Đạt FC</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>RM (Level 2)</td>
+            <td>$142,500</td><td>$142,500</td><td class="gap-zero">$0</td><td>100%</td>
+            <td>$185,250</td><td>$185,250</td><td class="gap-zero">$0</td><td>100%</td>
+            <td>$185,250</td><td>$185,250</td><td class="gap-zero">$0</td><td>100%</td>
+            <td><strong>$513,000</strong></td><td><strong>$513,000</strong></td>
+            <td><span class="fc-badge fc-on">100.0%</span></td>
+          </tr>
+          <tr>
+            <td>Renewal (L2)</td>
+            <td>$138,854</td><td>$129,134</td><td class="gap-neg">−$9,720</td><td>93.0%</td>
+            <td>$296,753</td><td>$281,915</td><td class="gap-neg">−$14,838</td><td>95.0%</td>
+            <td>$171,455</td><td>$166,311</td><td class="gap-neg">−$5,144</td><td>97.0%</td>
+            <td><strong>$607,062</strong></td><td><strong>$577,360</strong></td>
+            <td><span class="fc-badge fc-risk">95.1%</span></td>
+          </tr>
+          <tr>
+            <td>Service (L2)</td>
+            <td>$82,378</td><td>$79,083</td><td class="gap-neg">−$3,295</td><td>96.0%</td>
+            <td>$98,220</td><td>$95,273</td><td class="gap-neg">−$2,947</td><td>97.0%</td>
+            <td>$103,501</td><td>$100,396</td><td class="gap-neg">−$3,105</td><td>97.0%</td>
+            <td><strong>$284,099</strong></td><td><strong>$274,752</strong></td>
+            <td><span class="fc-badge fc-risk">96.7%</span></td>
+          </tr>
+          <tr>
+            <td>Acctg &amp; Tax (L2)</td>
+            <td>$129,465</td><td>$122,992</td><td class="gap-neg">−$6,473</td><td>95.0%</td>
+            <td>$93,503</td><td>$89,763</td><td class="gap-neg">−$3,740</td><td>96.0%</td>
+            <td>$79,118</td><td>$76,744</td><td class="gap-neg">−$2,374</td><td>97.0%</td>
+            <td><strong>$302,086</strong></td><td><strong>$289,499</strong></td>
+            <td><span class="fc-badge fc-risk">95.8%</span></td>
+          </tr>
+          <tr>
+            <td>Bank (Team GP)</td>
+            <td>$24,000</td><td>$24,000</td><td class="gap-zero">$0</td><td>100%</td>
+            <td>$24,000</td><td>$24,000</td><td class="gap-zero">$0</td><td>100%</td>
+            <td>$24,000</td><td>$24,000</td><td class="gap-zero">$0</td><td>100%</td>
+            <td><strong>$72,000</strong></td><td><strong>$72,000</strong></td>
+            <td><span class="fc-badge fc-on">100.0%</span></td>
+          </tr>
+          <tr>
+            <td><strong>TỔNG 5 DEPTS</strong></td>
+            <td><strong>$517,197</strong></td><td><strong>$497,709</strong></td><td class="gap-neg"><strong>−$19,488</strong></td><td>96.8%</td>
+            <td><strong>$697,726</strong></td><td><strong>$676,201</strong></td><td class="gap-neg"><strong>−$21,525</strong></td><td>97.6%</td>
+            <td><strong>$563,324</strong></td><td><strong>$552,701</strong></td><td class="gap-neg"><strong>−$10,623</strong></td><td>98.1%</td>
+            <td><strong>$1,778,247</strong></td><td><strong>$1,726,611</strong></td>
+            <td><span class="fc-badge fc-risk"><strong>97.1%</strong></span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Forecast rationale -->
+    <div class="g2">
+      <div class="card">
+        <div class="card-title">Căn Cứ Điều Chỉnh Forecast</div>
+        <div class="card-body">
+          <div style="display:grid;grid-template-columns:auto 1fr;gap:6px 12px;align-items:baseline">
+            <span class="chip chip-blue">RM 1.00×</span>
+            <span>Ramp 20 RM confirmed từ T4. Q2 đầy đủ headcount → giữ nguyên plan.</span>
+            <span class="chip chip-amber">Renewal 0.93–0.97×</span>
+            <span>Payment timing risk: T4 late split từ T3 (~$9k shortfall), T5 high season 349 cty nhưng on-time rate chưa chắc 65%.</span>
+            <span class="chip chip-amber">Service 0.96–0.97×</span>
+            <span>ES Filing BVI deadline 31/5 — backlog risk nếu SLA không đảm bảo.</span>
+            <span class="chip chip-amber">ATA 0.95–0.97×</span>
+            <span>T4 peak $129k → conversion chưa đồng đều, ramp down T5–T6.</span>
+            <span class="chip chip-blue">Bank 1.00×</span>
+            <span>Pipeline steady — conditional on process fix (activation delay resolved).</span>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">H1 Exposure Summary</div>
+        <div class="card-body">
+          <div style="margin-bottom:10px;padding-bottom:10px;border-bottom:1px solid var(--border)">
+            <div style="display:flex;justify-content:space-between;font-family:var(--ff-mono);font-size:12px;margin-bottom:4px">
+              <span>Q1 Actual vs Plan</span><span class="num-red">−$394,516 (70.8%)</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;font-family:var(--ff-mono);font-size:12px;margin-bottom:4px">
+              <span>Q2 Forecast vs Plan</span><span class="num-amber">−$51,636 (97.1%)</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;font-family:var(--ff-mono);font-size:12px;font-weight:600;margin-top:6px;padding-top:6px;border-top:1px solid var(--border)">
+              <span>H1 Gap Exposure</span><span class="num-red">−$446,152</span>
+            </div>
+          </div>
+          <div style="font-size:12px;color:var(--ink4)">
+            Recovery khả thi trong Q2: Renewal late AR ~$38k + Service ES Filing spike + ATA momentum = <strong style="color:var(--green)">~$80–100k tự nhiên</strong>. Phần còn lại ~$294k cần H2 acceleration.
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="wrap"><div class="divider"></div></div>
+
+<!-- ═══════════════════════
+     SECTION 5 — RECOVERY
+════════════════════════ -->
+<section id="recovery">
+  <div class="wrap">
+    <div class="sec-eyebrow">05</div>
+    <h2 class="sec-title">Kế Hoạch Phục Hồi Gap Q1 → Q2 / H2 2026</h2>
+    <p class="sec-sub">Gap thực tế Q1: $394,516. Recovery target tối thiểu 30–50% = $118k–$197k thông qua pipeline sẵn có trong Q2.</p>
+
+    <div class="g2">
+      <div class="recovery-timeline">
+        <div class="rt-item">
+          <div class="rt-when rt-now">TUẦN<br>NÀY</div>
+          <div class="rt-body">
+            <strong>Salesforce Gap Audit:</strong> Phân loại $394k gap thành 3 buckets: unbooked-timing vs lost deal vs headcount shortfall. RM báo cáo pipeline coverage T4 trước 25/4. Bank escalation: bao nhiêu case pending activation vs confirmed lost.
+          </div>
+        </div>
+        <div class="rt-item">
+          <div class="rt-when rt-t4">T4<br>Apr</div>
+          <div class="rt-body">
+            <strong>Renewal Late AR Recovery:</strong> $30–40k dự kiến tự dồn từ T3 (40% late split). Proactive call <strong>50 cty top-tier</strong> để lock payment trước 30/4 → đẩy Renewal T4 vượt plan $138,854.
+          </div>
+        </div>
+        <div class="rt-item">
+          <div class="rt-when rt-t45">T4–T5<br>Apr–May</div>
+          <div class="rt-body">
+            <strong>RM Acceleration:</strong> Nếu &lt;14 RM active thực tế → tập trung tuyển/train để đủ 20 RM productive từ T5. Target: RM Q2 đạt ≥$513k (100% plan) nhờ run-rate mới, không phải recovery.
+          </div>
+        </div>
+        <div class="rt-item">
+          <div class="rt-when rt-t5">T5<br>May</div>
+          <div class="rt-body">
+            <strong>Service ES Filing BVI:</strong> Deadline 31/5 tạo natural revenue spike. Đảm bảo queue không bị backlog — nếu &gt;30 cases vào 10/5 → thuê thêm 1 temp bookkeeper ($500 cost, bảo vệ $15k+ revenue).
+          </div>
+        </div>
+        <div class="rt-item">
+          <div class="rt-when rt-h2">Q3–Q4<br>H2</div>
+          <div class="rt-body">
+            <strong>ATA Momentum Scale:</strong> Vượt Q1 +$22,982. Nhân rộng multi-jur upsell (BVI+HK combo $962/cty) cho 50 cty single-jur. Apply model cho Renewal và Service cross-sell.
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <!-- Gap breakdown card -->
+        <div class="gap-box" style="margin-bottom:16px">
+          <div class="gap-box-header">
+            <div class="gap-box-title">Q1 Gap Breakdown — $394,516</div>
+            <div class="gap-box-badge">By Dept</div>
+          </div>
+          <div class="gap-box-body">
+            <div class="prog-wrap">
+              <div class="prog-header">
+                <span class="prog-label">RM — timing + headcount</span>
+                <span class="prog-val mono num-red">$207,695 · 52.6%</span>
+              </div>
+              <div class="prog-track"><div class="prog-fill fill-red" style="width:100%"></div></div>
+            </div>
+            <div class="prog-wrap">
+              <div class="prog-header">
+                <span class="prog-label">Service — seasonal (recoverable)</span>
+                <span class="prog-val mono num-amber">$97,273 · 24.7%</span>
+              </div>
+              <div class="prog-track"><div class="prog-fill fill-amber" style="width:47%"></div></div>
+            </div>
+            <div class="prog-wrap">
+              <div class="prog-header">
+                <span class="prog-label">Bank — process issue</span>
+                <span class="prog-val mono num-red">$66,788 · 16.9%</span>
+              </div>
+              <div class="prog-track"><div class="prog-fill fill-red" style="width:32%"></div></div>
+            </div>
+            <div class="prog-wrap">
+              <div class="prog-header">
+                <span class="prog-label">Renewal — timing (AR late)</span>
+                <span class="prog-val mono num-amber">$45,743 · 11.6%</span>
+              </div>
+              <div class="prog-track"><div class="prog-fill fill-amber" style="width:22%"></div></div>
+            </div>
+            <div class="prog-wrap">
+              <div class="prog-header">
+                <span class="prog-label">ATA — surplus (offsets)</span>
+                <span class="prog-val mono num-green">+$22,982 offset</span>
+              </div>
+              <div class="prog-track"><div class="prog-fill fill-green" style="width:11%"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Recovery Probability Assessment</div>
+          <div class="card-body">
+            <div style="display:grid;grid-template-columns:1fr auto;gap:8px;font-size:12px">
+              <span>Renewal late AR T4 (natural)</span><span class="chip chip-green">~$38k · HIGH</span>
+              <span>Service ES Filing spike T5 (seasonal)</span><span class="chip chip-green">~$30–50k · HIGH</span>
+              <span>ATA Q2 momentum</span><span class="chip chip-green">~$10–20k · MED-HIGH</span>
+              <span>RM Q2 if headcount OK</span><span class="chip chip-amber">$0 gap · IF ≥18 active</span>
+              <span>Bank process fix</span><span class="chip chip-amber">$0–30k · UNCERTAIN</span>
+            </div>
+            <div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border);font-family:var(--ff-mono);font-size:11px">
+              <span style="color:var(--ink4)">Natural recovery Q2:</span>
+              <span style="color:var(--green);font-weight:600"> ~$80–100k</span><br>
+              <span style="color:var(--ink4)">Remaining to H2 plan:</span>
+              <span style="color:var(--amber-mid);font-weight:600"> ~$294–314k</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="wrap"><div class="divider"></div></div>
+
+<!-- ═══════════════════════
+     SECTION 6 — BSC
+════════════════════════ -->
+<section id="bsc">
+  <div class="wrap">
+    <div class="sec-eyebrow">06</div>
+    <h2 class="sec-title">BSC Gap Analysis — Q2/2026</h2>
+    <p class="sec-sub">4 Perspectives × Action Items. Căn cứ: Q1 actual $954,373 (70.8%) · Q2 Forecast $1,726,611 (97.1%) · H1 gap exposure −$446,152.</p>
+
+    <div class="bsc-grid">
+
+      <!-- Financial -->
+      <div class="bsc-card bsc-fin">
+        <div class="bsc-perspective">
+          <div class="bsc-p-icon">🏦</div>
+          <div class="bsc-p-title">Financial<br>(Tài chính)</div>
+        </div>
+        <div class="bsc-focus">
+          <div class="bsc-focus-label">Dept Focus</div>
+          <div class="bsc-focus-val">Renewal 90.5% Q1<br>ATA 111.4% ✅</div>
+          <div class="bsc-focus-sub">Q2 Renewal gap: −$29,702<br>Late AR recover: ~$38k</div>
+        </div>
+        <div class="bsc-analysis">
+          <div class="bsc-analysis-label">Gap Analysis</div>
+          <div class="bsc-analysis-text">Renewal late payment split (40% T3→T4) = ~$38k natural recovery T4. T5 = 349 cty active (high season) nhưng forecast 95.1% do payment timing. ATA vượt plan +$22,982 Q1 — duy trì qua Q2 bằng multi-jur upsell. RM Q2 giữ 100% plan nếu headcount đủ từ T4.</div>
+        </div>
+        <div class="bsc-actions">
+          <div class="bsc-actions-label">Action Items</div>
+          <div class="bsc-action-item"><span class="bsc-action-num">①</span><span>Renewal AR reconcile: pull danh sách outstanding T3 payment trước 28/4 → confirm $38k late payment sẽ book T4 → nếu không vào trước 30/4, escalate.</span></div>
+          <div class="bsc-action-item"><span class="bsc-action-num">②</span><span>Renewal T5 prep: liên hệ 80 cty active deadline T5 (349 cty) trước 10/5 — priority: on-time payment (65% rate target).</span></div>
+          <div class="bsc-action-item"><span class="bsc-action-num">③</span><span>ATA: replicate Q1 pattern — upsell BVI+HK combo ($962/cty) cho 50 cty chỉ có 1 jur → tăng ATA Q2 vượt $302k plan.</span></div>
+          <div class="bsc-action-item"><span class="bsc-action-num">④</span><span>Revenue recognition audit: làm rõ $394k Q1 gap: timing vs lost deal trước 25/4.</span></div>
+        </div>
+      </div>
+
+      <!-- Customer -->
+      <div class="bsc-card bsc-cust">
+        <div class="bsc-perspective">
+          <div class="bsc-p-icon">🎯</div>
+          <div class="bsc-p-title">Customer<br>(Khách hàng)</div>
+        </div>
+        <div class="bsc-focus">
+          <div class="bsc-focus-label">Dept Focus</div>
+          <div class="bsc-focus-val">RM 40.9% Q1<br>$143,814 / $351,509</div>
+          <div class="bsc-focus-sub">Gap: −$207,695<br>~14 RM không đạt KPI</div>
+        </div>
+        <div class="bsc-analysis">
+          <div class="bsc-analysis-label">Gap Analysis</div>
+          <div class="bsc-analysis-text">RM đạt 40.9% Q1 — nghiêm trọng nhất toàn công ty. T1-T2 chỉ có 10 RM chính thức → headcount ramp chưa đủ. Q2 forecast giữ 100% ($513k) nhưng chỉ khả thi nếu ≥18 RM productive từ T4. Bank 7.2% cho thấy customer acquisition pipeline gần như đóng băng.</div>
+        </div>
+        <div class="bsc-actions">
+          <div class="bsc-actions-label">Action Items</div>
+          <div class="bsc-action-item"><span class="bsc-action-num">①</span><span>RM headcount audit NGAY: xác nhận số RM đang active thực tế (deal trong 30 ngày) vs on-paper. Mỗi RM missing = $17,575/tháng thiếu hụt.</span></div>
+          <div class="bsc-action-item"><span class="bsc-action-num">②</span><span>RM call blitz T4: mỗi RM target tối thiểu 10 qualified prospects/tuần — track qua Salesforce, báo cáo thứ Sáu hàng tuần.</span></div>
+          <div class="bsc-action-item"><span class="bsc-action-num">③</span><span>ICP focus: HK + Singapore SMEs (renewal clients + RM cross-sell) — conversion cycle ngắn hơn cold leads.</span></div>
+          <div class="bsc-action-item"><span class="bsc-action-num">④</span><span>Bank process fix: xác định activation bottleneck (bank partner delay?) vs sales gap. Nếu là process → escalate partner; nếu sales → KPI review.</span></div>
+        </div>
+      </div>
+
+      <!-- Internal Process -->
+      <div class="bsc-card bsc-proc">
+        <div class="bsc-perspective">
+          <div class="bsc-p-icon">⚙️</div>
+          <div class="bsc-p-title">Internal<br>Process</div>
+        </div>
+        <div class="bsc-focus">
+          <div class="bsc-focus-label">Dept Focus</div>
+          <div class="bsc-focus-val">Service 59.8% Q1<br>$144,581 / $241,854</div>
+          <div class="bsc-focus-sub">Gap: −$97,273<br>Seasonal — không lost</div>
+        </div>
+        <div class="bsc-analysis">
+          <div class="bsc-analysis-label">Gap Analysis</div>
+          <div class="bsc-analysis-text">Service 59.8% Q1 phản ánh đúng seasonality (T1-T3 = low season). ES Filing BVI deadline 31/5 sẽ tạo spike tự nhiên T5-T6. Q2 forecast $274,752 (96.7%) — rủi ro chính là backlog không được process kịp. SLA trễ → revenue shift T5→T6 hoặc mất client.</div>
+        </div>
+        <div class="bsc-actions">
+          <div class="bsc-actions-label">Action Items</div>
+          <div class="bsc-action-item"><span class="bsc-action-num">①</span><span>ES Filing queue từ 1/5: phân loại urgent (&lt;15/5) / normal (15–31/5) / buffer (T6). Target: 0 missed deadlines.</span></div>
+          <div class="bsc-action-item"><span class="bsc-action-num">②</span><span>SLA enforcement: turnaround ≤5 working days. Nếu backlog &gt;30 cases vào 10/5 → thuê 1 temp bookkeeper ($500, bảo vệ $15k+).</span></div>
+          <div class="bsc-action-item"><span class="bsc-action-num">③</span><span>Service-Bank cross-referral: Bank clients thường cần ES Filing → set internal referral trigger khi account opened.</span></div>
+          <div class="bsc-action-item"><span class="bsc-action-num">④</span><span>Automation: template hóa ES Filing workflow → giảm processing time 30%, xử lý 20% nhiều orders hơn mà không tăng headcount.</span></div>
+        </div>
+      </div>
+
+      <!-- Learning & Growth -->
+      <div class="bsc-card bsc-learn">
+        <div class="bsc-perspective">
+          <div class="bsc-p-icon">📈</div>
+          <div class="bsc-p-title">Learning<br>&amp; Growth</div>
+        </div>
+        <div class="bsc-focus">
+          <div class="bsc-focus-label">Dept Focus</div>
+          <div class="bsc-focus-val">ATA ✅ Vượt plan Q1<br>Bank ⚠️ 7.2% Q1</div>
+          <div class="bsc-focus-sub">Q2 gap tổng: −$51,636<br>97.1% of plan</div>
+        </div>
+        <div class="bsc-analysis">
+          <div class="bsc-analysis-label">Gap Analysis</div>
+          <div class="bsc-analysis-text">ATA vượt plan Q1 (+11.4%) cho thấy team có năng lực — cần scale model này. Bank 7.2% cho thấy training/process gap nghiêm trọng. Q2 tổng gap −$51,636 có thể đóng được nếu: Renewal recover $38k + Service đạt ES Filing target + RM maintain momentum.</div>
+        </div>
+        <div class="bsc-actions">
+          <div class="bsc-actions-label">Action Items</div>
+          <div class="bsc-action-item"><span class="bsc-action-num">①</span><span>ATA knowledge transfer: document quy trình multi-jur upsell thành SOP → apply cho Renewal và Service cross-sell.</span></div>
+          <div class="bsc-action-item"><span class="bsc-action-num">②</span><span>Bank training: nếu convert rate &lt;45% (Mức 1) liên tục 2 tháng → mandatory training trước T5. Target: Mức 3 (60% convert + $4k GP) cho ≥4/6 members.</span></div>
+          <div class="bsc-action-item"><span class="bsc-action-num">③</span><span>Weekly performance cadence: mỗi thứ Hai — Dept leads báo cáo 3 KPIs: # deals closed, GP vs weekly target, # pipeline deals.</span></div>
+          <div class="bsc-action-item"><span class="bsc-action-num">④</span><span>Mid-Q2 checkpoint (tuần 2 T5): nếu gap &gt;15% vs Q2 forecast → trigger Director-level intervention plan.</span></div>
+        </div>
+      </div>
+
+      <!-- BSC Aggregate -->
+      <div class="bsc-card bsc-agg">
+        <div class="bsc-perspective">
+          <div class="bsc-p-icon">🎯</div>
+          <div class="bsc-p-title">BSC<br>Aggregate</div>
+        </div>
+        <div class="bsc-focus">
+          <div class="bsc-focus-label">All 5 Depts</div>
+          <div class="bsc-focus-val">Q1 gap: −$394,516<br>Q2 gap (fc): −$51,636</div>
+          <div class="bsc-focus-sub">H1 exposure: −$446,152</div>
+        </div>
+        <div class="bsc-analysis">
+          <div class="bsc-analysis-label">Aggregate Analysis</div>
+          <div class="bsc-analysis-text">Q1 actual $954,373 (70.8% plan). Q2 forecast $1,726,611 (97.1% plan). H1 gap exposure −$446,152 nếu Q2 forecast đúng. Recovery khả thi: $38k Renewal late AR + Service ES Filing spike + ATA momentum = ~$80–100k tự nhiên T4–T5. Remaining ~$294–314k cần H2 plan revision hoặc RM acceleration.</div>
+        </div>
+        <div class="bsc-actions">
+          <div class="bsc-actions-label">Weekly Leading KPIs</div>
+          <div class="bsc-action-item"><span class="bsc-action-num">①</span><span>GP actual vs weekly forecast — alert nếu deviation &gt;10% (any dept)</span></div>
+          <div class="bsc-action-item"><span class="bsc-action-num">②</span><span>Renewal: # cty paid on-time / # cty active (target ≥65% convert rate)</span></div>
+          <div class="bsc-action-item"><span class="bsc-action-num">③</span><span>RM: # qualified deals in pipeline / # deals closed weekly</span></div>
+          <div class="bsc-action-item"><span class="bsc-action-num">④</span><span>Bank: # accounts activated / # orders assigned (target ≥60% convert)</span></div>
+          <div class="bsc-action-item"><span class="bsc-action-num">⑤</span><span>Service: # ES Filing cases queued / # completed on SLA — no misses</span></div>
+        </div>
+      </div>
+
+    </div><!-- /bsc-grid -->
+  </div>
+</section>
+
+<div class="wrap"><div class="divider"></div></div>
+
+<!-- ═══════════════════════
+     SECTION 7 — KPI TRACKER
+════════════════════════ -->
+<section id="kpi-tracker">
+  <div class="wrap">
+    <div class="sec-eyebrow">07</div>
+    <h2 class="sec-title">KPI Tracker — Leading &amp; Lagging Indicators</h2>
+    <p class="sec-sub">Framework theo dõi hàng tuần và hàng tháng. Leading KPIs là tín hiệu sớm, lagging KPIs xác nhận kết quả.</p>
+
+    <div class="kpi-track-grid">
+
+      <div class="kpi-track-card">
+        <div class="kpi-track-title">
+          <div class="kpi-dot" style="background:#EF4444"></div>
+          RM — Weekly KPIs
+        </div>
+        <div style="font-size:12px;color:var(--ink3);line-height:1.7">
+          <div style="display:grid;grid-template-columns:auto 1fr;gap:4px 10px">
+            <span class="chip chip-blue">Leading</span><span># qualified prospects in pipeline / RM / week (target ≥10)</span>
+            <span class="chip chip-blue">Leading</span><span># discovery calls completed (báo cáo thứ Sáu)</span>
+            <span class="chip chip-grey">Lagging</span><span>GP actual vs monthly plan (%)</span>
+            <span class="chip chip-grey">Lagging</span><span># deals closed / RM / tháng (implied $8,788/deal để đạt L2)</span>
+            <span class="chip chip-red">Alert</span><span>Nếu RM active &lt;14 người → trigger tuyển dụng khẩn cấp</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="kpi-track-card">
+        <div class="kpi-track-title">
+          <div class="kpi-dot" style="background:#D97706"></div>
+          Renewal — Weekly KPIs
+        </div>
+        <div style="font-size:12px;color:var(--ink3);line-height:1.7">
+          <div style="display:grid;grid-template-columns:auto 1fr;gap:4px 10px">
+            <span class="chip chip-blue">Leading</span><span># cty contacted (target: 80 cty trước 10/5 cho T5 high season)</span>
+            <span class="chip chip-blue">Leading</span><span>Outstanding AR từ T3 — confirm booking date trước 30/4</span>
+            <span class="chip chip-grey">Lagging</span><span>Convert rate (# paid / # active cty) — target ≥65%</span>
+            <span class="chip chip-grey">Lagging</span><span>GP actual vs plan (early/on-time/late split)</span>
+            <span class="chip chip-amber">Watch</span><span>T5 có 349 cty active — on-time rate là yếu tố quyết định</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="kpi-track-card">
+        <div class="kpi-track-title">
+          <div class="kpi-dot" style="background:#EF4444"></div>
+          Service — Weekly KPIs
+        </div>
+        <div style="font-size:12px;color:var(--ink3);line-height:1.7">
+          <div style="display:grid;grid-template-columns:auto 1fr;gap:4px 10px">
+            <span class="chip chip-blue">Leading</span><span># ES Filing BVI cases in queue (alert nếu &gt;30 cases vào 10/5)</span>
+            <span class="chip chip-blue">Leading</span><span>SLA compliance: % orders completed ≤5 working days</span>
+            <span class="chip chip-grey">Lagging</span><span>GP actual vs plan — tháng 5–6 là peak tháng</span>
+            <span class="chip chip-grey">Lagging</span><span># orders received vs fulfilled trong tháng</span>
+            <span class="chip chip-green">Oppty</span><span>Bank cross-referral leads — set trigger từ T4</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="kpi-track-card">
+        <div class="kpi-track-title">
+          <div class="kpi-dot" style="background:#059669"></div>
+          ATA — Weekly KPIs
+        </div>
+        <div style="font-size:12px;color:var(--ink3);line-height:1.7">
+          <div style="display:grid;grid-template-columns:auto 1fr;gap:4px 10px">
+            <span class="chip chip-blue">Leading</span><span># proposals gửi cho multi-jur upsell (BVI+HK combo)</span>
+            <span class="chip chip-blue">Leading</span><span># single-jur clients contacted cho upsell (target 50 cty)</span>
+            <span class="chip chip-grey">Lagging</span><span>GP actual vs plan — T4 là peak ($129k plan)</span>
+            <span class="chip chip-grey">Lagging</span><span>Multi-jur deal rate (% clients với ≥2 jur services)</span>
+            <span class="chip chip-green">Model</span><span>Document SOP → apply cho Renewal + Service cross-sell</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="kpi-track-card">
+        <div class="kpi-track-title">
+          <div class="kpi-dot" style="background:#EF4444"></div>
+          Bank — Weekly KPIs
+        </div>
+        <div style="font-size:12px;color:var(--ink3);line-height:1.7">
+          <div style="display:grid;grid-template-columns:auto 1fr;gap:4px 10px">
+            <span class="chip chip-blue">Leading</span><span># orders assigned to team / # accounts submitted to partner</span>
+            <span class="chip chip-blue">Leading</span><span># accounts activated (convert rate = activated / assigned)</span>
+            <span class="chip chip-grey">Lagging</span><span>GP actual vs plan · Team target: $24,000/tháng (Mức 3 × 6)</span>
+            <span class="chip chip-grey">Lagging</span><span>Convert rate vs Mức 3 target (60%) — mỗi thứ Hai</span>
+            <span class="chip chip-red">Critical</span><span>Phân loại activation delay: partner bottleneck vs internal gap</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="kpi-track-card">
+        <div class="kpi-track-title">
+          <div class="kpi-dot" style="background:#1549CC"></div>
+          Company — Monthly Lagging KPIs
+        </div>
+        <div style="font-size:12px;color:var(--ink3);line-height:1.7">
+          <div style="display:grid;grid-template-columns:auto 1fr;gap:4px 10px">
+            <span class="chip chip-grey">Monthly</span><span>Total GP actual vs monthly plan (% đạt từng dept)</span>
+            <span class="chip chip-grey">Monthly</span><span>Q2 cumulative actual vs Q2 forecast ($1,726,611)</span>
+            <span class="chip chip-grey">Monthly</span><span>H1 recovery rate vs Q1 gap ($394,516 benchmark)</span>
+            <span class="chip chip-red">Trigger</span><span>Nếu Q2 gap &gt;15% vs forecast (tuần 2 T5) → Director intervention</span>
+            <span class="chip chip-amber">Review</span><span>H2 plan revision nếu Q2 actual &lt;90% forecast</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">OneIBC Group — Internal Governance Report</div>
+      <div>KPI Plan 2026 · Số liệu thực tế Q1 · Rolling Forecast Q2 · BSC Framework</div>
+      <div style="margin-top:4px;color:#334155">Tài liệu nội bộ · Không phân phối · Tháng 04/2026</div>
+    </div>
+    <div style="text-align:right">
+      <div style="color:#94A3B8;margin-bottom:4px">Nguồn dữ liệu</div>
+      <div>KPI_2026_ONE_IBC_Chốt.xlsx · Salesforce Q1/2026</div>
+      <div>Rolling Forecast Model · BSC Internal Framework</div>
+    </div>
+  </div>
+</footer>
+
+<a href="#" class="back-top" title="Lên đầu trang">↑</a>
+
+</body>
+</html>

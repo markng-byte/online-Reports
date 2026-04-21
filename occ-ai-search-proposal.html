@@ -1,0 +1,1740 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Search Transformation — offshorecompanycorp.com</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0d0d0f;
+  --bg2: #141416;
+  --bg3: #1a1a1e;
+  --bg4: #222228;
+  --line: rgba(255,255,255,0.07);
+  --line2: rgba(255,255,255,0.13);
+  --text: #e8e6e0;
+  --text2: #9a9891;
+  --text3: #5a5855;
+  --accent: #c8a96e;
+  --accent2: #a08a52;
+  --red: #e05a4a;
+  --amber: #d4943a;
+  --green: #5aaa7a;
+  --blue: #5a8fd4;
+  --teal: #4ab0a0;
+  --purple: #9a7acd;
+  --serif: 'DM Serif Display', Georgia, serif;
+  --sans: 'Outfit', system-ui, sans-serif;
+  --mono: 'DM Mono', monospace;
+  --sidebar: 240px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.7;
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ── SIDEBAR ─────────────────────────────── */
+.sidebar {
+  width: var(--sidebar);
+  flex-shrink: 0;
+  position: fixed;
+  top: 0; left: 0; bottom: 0;
+  background: var(--bg2);
+  border-right: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  z-index: 100;
+}
+
+.sidebar-brand {
+  padding: 28px 24px 20px;
+  border-bottom: 1px solid var(--line);
+}
+
+.sidebar-logo {
+  font-family: var(--serif);
+  font-size: 13px;
+  color: var(--accent);
+  letter-spacing: 0.06em;
+  margin-bottom: 4px;
+}
+
+.sidebar-doc {
+  font-size: 11px;
+  color: var(--text3);
+  font-weight: 300;
+  letter-spacing: 0.04em;
+}
+
+.nav-section {
+  padding: 20px 0 8px;
+  border-bottom: 1px solid var(--line);
+}
+
+.nav-section:last-child { border-bottom: none; }
+
+.nav-label {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text3);
+  padding: 0 24px 10px;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 24px;
+  font-size: 12.5px;
+  color: var(--text2);
+  text-decoration: none;
+  transition: all 0.15s;
+  cursor: pointer;
+  border-left: 2px solid transparent;
+}
+
+.nav-item:hover { color: var(--text); background: var(--bg3); }
+.nav-item.active { color: var(--accent); border-left-color: var(--accent); background: rgba(200,169,110,0.06); }
+
+.nav-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  opacity: 0.4;
+}
+
+.nav-item.active .nav-dot { opacity: 1; }
+
+.sidebar-footer {
+  margin-top: auto;
+  padding: 16px 24px;
+  border-top: 1px solid var(--line);
+  font-size: 11px;
+  color: var(--text3);
+  line-height: 1.5;
+}
+
+/* ── MAIN ───────────────────────────────── */
+.main {
+  margin-left: var(--sidebar);
+  flex: 1;
+  min-width: 0;
+}
+
+/* ── COVER ──────────────────────────────── */
+.cover {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 80px 72px;
+  position: relative;
+  border-bottom: 1px solid var(--line);
+  overflow: hidden;
+}
+
+.cover-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+}
+
+.cover-accent-line {
+  position: absolute;
+  top: 0; left: 72px;
+  width: 1px;
+  height: 100%;
+  background: linear-gradient(to bottom, transparent, var(--accent), transparent);
+  opacity: 0.3;
+}
+
+.cover-tag {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 32px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.cover-tag::before {
+  content: '';
+  display: block;
+  width: 32px; height: 1px;
+  background: var(--accent);
+}
+
+.cover-title {
+  font-family: var(--serif);
+  font-size: clamp(42px, 5vw, 68px);
+  line-height: 1.1;
+  color: var(--text);
+  margin-bottom: 16px;
+  max-width: 700px;
+}
+
+.cover-title em {
+  font-style: italic;
+  color: var(--accent);
+}
+
+.cover-subtitle {
+  font-size: 17px;
+  color: var(--text2);
+  font-weight: 300;
+  max-width: 560px;
+  margin-bottom: 56px;
+  line-height: 1.6;
+}
+
+.cover-meta {
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.cover-meta-item { }
+.cover-meta-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text3);
+  margin-bottom: 4px;
+}
+.cover-meta-val {
+  font-size: 14px;
+  color: var(--text2);
+  font-weight: 400;
+}
+
+.cover-badges {
+  position: absolute;
+  top: 56px; right: 72px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-end;
+}
+
+.cover-badge {
+  font-size: 11px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  border: 1px solid var(--line2);
+  color: var(--text2);
+  font-weight: 400;
+  letter-spacing: 0.03em;
+}
+
+/* ── SECTION ─────────────────────────────── */
+.section {
+  padding: 72px 72px 56px;
+  border-bottom: 1px solid var(--line);
+  scroll-margin-top: 0;
+}
+
+.section:last-child { border-bottom: none; }
+
+.section-eyebrow {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.section-eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 20px; height: 1px;
+  background: var(--accent);
+}
+
+.section-title {
+  font-family: var(--serif);
+  font-size: clamp(28px, 3vw, 40px);
+  line-height: 1.15;
+  margin-bottom: 16px;
+  color: var(--text);
+}
+
+.section-lead {
+  font-size: 16px;
+  color: var(--text2);
+  max-width: 660px;
+  margin-bottom: 48px;
+  font-weight: 300;
+  line-height: 1.75;
+}
+
+/* ── COMPONENTS ─────────────────────────── */
+.h3 {
+  font-family: var(--serif);
+  font-size: 20px;
+  color: var(--text);
+  margin: 44px 0 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--line);
+}
+
+.h3:first-child { margin-top: 0; }
+
+.prose {
+  font-size: 14.5px;
+  color: var(--text2);
+  line-height: 1.8;
+  max-width: 700px;
+  margin-bottom: 24px;
+}
+
+/* Gap cards */
+.gap-grid {
+  display: grid;
+  gap: 12px;
+}
+
+.gap-card {
+  background: var(--bg2);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 20px 24px;
+  transition: border-color 0.2s;
+}
+
+.gap-card:hover { border-color: var(--line2); }
+
+.gap-card.critical { border-left: 3px solid var(--red); }
+.gap-card.high { border-left: 3px solid var(--amber); }
+.gap-card.opportunity { border-left: 3px solid var(--green); }
+
+.gap-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  gap: 12px;
+}
+
+.gap-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.pill {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 20px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.pill-red { background: rgba(224,90,74,0.15); color: var(--red); border: 1px solid rgba(224,90,74,0.25); }
+.pill-amber { background: rgba(212,148,58,0.15); color: var(--amber); border: 1px solid rgba(212,148,58,0.25); }
+.pill-green { background: rgba(90,170,122,0.15); color: var(--green); border: 1px solid rgba(90,170,122,0.25); }
+.pill-blue { background: rgba(90,143,212,0.15); color: var(--blue); border: 1px solid rgba(90,143,212,0.25); }
+.pill-teal { background: rgba(74,176,160,0.15); color: var(--teal); border: 1px solid rgba(74,176,160,0.25); }
+.pill-purple { background: rgba(154,122,205,0.15); color: var(--purple); border: 1px solid rgba(154,122,205,0.25); }
+.pill-gray { background: rgba(255,255,255,0.06); color: var(--text2); border: 1px solid var(--line2); }
+
+.gap-desc {
+  font-size: 13px;
+  color: var(--text2);
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+
+.gap-fix {
+  background: var(--bg3);
+  border-radius: 6px;
+  padding: 12px 14px;
+  font-size: 12.5px;
+  color: var(--text);
+  line-height: 1.6;
+}
+
+.fix-label {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 5px;
+}
+
+/* Table */
+.tbl-wrap {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 28px;
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+thead th {
+  text-align: left;
+  padding: 10px 16px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text3);
+  background: var(--bg3);
+  border-bottom: 1px solid var(--line);
+  white-space: nowrap;
+}
+
+tbody td {
+  padding: 12px 16px;
+  vertical-align: top;
+  border-bottom: 1px solid var(--line);
+  color: var(--text2);
+  line-height: 1.5;
+}
+
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:hover td { background: var(--bg3); }
+tbody td strong { color: var(--text); font-weight: 500; }
+
+/* Code block */
+.code-block {
+  background: var(--bg3);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 20px 24px;
+  font-family: var(--mono);
+  font-size: 12px;
+  line-height: 1.8;
+  color: var(--text2);
+  margin-bottom: 20px;
+  overflow-x: auto;
+  white-space: pre;
+}
+
+.code-block .comment { color: var(--text3); }
+.code-block .key { color: var(--accent); }
+.code-block .val { color: var(--teal); }
+.code-block .str { color: var(--green); }
+
+/* Stakeholder cards */
+.stakeholder-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 14px;
+  margin-bottom: 28px;
+}
+
+.scard {
+  background: var(--bg2);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 20px 22px;
+  transition: border-color 0.2s;
+}
+
+.scard:hover { border-color: var(--line2); }
+
+.scard-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--line);
+}
+
+.scard-icon {
+  width: 32px; height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.scard-name { font-size: 13px; font-weight: 500; color: var(--text); }
+.scard-role { font-size: 11px; color: var(--text3); margin-top: 1px; }
+
+.scard ul { list-style: none; }
+.scard li {
+  font-size: 12.5px;
+  color: var(--text2);
+  padding: 6px 0;
+  border-bottom: 1px solid var(--line);
+  line-height: 1.5;
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+.scard li::before {
+  content: '→';
+  color: var(--accent);
+  font-size: 11px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.scard li:last-child { border-bottom: none; }
+
+/* Mindset */
+.mindset-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.mindset-old { padding: 16px 20px; background: var(--bg3); }
+.mindset-new { padding: 16px 20px; background: var(--bg2); border-left: 1px solid var(--line); }
+.mindset-label {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.mindset-old .mindset-label { color: var(--text3); }
+.mindset-new .mindset-label { color: var(--accent); }
+.mindset-text { font-size: 13px; color: var(--text2); line-height: 1.6; }
+.mindset-new .mindset-text { color: var(--text); }
+
+/* Roadmap */
+.roadmap-item {
+  display: flex;
+  gap: 20px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--line);
+  align-items: flex-start;
+}
+
+.roadmap-item:last-child { border-bottom: none; }
+
+.roadmap-num {
+  font-family: var(--serif);
+  font-size: 28px;
+  color: var(--text3);
+  min-width: 36px;
+  line-height: 1;
+  padding-top: 4px;
+}
+
+.roadmap-content { flex: 1; }
+
+.roadmap-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.roadmap-desc {
+  font-size: 13px;
+  color: var(--text2);
+  line-height: 1.6;
+}
+
+.roadmap-meta {
+  font-size: 11px;
+  color: var(--text3);
+  margin-top: 6px;
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.roadmap-meta span::before { content: '· '; }
+.roadmap-meta span:first-child::before { content: ''; }
+
+/* Bar signal */
+.bar-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 10px;
+}
+
+.bar-label { font-size: 12.5px; color: var(--text2); width: 200px; flex-shrink: 0; }
+.bar-track {
+  flex: 1; height: 4px;
+  background: var(--bg4);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.bar-fill { height: 100%; border-radius: 2px; }
+.bar-val { font-size: 12px; font-weight: 500; width: 36px; text-align: right; }
+
+/* Quote block */
+.quote-block {
+  border-left: 2px solid var(--accent);
+  padding: 16px 24px;
+  margin: 24px 0;
+  background: rgba(200,169,110,0.05);
+  border-radius: 0 8px 8px 0;
+}
+
+.quote-text {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 16px;
+  color: var(--text);
+  line-height: 1.6;
+  margin-bottom: 8px;
+}
+
+.quote-attr { font-size: 12px; color: var(--text3); }
+
+/* Checklist */
+.checklist { list-style: none; margin-bottom: 20px; }
+.checklist li {
+  display: flex;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 13px;
+  color: var(--text2);
+  line-height: 1.5;
+  align-items: flex-start;
+}
+.checklist li:last-child { border-bottom: none; }
+.checklist li .ck {
+  width: 16px; height: 16px;
+  border-radius: 4px;
+  border: 1px solid var(--line2);
+  flex-shrink: 0;
+  margin-top: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 2-col layout */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 28px;
+}
+
+/* Stat cards */
+.stat-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+.stat-card {
+  background: var(--bg2);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 18px 20px;
+}
+
+.stat-val {
+  font-family: var(--serif);
+  font-size: 28px;
+  color: var(--accent);
+  margin-bottom: 4px;
+  line-height: 1;
+}
+
+.stat-label { font-size: 12px; color: var(--text3); line-height: 1.4; }
+
+/* Divider */
+.divider {
+  height: 1px;
+  background: var(--line);
+  margin: 36px 0;
+}
+
+/* Print / share bar */
+.topbar {
+  position: fixed;
+  top: 0; right: 0;
+  left: var(--sidebar);
+  height: 48px;
+  background: rgba(13,13,15,0.9);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 32px;
+  gap: 12px;
+  z-index: 90;
+}
+
+.topbar-btn {
+  font-size: 12px;
+  color: var(--text2);
+  padding: 6px 14px;
+  border-radius: 6px;
+  border: 1px solid var(--line2);
+  background: transparent;
+  cursor: pointer;
+  font-family: var(--sans);
+  transition: all 0.15s;
+}
+
+.topbar-btn:hover { color: var(--text); border-color: var(--accent); background: rgba(200,169,110,0.08); }
+.topbar-btn.primary { background: var(--accent); color: var(--bg); border-color: var(--accent); font-weight: 500; }
+.topbar-btn.primary:hover { background: var(--accent2); }
+
+.topbar-date { font-size: 11px; color: var(--text3); margin-right: auto; }
+
+/* Responsive */
+@media (max-width: 900px) {
+  :root { --sidebar: 0px; }
+  .sidebar { display: none; }
+  .cover, .section { padding: 48px 28px; }
+  .topbar { left: 0; }
+  .two-col { grid-template-columns: 1fr; }
+  .mindset-pair { grid-template-columns: 1fr; }
+  .mindset-new { border-left: none; border-top: 1px solid var(--line); }
+  .cover-badges { display: none; }
+}
+
+@media print {
+  .sidebar, .topbar { display: none; }
+  .main { margin-left: 0; }
+  .section { break-inside: avoid; }
+  body { background: white; color: black; }
+}
+
+/* Animations */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.cover-tag { animation: fadeUp 0.6s ease both; }
+.cover-title { animation: fadeUp 0.6s 0.1s ease both; }
+.cover-subtitle { animation: fadeUp 0.6s 0.2s ease both; }
+.cover-meta { animation: fadeUp 0.6s 0.3s ease both; }
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="sidebar-brand">
+    <div class="sidebar-logo">AI Search Proposal</div>
+    <div class="sidebar-doc">offshorecompanycorp.com · 2025</div>
+  </div>
+
+  <nav class="nav-section">
+    <div class="nav-label">Tổng quan</div>
+    <a class="nav-item active" href="#cover" onclick="setActive(this)">
+      <div class="nav-dot" style="background:var(--accent)"></div> Trang bìa
+    </a>
+    <a class="nav-item" href="#executive" onclick="setActive(this)">
+      <div class="nav-dot" style="background:var(--accent)"></div> Executive Summary
+    </a>
+    <a class="nav-item" href="#signals" onclick="setActive(this)">
+      <div class="nav-dot" style="background:var(--blue)"></div> Tín hiệu xếp hạng
+    </a>
+  </nav>
+
+  <nav class="nav-section">
+    <div class="nav-label">Audit & Gaps</div>
+    <a class="nav-item" href="#audit" onclick="setActive(this)">
+      <div class="nav-dot" style="background:var(--red)"></div> Gap Audit thực tế
+    </a>
+    <a class="nav-item" href="#competitive" onclick="setActive(this)">
+      <div class="nav-dot" style="background:var(--purple)"></div> Competitive Position
+    </a>
+  </nav>
+
+  <nav class="nav-section">
+    <div class="nav-label">Đề xuất</div>
+    <a class="nav-item" href="#technical" onclick="setActive(this)">
+      <div class="nav-dot" style="background:var(--teal)"></div> Technical
+    </a>
+    <a class="nav-item" href="#content" onclick="setActive(this)">
+      <div class="nav-dot" style="background:var(--green)"></div> Content Strategy
+    </a>
+    <a class="nav-item" href="#stakeholders" onclick="setActive(this)">
+      <div class="nav-dot" style="background:var(--amber)"></div> Stakeholders
+    </a>
+    <a class="nav-item" href="#mindset" onclick="setActive(this)">
+      <div class="nav-dot" style="background:var(--purple)"></div> Mindset Shift
+    </a>
+    <a class="nav-item" href="#governance" onclick="setActive(this)">
+      <div class="nav-dot" style="background:var(--blue)"></div> Governance
+    </a>
+  </nav>
+
+  <nav class="nav-section">
+    <div class="nav-label">Triển khai</div>
+    <a class="nav-item" href="#roadmap" onclick="setActive(this)">
+      <div class="nav-dot" style="background:var(--accent)"></div> Roadmap 90 ngày
+    </a>
+    <a class="nav-item" href="#kpi" onclick="setActive(this)">
+      <div class="nav-dot" style="background:var(--green)"></div> KPIs mới
+    </a>
+  </nav>
+
+  <div class="sidebar-footer">
+    Prepared by: Harvey<br>
+    For internal use · Confidential
+  </div>
+</aside>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <span class="topbar-date">offshorecompanycorp.com · AI Search Transformation · 2025</span>
+  <button class="topbar-btn" onclick="window.print()">In / Xuất PDF</button>
+</div>
+
+<!-- MAIN -->
+<main class="main" style="padding-top:48px;">
+
+<!-- COVER -->
+<section class="cover" id="cover">
+  <div class="cover-grid"></div>
+  <div class="cover-accent-line"></div>
+
+  <div class="cover-badges">
+    <span class="cover-badge">GEO · AIO · AEO</span>
+    <span class="cover-badge">8 Stakeholder Groups</span>
+    <span class="cover-badge">90-Day Roadmap</span>
+    <span class="cover-badge">Confidential</span>
+  </div>
+
+  <div class="cover-tag">AI Search Transformation Proposal</div>
+
+  <h1 class="cover-title">
+    Tối ưu hóa<br>
+    <em>AI Search</em><br>
+    cho OCC
+  </h1>
+
+  <p class="cover-subtitle">
+    Kế hoạch chuyển đổi toàn diện từ SEO truyền thống sang Generative Engine Optimization — bao gồm technical, content, mindset và governance cho từng bộ phận tại offshorecompanycorp.com.
+  </p>
+
+  <div class="cover-meta">
+    <div class="cover-meta-item">
+      <div class="cover-meta-label">Website</div>
+      <div class="cover-meta-val">offshorecompanycorp.com</div>
+    </div>
+    <div class="cover-meta-item">
+      <div class="cover-meta-label">Phạm vi</div>
+      <div class="cover-meta-val">Technical · Content · Ops · Governance</div>
+    </div>
+    <div class="cover-meta-item">
+      <div class="cover-meta-label">Timeline</div>
+      <div class="cover-meta-val">90 ngày đầu + Ongoing</div>
+    </div>
+    <div class="cover-meta-item">
+      <div class="cover-meta-label">Năm</div>
+      <div class="cover-meta-val">2025</div>
+    </div>
+  </div>
+</section>
+
+<!-- EXECUTIVE SUMMARY -->
+<section class="section" id="executive">
+  <div class="section-eyebrow">01 · Executive Summary</div>
+  <h2 class="section-title">Tại sao OCC cần<br>hành động ngay</h2>
+  <p class="section-lead">
+    AI search (Perplexity, ChatGPT Browse, Google AI Overviews) đang chiếm ngày càng nhiều query trong ngành offshore company formation — nhưng offshorecompanycorp.com chưa được tối ưu để xuất hiện trong các câu trả lời này.
+  </p>
+
+  <div class="stat-row">
+    <div class="stat-card">
+      <div class="stat-val">60%</div>
+      <div class="stat-label">Google searches kết thúc với AI Overview, không click vào site</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-val">70+</div>
+      <div class="stat-label">Jurisdiction pages — mỗi trang là một cơ hội AI citation chưa được tận dụng</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-val">0</div>
+      <div class="stat-label">FAQ schema hiện có trên site — gap lớn nhất cần fix</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-val">3x</div>
+      <div class="stat-label">Tốc độ tăng trưởng AI referral traffic trong ngành năm 2024–2025</div>
+    </div>
+  </div>
+
+  <div class="quote-block">
+    <div class="quote-text">"AI search không tìm ai rank #1 Google — AI tìm ai trả lời rõ nhất và đáng tin nhất. Một trang DA thấp nhưng có FAQ schema + answer-first content vẫn được Perplexity cite."</div>
+    <div class="quote-attr">— Nguyên tắc cốt lõi của GEO (Generative Engine Optimization)</div>
+  </div>
+
+  <div class="h3">3 phát hiện quan trọng nhất từ audit thực tế</div>
+
+  <div class="gap-grid">
+    <div class="gap-card critical">
+      <div class="gap-head">
+        <span class="gap-title">Gap #1 — Content format sai hoàn toàn cho AI</span>
+        <span class="pill pill-red">Critical</span>
+      </div>
+      <div class="gap-desc">Jurisdiction pages (Singapore, HK, BVI...) mở đầu bằng marketing copy ("Strategic Asian business hub") thay vì trả lời thẳng câu hỏi. AI bỏ qua đoạn marketing và tìm nguồn khác — đây là lý do OCC không được cite dù content phong phú.</div>
+    </div>
+    <div class="gap-card critical">
+      <div class="gap-head">
+        <span class="gap-title">Gap #2 — Không có FAQ section &amp; schema</span>
+        <span class="pill pill-red">Critical</span>
+      </div>
+      <div class="gap-desc">Không tìm thấy FAQPage schema trên bất kỳ trang nào. Đây là format AI extract nhiều nhất — "How long does BVI registration take?", "Do I need a local director?" Đối thủ làm điều này sẽ chiếm toàn bộ AI citations trong ngành.</div>
+    </div>
+    <div class="gap-card opportunity">
+      <div class="gap-head">
+        <span class="gap-title">Cơ hội #1 — 70+ jurisdiction pages là content cluster khổng lồ</span>
+        <span class="pill pill-green">Lợi thế lớn</span>
+      </div>
+      <div class="gap-desc">Nếu mỗi trang jurisdiction được tối ưu đúng cách (FAQ schema, answer-first, author E-E-A-T), OCC có thể dominate AI search cho "how to register company in [country]" queries — lợi thế mà đối thủ nhỏ hơn không thể copy nhanh.</div>
+    </div>
+  </div>
+</section>
+
+<!-- SIGNALS -->
+<section class="section" id="signals">
+  <div class="section-eyebrow">02 · Tín hiệu xếp hạng</div>
+  <h2 class="section-title">AI platforms đọc gì<br>từ offshorecompanycorp.com</h2>
+  <p class="section-lead">
+    Mỗi AI platform có cơ chế index và chọn nguồn khác nhau. OCC cần hiểu từng platform để ưu tiên đúng effort.
+  </p>
+
+  <div class="h3">Mức độ ảnh hưởng — tín hiệu quan trọng với ngành offshore services</div>
+
+  <div style="margin-bottom:32px">
+    <div class="bar-row"><span class="bar-label">E-E-A-T (expertise + trust)</span><div class="bar-track"><div class="bar-fill" style="width:95%;background:var(--green)"></div></div><span class="bar-val" style="color:var(--green)">95%</span></div>
+    <div class="bar-row"><span class="bar-label">FAQPage schema</span><div class="bar-track"><div class="bar-fill" style="width:92%;background:var(--green)"></div></div><span class="bar-val" style="color:var(--green)">92%</span></div>
+    <div class="bar-row"><span class="bar-label">Answer-first content</span><div class="bar-track"><div class="bar-fill" style="width:88%;background:var(--green)"></div></div><span class="bar-val" style="color:var(--green)">88%</span></div>
+    <div class="bar-row"><span class="bar-label">Dữ liệu cụ thể (giá, timeline)</span><div class="bar-track"><div class="bar-fill" style="width:85%;background:var(--teal)"></div></div><span class="bar-val" style="color:var(--teal)">85%</span></div>
+    <div class="bar-row"><span class="bar-label">Domain authority + backlink</span><div class="bar-track"><div class="bar-fill" style="width:80%;background:var(--teal)"></div></div><span class="bar-val" style="color:var(--teal)">80%</span></div>
+    <div class="bar-row"><span class="bar-label">Core Web Vitals</span><div class="bar-track"><div class="bar-fill" style="width:72%;background:var(--blue)"></div></div><span class="bar-val" style="color:var(--blue)">72%</span></div>
+    <div class="bar-row"><span class="bar-label">Cập nhật nội dung (freshness)</span><div class="bar-track"><div class="bar-fill" style="width:65%;background:var(--blue)"></div></div><span class="bar-val" style="color:var(--blue)">65%</span></div>
+    <div class="bar-row"><span class="bar-label">Social signals (LinkedIn, X)</span><div class="bar-track"><div class="bar-fill" style="width:48%;background:var(--amber)"></div></div><span class="bar-val" style="color:var(--amber)">48%</span></div>
+    <div class="bar-row"><span class="bar-label">Keyword density (SEO cũ)</span><div class="bar-track"><div class="bar-fill" style="width:22%;background:var(--text3)"></div></div><span class="bar-val" style="color:var(--text3)">22%</span></div>
+  </div>
+
+  <div class="h3">Platform nào quan trọng nhất với OCC</div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Platform</th><th>Index nguồn</th><th>Tại sao quan trọng với OCC</th><th>Ưu tiên</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Perplexity</strong></td><td>Bing + crawl riêng + Reddit</td><td>B2B user hay dùng cho research "best offshore jurisdiction" — high-intent</td><td><span class="pill pill-red">Cao nhất</span></td></tr>
+        <tr><td><strong>ChatGPT Browse</strong></td><td>Bing index + plugins</td><td>Entrepreneurs, startup founders dùng ChatGPT để hỏi về company structure</td><td><span class="pill pill-red">Cao nhất</span></td></tr>
+        <tr><td><strong>Google AI Overviews</strong></td><td>Google full index</td><td>Hiển thị trước organic results — ai không có AIO là mất visibility đầu tiên</td><td><span class="pill pill-red">Cao nhất</span></td></tr>
+        <tr><td><strong>Gemini</strong></td><td>Google index + Workspace</td><td>Business users dùng Google Workspace kết hợp Gemini để research corporate structure</td><td><span class="pill pill-amber">Cao</span></td></tr>
+        <tr><td><strong>Bing Copilot</strong></td><td>Bing index</td><td>Vẫn significant share ở EU và corporate users</td><td><span class="pill pill-amber">Cao</span></td></tr>
+        <tr><td><strong>Grok</strong></td><td>X + Bing</td><td>Crypto/Web3 founders — audience overlap với offshore + digital asset use cases</td><td><span class="pill pill-blue">Trung bình</span></td></tr>
+        <tr><td><strong>Meta AI</strong></td><td>Bing + Meta</td><td>Consumer segment — ít relevant với B2B offshore services</td><td><span class="pill pill-gray">Thấp</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- AUDIT -->
+<section class="section" id="audit">
+  <div class="section-eyebrow">03 · Gap Audit</div>
+  <h2 class="section-title">Thực trạng site —<br>audit từ dữ liệu thực</h2>
+  <p class="section-lead">
+    Dữ liệu được thu thập bằng cách fetch trực tiếp các trang chính của offshorecompanycorp.com. Đây là những gì AI crawlers thực sự "thấy" khi đọc site.
+  </p>
+
+  <div class="gap-grid">
+
+    <div class="gap-card critical">
+      <div class="gap-head"><span class="gap-title">robots.txt — AI bot access</span><span class="pill pill-amber">Chưa xác nhận</span></div>
+      <div class="gap-desc">Site dùng Cloudflare CDN. Một số cấu hình Cloudflare có bot protection chặn GPTBot, ClaudeBot, PerplexityBot — đặc biệt nếu bật "Bot Fight Mode" hoặc WAF rules quá aggressive. Cần verify ngay.</div>
+      <div class="gap-fix">
+        <div class="fix-label">Fix ngay — Dev (30 phút)</div>
+        Truy cập offshorecompanycorp.com/robots.txt. Nếu thấy Disallow cho AI bots → fix ngay. Nếu không tìm thấy explicit Allow → thêm vào. Kiểm tra Cloudflare dashboard: Security → Bots → không chặn known good bots.
+      </div>
+    </div>
+
+    <div class="gap-card critical">
+      <div class="gap-head"><span class="gap-title">llms.txt — không tồn tại</span><span class="pill pill-red">Thiếu hoàn toàn</span></div>
+      <div class="gap-desc">offshorecompanycorp.com/llms.txt trả về 404. Không có file hướng dẫn AI crawler đâu là nội dung quan trọng nhất. Perplexity và nhiều crawler đã bắt đầu đọc file này.</div>
+      <div class="gap-fix">
+        <div class="fix-label">Tạo mới — Dev + SEO (2 giờ)</div>
+        File đơn giản liệt kê 20–30 URL quan trọng nhất: service pages, jurisdiction pages, about, pricing. Format Markdown. Deploy tại /llms.txt. Quick win cao nhất so với effort bỏ ra.
+      </div>
+    </div>
+
+    <div class="gap-card critical">
+      <div class="gap-head"><span class="gap-title">FAQPage schema — không có trên bất kỳ trang nào</span><span class="pill pill-red">Thiếu hoàn toàn</span></div>
+      <div class="gap-desc">Checked: homepage, Singapore page, BVI page, company-formation page — không có FAQPage JSON-LD. Đây là schema AI extract nhiều nhất để trả lời queries. Đối thủ nào làm trước sẽ chiếm toàn bộ AI citations cho ngành này.</div>
+      <div class="gap-fix">
+        <div class="fix-label">Implement — Dev + Content (1–2 tuần)</div>
+        Content team viết 6–8 FAQ thực tế cho mỗi jurisdiction page. Dev inject JSON-LD FAQPage vào &lt;head&gt; dynamically theo page type. Bắt đầu với Singapore, HK, BVI, USA — 4 trang traffic cao nhất.
+      </div>
+    </div>
+
+    <div class="gap-card high">
+      <div class="gap-head"><span class="gap-title">Answer-first content — jurisdiction pages</span><span class="pill pill-amber">Sai format</span></div>
+      <div class="gap-desc">Trang Singapore mở đầu: "Strategic Asian business hub with top-ranked ease of doing business..." — marketing copy. AI parser đọc đoạn này và không tìm thấy answer nên tiếp tục search nguồn khác. Paragraph đầu tiên phải trả lời thẳng câu hỏi thực tế.</div>
+      <div class="gap-fix">
+        <div class="fix-label">Rewrite — Content team (5 ngày cho top 5 pages)</div>
+        Paragraph 1 mới: "Registering a company in Singapore requires at least one local resident director and takes 1–3 business days through ACRA. Foreign founders can own 100% of shares. Minimum paid-up capital is S$1."
+      </div>
+    </div>
+
+    <div class="gap-card high">
+      <div class="gap-head"><span class="gap-title">HowTo schema — "How It Works" 5 bước</span><span class="pill pill-amber">Schema thiếu</span></div>
+      <div class="gap-desc">Site có section "How It Works" với 5 bước rõ ràng (Preparation → Company Details → Document Submission → Additional Services → Company Management) nhưng không có HowTo JSON-LD. AI không nhận ra đây là structured process.</div>
+      <div class="gap-fix">
+        <div class="fix-label">Implement — Dev (1 ngày)</div>
+        Inject HowTo schema vào homepage và mỗi service page. 5 steps đã có sẵn nội dung — chỉ cần wrap vào schema đúng format.
+      </div>
+    </div>
+
+    <div class="gap-card high">
+      <div class="gap-head"><span class="gap-title">Organization schema — homepage &amp; about</span><span class="pill pill-amber">Thiếu</span></div>
+      <div class="gap-desc">About page đề cập "32 branches, 25 countries, 30 professionals" nhưng không có Organization JSON-LD. AI (đặc biệt khi trả lời "who is offshorecompanycorp") dùng Knowledge Graph — cần Organization schema để build Knowledge Graph entry.</div>
+      <div class="gap-fix">
+        <div class="fix-label">Implement — Dev (1 ngày)</div>
+        Organization schema với: name, url, logo, description, numberOfEmployees, areaServed, address (headquarters). LocalBusiness schema cho mỗi trong 32 branch offices nếu có trang riêng.
+      </div>
+    </div>
+
+    <div class="gap-card high">
+      <div class="gap-head"><span class="gap-title">Author E-E-A-T — không có individual experts</span><span class="pill pill-amber">Yếu</span></div>
+      <div class="gap-desc">"30 professionals" được đề cập trong About page nhưng không có author pages, không có bylines trên blog posts, không có Person schema. AI không biết ai là expert đứng sau nội dung → E-E-A-T score thấp, đặc biệt với Google.</div>
+      <div class="gap-fix">
+        <div class="fix-label">Build — Content + HR (2–3 tuần)</div>
+        Tạo author pages cho 3–5 key consultants: photo, title, credentials, jurisdiction specialization, LinkedIn. Person schema. Link từ mọi blog post đến author page. Google dùng điều này để đánh giá trustworthiness.
+      </div>
+    </div>
+
+    <div class="gap-card opportunity">
+      <div class="gap-head"><span class="gap-title">Cơ hội: 70+ jurisdiction pages — chưa ai khai thác</span><span class="pill pill-green">Competitive moat</span></div>
+      <div class="gap-desc">OCC có coverage jurisdiction rộng nhất so với hầu hết đối thủ. Nếu mỗi trang được tối ưu đồng loạt (FAQ schema + answer-first + author E-E-A-T), đây là lợi thế không thể copy nhanh. BBCIncorp, Enterslice không có scale này.</div>
+      <div class="gap-fix">
+        <div class="fix-label">Chiến lược dài hạn — tất cả teams</div>
+        Tạo template chuẩn cho jurisdiction page: answer-first paragraph → key highlights → cost table → "How It Works" → FAQ (8 câu) → schema. Deploy đồng loạt cho 70+ pages. Đây là content moat thực sự.
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- COMPETITIVE -->
+<section class="section" id="competitive">
+  <div class="section-eyebrow">04 · Competitive Position</div>
+  <h2 class="section-title">OCC so với đối thủ<br>trên AI search</h2>
+  <p class="section-lead">Khi user hỏi AI "best offshore company service provider", đây là landscape hiện tại và cơ hội cho OCC.</p>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Tiêu chí</th><th>OCC (hiện tại)</th><th>BBCIncorp</th><th>Enterslice</th><th>GlobalOffshoreCompany</th></tr></thead>
+      <tbody>
+        <tr><td>FAQPage schema</td><td><span class="pill pill-red">Không có</span></td><td>Một số trang</td><td>Nhiều trang</td><td>Có</td></tr>
+        <tr><td>llms.txt</td><td><span class="pill pill-red">Không có</span></td><td>Không có</td><td>Không có</td><td>Không có</td></tr>
+        <tr><td>Answer-first content</td><td><span class="pill pill-amber">Chưa</span></td><td>Một phần</td><td>Tốt</td><td>Trung bình</td></tr>
+        <tr><td>Số jurisdiction coverage</td><td><span class="pill pill-green">70+ (mạnh nhất)</span></td><td>~30</td><td>~25</td><td>~10</td></tr>
+        <tr><td>Quora / Reddit presence</td><td><span class="pill pill-amber">Yếu</span></td><td>Trung bình</td><td>Tốt</td><td>Yếu</td></tr>
+        <tr><td>Author E-E-A-T</td><td><span class="pill pill-red">Không có</span></td><td>Yếu</td><td>Trung bình</td><td>Có một số</td></tr>
+        <tr><td>Perplexity citation (test)</td><td>Ít</td><td>Ít</td><td>Thường xuyên</td><td>Đôi khi</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="quote-block">
+    <div class="quote-text">"Enterslice đang được Perplexity cite thường xuyên nhất trong ngành — không phải vì content tốt hơn OCC, mà vì họ có FAQ schema và answer-first format. Đây là gap có thể fix trong 2–4 tuần."</div>
+    <div class="quote-attr">— Nhận xét từ audit competitive</div>
+  </div>
+</section>
+
+<!-- TECHNICAL -->
+<section class="section" id="technical">
+  <div class="section-eyebrow">05 · Đề xuất Technical</div>
+  <h2 class="section-title">Những gì Dev team<br>cần làm — cụ thể</h2>
+  <p class="section-lead">Tất cả đề xuất kỹ thuật bên dưới đều có code mẫu sẵn sàng implement. Priority sắp xếp theo ROI / effort ratio.</p>
+
+  <div class="h3">1. robots.txt — kiểm tra và cập nhật ngay</div>
+  <div class="code-block"><span class="comment"># offshorecompanycorp.com/robots.txt — recommended config</span>
+
+<span class="key">User-agent:</span> <span class="val">*</span>
+<span class="key">Allow:</span> <span class="val">/</span>
+<span class="key">Disallow:</span> <span class="val">/admin/</span>
+<span class="key">Disallow:</span> <span class="val">/order-services/checkout</span>
+<span class="key">Disallow:</span> <span class="val">/client-portal/</span>
+
+<span class="comment"># Explicitly allow all major AI crawlers</span>
+<span class="key">User-agent:</span> <span class="val">GPTBot</span>
+<span class="key">Allow:</span> <span class="val">/</span>
+
+<span class="key">User-agent:</span> <span class="val">ClaudeBot</span>
+<span class="key">Allow:</span> <span class="val">/</span>
+
+<span class="key">User-agent:</span> <span class="val">PerplexityBot</span>
+<span class="key">Allow:</span> <span class="val">/</span>
+
+<span class="key">User-agent:</span> <span class="val">Google-Extended</span>
+<span class="key">Allow:</span> <span class="val">/</span>
+
+<span class="key">User-agent:</span> <span class="val">CCBot</span>
+<span class="key">Allow:</span> <span class="val">/</span>
+
+<span class="key">User-agent:</span> <span class="val">meta-externalagent</span>
+<span class="key">Allow:</span> <span class="val">/</span>
+
+<span class="key">Sitemap:</span> <span class="val">https://www.offshorecompanycorp.com/sitemap.xml</span></div>
+
+  <div class="h3">2. llms.txt — tạo tại /llms.txt</div>
+  <div class="code-block"><span class="comment"># https://www.offshorecompanycorp.com/llms.txt</span>
+
+<span class="key"># OffShore CompanyCorp (OCC)</span>
+
+> Global offshore company formation and corporate services.
+> 70+ jurisdictions. Banking, nominee, virtual office, compliance.
+> Network: One IBC — 32 offices in 25 countries.
+> Starting from US$439. Fast, confidential, remote-friendly.
+
+<span class="key">## Core Services</span>
+- [Company Incorporation](https://www.offshorecompanycorp.com/services/company-formation): Register in 70+ jurisdictions with full legal documentation
+- [Business Account Opening](https://www.offshorecompanycorp.com/services/business-accounts): Remote multi-currency account facilitation
+- [Nominee Services](https://www.offshorecompanycorp.com/services/nominee): Director and shareholder nominee for privacy
+- [Virtual Office](https://www.offshorecompanycorp.com/services/serviced-office): Business address, mail handling, phone answering
+- [Tax & Accounting](https://www.offshorecompanycorp.com/services/accounting-auditing): Annual filings, audit, compliance support
+- [Corporate Structuring](https://www.offshorecompanycorp.com/services/corporate-structuring-restructuring): Holding structures, restructuring advisory
+- [Trust & Foundation](https://www.offshorecompanycorp.com/services/trust-foundation): Asset protection vehicles
+
+<span class="key">## Top Jurisdictions</span>
+- [Singapore](https://www.offshorecompanycorp.com/services/company-formation/singapore): From US$3,134 · 17% corporate tax · ASEAN gateway
+- [Hong Kong](https://www.offshorecompanycorp.com/services/company-formation/hong-kong): Asia financial center · territorial tax system
+- [BVI](https://www.offshorecompanycorp.com/services/company-formation/british-virgin-islands): Privacy-focused · no local tax · nominee available
+- [USA](https://www.offshorecompanycorp.com/services/company-formation/usa): Delaware / Wyoming LLC · US market access
+- [UK](https://www.offshorecompanycorp.com/services/company-formation/united-kingdom): EU/UK presence · LLP or Ltd options
+- [Cayman Islands](https://www.offshorecompanycorp.com/services/company-formation/cayman-islands): Hedge fund / fund structures
+- [All Jurisdictions](https://www.offshorecompanycorp.com/services/company-formation): Compare all 70+ options
+
+<span class="key">## About</span>
+- [About OCC](https://www.offshorecompanycorp.com/about-us): 30+ professionals, confidentiality-first, AML compliant
+- [Global Structure](https://www.offshorecompanycorp.com/structure): One IBC network member locations</div>
+
+  <div class="h3">3. FAQPage schema — Singapore page (template cho tất cả)</div>
+  <div class="code-block">&lt;<span class="key">script</span> type=<span class="str">"application/ld+json"</span>&gt;
+{
+  <span class="str">"@context"</span>: <span class="str">"https://schema.org"</span>,
+  <span class="str">"@type"</span>: <span class="str">"FAQPage"</span>,
+  <span class="str">"mainEntity"</span>: [
+    {
+      <span class="str">"@type"</span>: <span class="str">"Question"</span>,
+      <span class="str">"name"</span>: <span class="str">"How long does Singapore company registration take?"</span>,
+      <span class="str">"acceptedAnswer"</span>: {
+        <span class="str">"@type"</span>: <span class="str">"Answer"</span>,
+        <span class="str">"text"</span>: <span class="str">"Singapore company registration typically takes 1–3 business days through ACRA. With OCC, companies are usually incorporated within 2 business days after all documents are submitted."</span>
+      }
+    },
+    {
+      <span class="str">"@type"</span>: <span class="str">"Question"</span>,
+      <span class="str">"name"</span>: <span class="str">"Do I need a local director for a Singapore company?"</span>,
+      <span class="str">"acceptedAnswer"</span>: {
+        <span class="str">"@type"</span>: <span class="str">"Answer"</span>,
+        <span class="str">"text"</span>: <span class="str">"Yes. Singapore law (Companies Act) requires at least one ordinarily resident director. OCC provides professional nominee director services for foreign founders who do not have a Singapore resident."</span>
+      }
+    },
+    {
+      <span class="str">"@type"</span>: <span class="str">"Question"</span>,
+      <span class="str">"name"</span>: <span class="str">"What is the corporate tax rate in Singapore?"</span>,
+      <span class="str">"acceptedAnswer"</span>: {
+        <span class="str">"@type"</span>: <span class="str">"Answer"</span>,
+        <span class="str">"text"</span>: <span class="str">"Singapore's standard corporate tax rate is 17%. With partial tax exemptions, the effective rate on the first SGD 100,000 of chargeable income can be as low as 4.25%."</span>
+      }
+    },
+    {
+      <span class="str">"@type"</span>: <span class="str">"Question"</span>,
+      <span class="str">"name"</span>: <span class="str">"Can a foreigner own 100% of a Singapore company?"</span>,
+      <span class="str">"acceptedAnswer"</span>: {
+        <span class="str">"@type"</span>: <span class="str">"Answer"</span>,
+        <span class="str">"text"</span>: <span class="str">"Yes. Singapore allows 100% foreign ownership of private limited companies (Pte Ltd) with no restrictions on shareholder nationality."</span>
+      }
+    },
+    {
+      <span class="str">"@type"</span>: <span class="str">"Question"</span>,
+      <span class="str">"name"</span>: <span class="str">"What documents are required to register a Singapore company?"</span>,
+      <span class="str">"acceptedAnswer"</span>: {
+        <span class="str">"@type"</span>: <span class="str">"Answer"</span>,
+        <span class="str">"text"</span>: <span class="str">"Required: passport copies of all directors and shareholders, proof of residential address (utility bill or bank statement), proposed company name, share allocation plan, and registered office address in Singapore."</span>
+      }
+    }
+  ]
+}
+&lt;/<span class="key">script</span>&gt;</div>
+
+  <div class="h3">4. HowTo schema — quy trình 5 bước (inject vào homepage &amp; service pages)</div>
+  <div class="code-block">{
+  <span class="str">"@context"</span>: <span class="str">"https://schema.org"</span>,
+  <span class="str">"@type"</span>: <span class="str">"HowTo"</span>,
+  <span class="str">"name"</span>: <span class="str">"How to register an offshore company with OCC"</span>,
+  <span class="str">"description"</span>: <span class="str">"Step-by-step process to incorporate an offshore company through OffShore CompanyCorp"</span>,
+  <span class="str">"totalTime"</span>: <span class="str">"P3D"</span>,
+  <span class="str">"step"</span>: [
+    { <span class="str">"@type"</span>: <span class="str">"HowToStep"</span>, <span class="str">"position"</span>: 1, <span class="str">"name"</span>: <span class="str">"Preparation"</span>, <span class="str">"text"</span>: <span class="str">"Request a company name availability check and jurisdiction eligibility review."</span> },
+    { <span class="str">"@type"</span>: <span class="str">"HowToStep"</span>, <span class="str">"position"</span>: 2, <span class="str">"name"</span>: <span class="str">"Submit company details"</span>, <span class="str">"text"</span>: <span class="str">"Provide director, shareholder, and company structure information via the client portal."</span> },
+    { <span class="str">"@type"</span>: <span class="str">"HowToStep"</span>, <span class="str">"position"</span>: 3, <span class="str">"name"</span>: <span class="str">"Document submission"</span>, <span class="str">"text"</span>: <span class="str">"Upload identity documents and address proof for KYC/AML verification."</span> },
+    { <span class="str">"@type"</span>: <span class="str">"HowToStep"</span>, <span class="str">"position"</span>: 4, <span class="str">"name"</span>: <span class="str">"Additional services setup"</span>, <span class="str">"text"</span>: <span class="str">"Select optional services: bank account facilitation, nominee director, virtual office, accounting."</span> },
+    { <span class="str">"@type"</span>: <span class="str">"HowToStep"</span>, <span class="str">"position"</span>: 5, <span class="str">"name"</span>: <span class="str">"Company management"</span>, <span class="str">"text"</span>: <span class="str">"Receive incorporation documents and manage your company via the secure client portal."</span> }
+  ]
+}</div>
+
+  <div class="h3">5. GA4 — AI referral tracking setup</div>
+  <div class="code-block"><span class="comment"># GA4 Admin → Data Streams → Configure tag → Custom definitions</span>
+<span class="comment"># Tạo Custom Channel Group mới:</span>
+
+<span class="key">Channel: AI Search — Perplexity</span>
+  Condition: Session source exactly matches "perplexity.ai"
+
+<span class="key">Channel: AI Search — ChatGPT</span>
+  Condition: Session source exactly matches "chatgpt.com"
+
+<span class="key">Channel: AI Search — Copilot</span>
+  Condition: Session source exactly matches "copilot.microsoft.com"
+
+<span class="key">Channel: AI Search — Claude</span>
+  Condition: Session source exactly matches "claude.ai"
+
+<span class="key">Channel: AI Search — You.com</span>
+  Condition: Session source exactly matches "you.com"
+
+<span class="comment"># New monthly KPIs to report:</span>
+<span class="key">→</span> AI referral sessions (total + by platform)
+<span class="key">→</span> AI referral conversion rate vs organic
+<span class="key">→</span> Which pages AI sends traffic to (top landing pages from AI)
+<span class="key">→</span> AI referral revenue (if e-commerce tracking enabled)</div>
+</section>
+
+<!-- CONTENT -->
+<section class="section" id="content">
+  <div class="section-eyebrow">06 · Content Strategy</div>
+  <h2 class="section-title">Rewrite theo chuẩn<br>AI-first content</h2>
+  <p class="section-lead">
+    Content của OCC hiện tại được viết để impress người đọc và convert. Cần rewrite để vừa impress người đọc, vừa được AI cite. Hai mục tiêu này không mâu thuẫn — nếu biết cách.
+  </p>
+
+  <div class="h3">Before / After — Singapore page (ví dụ cụ thể)</div>
+
+  <div class="mindset-pair" style="margin-bottom:24px">
+    <div class="mindset-old">
+      <div class="mindset-label">Hiện tại — AI bỏ qua</div>
+      <div class="mindset-text" style="font-size:13px">"Singapore Company Formation — Strategic Asian business hub with top-ranked ease of doing business and access to ASEAN markets. Start at US$3,134."<br><br><em style="color:var(--text3);font-size:12px">AI đọc đây là marketing copy, không phải thông tin hữu ích → skip.</em></div>
+    </div>
+    <div class="mindset-new">
+      <div class="mindset-label">Đề xuất — AI sẽ cite</div>
+      <div class="mindset-text" style="font-size:13px">"Registering a company in Singapore requires at least one local resident director and a minimum paid-up capital of S$1. The process takes 1–3 business days through ACRA and can be completed fully remotely. Foreign founders can hold 100% of shares without restrictions."<br><br><em style="color:var(--accent);font-size:12px">→ Perplexity sẽ cite đoạn này khi user hỏi "how to register company in Singapore as foreigner."</em></div>
+    </div>
+  </div>
+
+  <div class="h3">Priority rewrite — 6 trang cần làm trước</div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Trang</th><th>Vấn đề hiện tại</th><th>Cần thêm</th><th>Ưu tiên</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Singapore</strong></td><td>Hero marketing, không có answer-first, không FAQ</td><td>Definition paragraph, 7–8 FAQ, FAQPage schema, thời gian + chi phí cụ thể</td><td><span class="pill pill-red">P1</span></td></tr>
+        <tr><td><strong>Hong Kong</strong></td><td>Tương tự Singapore</td><td>FAQ về HK vs offshore difference, bank account requirement, tax</td><td><span class="pill pill-red">P1</span></td></tr>
+        <tr><td><strong>BVI</strong></td><td>Privacy selling point chưa được Q&A hóa</td><td>FAQ: "Is BVI legal?", "BVI renewal cost?", "BVI bank account?"</td><td><span class="pill pill-red">P1</span></td></tr>
+        <tr><td><strong>USA (Delaware/Wyoming)</strong></td><td>Content ổn nhưng không có FAQPage schema</td><td>Schema, FAQ về EIN, state tax, operating agreement</td><td><span class="pill pill-amber">P2</span></td></tr>
+        <tr><td><strong>UK</strong></td><td>Thin content</td><td>Mở rộng, FAQ về confirmation statement, PSC register</td><td><span class="pill pill-amber">P2</span></td></tr>
+        <tr><td><strong>Cayman Islands</strong></td><td>Chưa kiểm tra đủ</td><td>FAQ về fund structure, hedge fund use case, no tax policy</td><td><span class="pill pill-amber">P2</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="h3">FAQ thực tế — dựa trên search intent người dùng hỏi AI</div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Query người thực sự hỏi AI</th><th>Trang cần có FAQ</th><th>Tại sao quan trọng</th></tr></thead>
+      <tbody>
+        <tr><td>"How long does offshore company registration take?"</td><td>Homepage, mỗi jurisdiction</td><td>High-volume, high-intent — ai trả lời rõ nhất được cite</td></tr>
+        <tr><td>"Do I need to visit in person to register offshore?"</td><td>Homepage, How It Works</td><td>Remote-friendly là USP của OCC — phải answer rõ</td></tr>
+        <tr><td>"What is the cheapest offshore jurisdiction?"</td><td>Comparison page (cần tạo mới)</td><td>Price-sensitive query — cần comparison table cụ thể</td></tr>
+        <tr><td>"Can I open a bank account for offshore company remotely?"</td><td>Business Accounts page</td><td>Banking là service quan trọng — cần address rõ trong FAQ</td></tr>
+        <tr><td>"Is offshore company formation legal?"</td><td>Homepage — FAQ riêng</td><td>Câu hỏi phổ biến, nhạy cảm — AI muốn nguồn uy tín giải thích</td></tr>
+        <tr><td>"BVI vs Cayman Islands — which is better?"</td><td>So sánh page mới hoặc BVI FAQ</td><td>Decision-making query — ai so sánh rõ nhất được cite</td></tr>
+        <tr><td>"Does Singapore company need annual return filing?"</td><td>Singapore page + Compliance</td><td>Renewal service trigger — FAQ tốt = upsell opportunity</td></tr>
+        <tr><td>"What is nominee director service?"</td><td>Nominee Services page</td><td>Specialty service — định nghĩa rõ = AI cite khi explain concept</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="h3">Content gap — nội dung mới cần tạo</div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Nội dung</th><th>Lý do AI cần</th><th>Format</th><th>Owner</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Jurisdiction comparison page</strong></td><td>AI extract bảng để trả lời "best jurisdiction for X" — query có volume cao nhất ngành</td><td>Interactive table: cost, time, privacy, tax, banking difficulty</td><td>Content + Dev</td></tr>
+        <tr><td><strong>Offshore terms glossary</strong></td><td>AI dùng để define: "What is a nominee director?", "What is an IBC?", "What is KYC?"</td><td>50–100 từ mỗi định nghĩa + DefinedTerm schema</td><td>Content + Legal</td></tr>
+        <tr><td><strong>Annual cost breakdown guide</strong></td><td>Query "total cost to maintain BVI company" — AI muốn số cụ thể, không muốn "contact us"</td><td>Table: setup cost + annual fee + renewal + compliance cho top 10 jurisdictions</td><td>Sales + Content</td></tr>
+        <tr><td><strong>Legality explainer</strong></td><td>"Is offshore company legal?" — AI cautious với topic, ưu tiên nguồn authoritative giải thích rõ</td><td>Long-form article + legal citations + FAQ schema</td><td>Legal + Content</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- STAKEHOLDERS -->
+<section class="section" id="stakeholders">
+  <div class="section-eyebrow">07 · Stakeholders</div>
+  <h2 class="section-title">Việc cụ thể<br>cho từng bộ phận</h2>
+  <p class="section-lead">AI search không phải là việc của mỗi mình SEO hay Dev. Mỗi team đóng một vai trò không thể thay thế trong chiến lược này.</p>
+
+  <div class="stakeholder-grid">
+
+    <div class="scard">
+      <div class="scard-head">
+        <div class="scard-icon" style="background:rgba(90,170,122,0.15)">⚙</div>
+        <div>
+          <div class="scard-name">Dev Team</div>
+          <div class="scard-role">Technical lead — High urgency</div>
+        </div>
+      </div>
+      <ul>
+        <li>Kiểm tra robots.txt — whitelist tất cả AI bots ngay hôm nay</li>
+        <li>Tạo /llms.txt với 25–30 URL quan trọng nhất</li>
+        <li>Inject FAQPage JSON-LD vào &lt;head&gt; dynamic theo page type</li>
+        <li>Inject HowTo schema cho "How It Works" section</li>
+        <li>Inject Organization schema vào homepage &amp; about page</li>
+        <li>Thêm Person schema khi author pages được tạo</li>
+        <li>Setup GA4 custom channel group cho AI referral</li>
+        <li>Monitor server logs: GPTBot, ClaudeBot crawl frequency hàng tuần</li>
+        <li>Validate schema sau mỗi deploy bằng Google Rich Results Test</li>
+      </ul>
+    </div>
+
+    <div class="scard">
+      <div class="scard-head">
+        <div class="scard-icon" style="background:rgba(154,122,205,0.15)">✎</div>
+        <div>
+          <div class="scard-name">SEO / Content Team</div>
+          <div class="scard-role">Content strategy — High urgency</div>
+        </div>
+      </div>
+      <ul>
+        <li>Rewrite opening paragraph tất cả jurisdiction pages: answer-first format</li>
+        <li>Viết FAQ section 6–8 câu cho Singapore, HK, BVI, USA, Cayman (P1)</li>
+        <li>Tạo author pages cho 3–5 consultants: bio, credentials, LinkedIn</li>
+        <li>Thêm byline + author link vào tất cả blog posts đã publish</li>
+        <li>Build jurisdiction comparison page (new content)</li>
+        <li>Build offshore glossary page (new content)</li>
+        <li>Thêm "Last updated [date]" vào tất cả jurisdiction pages</li>
+        <li>Test hàng tuần: "best offshore company Singapore" trên Perplexity → OCC có xuất hiện không?</li>
+      </ul>
+    </div>
+
+    <div class="scard">
+      <div class="scard-head">
+        <div class="scard-icon" style="background:rgba(212,148,58,0.15)">◈</div>
+        <div>
+          <div class="scard-name">Sales Team</div>
+          <div class="scard-role">Content source + Intelligence</div>
+        </div>
+      </div>
+      <ul>
+        <li>Khi client nói "AI told me to contact you" → hỏi platform nào, log vào CRM</li>
+        <li>Gửi content team top 5 câu hỏi client hay hỏi nhất mỗi tuần</li>
+        <li>Tạo "Why OCC vs [competitor]" one-pager — AI hay answer câu này</li>
+        <li>Bổ sung số liệu cụ thể vào case studies: "Client X từ Y, BVI trong Z ngày, chi phí $W"</li>
+        <li>Yêu cầu clients để lại testimonial kèm tên đầy đủ + company nếu có thể</li>
+        <li>Note khi có client hỏi câu AI thường nhầm → signal cho content gap</li>
+      </ul>
+    </div>
+
+    <div class="scard">
+      <div class="scard-head">
+        <div class="scard-icon" style="background:rgba(224,90,74,0.15)">◉</div>
+        <div>
+          <div class="scard-name">Marketing Team</div>
+          <div class="scard-role">Brand amplification</div>
+        </div>
+      </div>
+      <ul>
+        <li>Answer câu hỏi ngành trên Quora, Reddit r/digitalnomad — không spam, chỉ value</li>
+        <li>LinkedIn: key consultants post thought leadership về jurisdiction updates</li>
+        <li>Pitch báo quốc tế (Forbes, Business Insider) khi có data ngành để cite</li>
+        <li>Press release khi thêm jurisdiction mới → PRNewswire để AI index nhanh</li>
+        <li>Monitor brand: search "OCC offshore" trên Perplexity, ChatGPT hàng tháng</li>
+        <li>Tạo Wikidata entity cho OCC / One IBC nếu chưa có</li>
+      </ul>
+    </div>
+
+    <div class="scard">
+      <div class="scard-head">
+        <div class="scard-icon" style="background:rgba(90,143,212,0.15)">⚖</div>
+        <div>
+          <div class="scard-name">Legal / Compliance Team</div>
+          <div class="scard-role">Content authority — Critical gatekeeper</div>
+        </div>
+      </div>
+      <ul>
+        <li>Review tất cả FAQ trước khi publish — jurisdiction info sai = AI lan rộng sai toàn cầu</li>
+        <li>Thêm "Verified by Legal Team — [date]" vào mỗi jurisdiction page</li>
+        <li>Khi có regulatory update (BEPS, CRS, DAC6...) → alert content team publish ngay 48h</li>
+        <li>Review disclaimer language: đủ bảo vệ pháp lý nhưng không che khuất nội dung hữu ích</li>
+        <li>Tạo queue review nhanh cho FAQ: mục tiêu SLA 48h (không phải 2 tuần)</li>
+      </ul>
+    </div>
+
+    <div class="scard">
+      <div class="scard-head">
+        <div class="scard-icon" style="background:rgba(74,176,160,0.15)">◎</div>
+        <div>
+          <div class="scard-name">Client Service / Account Managers</div>
+          <div class="scard-role">Feedback loop + content signal</div>
+        </div>
+      </div>
+      <ul>
+        <li>Log câu hỏi từ support tickets → gửi content team mỗi tuần</li>
+        <li>Khi client hỏi câu mà AI hay trả lời sai → đây là content gap signal cần fill gấp</li>
+        <li>Renewal flow: article "How to renew your BVI company" có thể AI cite và drive organic leads</li>
+        <li>Client portal valuable nhưng cần version public summary để AI crawl được</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- MINDSET -->
+<section class="section" id="mindset">
+  <div class="section-eyebrow">08 · Mindset Shift</div>
+  <h2 class="section-title">Thay đổi tư duy<br>theo cấp độ</h2>
+  <p class="section-lead">
+    Technical và content chỉ có thể thực thi tốt nếu mindset thay đổi trước. Đây là những tư duy cần bỏ — và tư duy mới cần xây dựng.
+  </p>
+
+  <div class="h3">Core shift — cấp độ tổ chức</div>
+
+  <div class="mindset-pair">
+    <div class="mindset-old"><div class="mindset-label">Tư duy cũ</div><div class="mindset-text">Viết content để rank #1 Google keyword "offshore company Singapore"</div></div>
+    <div class="mindset-new"><div class="mindset-label">Tư duy mới</div><div class="mindset-text">Viết content để khi user hỏi Perplexity "how to register company in Singapore", OCC được cite đầu tiên</div></div>
+  </div>
+  <div class="mindset-pair">
+    <div class="mindset-old"><div class="mindset-label">Tư duy cũ</div><div class="mindset-text">Homepage = brand story + conversion funnel. Viết để impress và convert ngay.</div></div>
+    <div class="mindset-new"><div class="mindset-label">Tư duy mới</div><div class="mindset-text">Homepage = AI-readable overview. Cả người thật lẫn AI crawlers đang học về OCC từ đây.</div></div>
+  </div>
+  <div class="mindset-pair">
+    <div class="mindset-old"><div class="mindset-label">Tư duy cũ</div><div class="mindset-text">FAQ là mục nhỏ cuối trang, "nice to have", marketing viết qua loa là đủ.</div></div>
+    <div class="mindset-new"><div class="mindset-label">Tư duy mới</div><div class="mindset-text">FAQ là kênh AI search chính. Mỗi câu = một cơ hội Perplexity cite. Sales team là nguồn FAQ tốt nhất.</div></div>
+  </div>
+  <div class="mindset-pair">
+    <div class="mindset-old"><div class="mindset-label">Tư duy cũ</div><div class="mindset-text">Nội dung legal phải hedge nhiều, viết mơ hồ để tránh rủi ro pháp lý.</div></div>
+    <div class="mindset-new"><div class="mindset-label">Tư duy mới</div><div class="mindset-text">AI ưu tiên nội dung cụ thể, rõ ràng. Hedge quá = AI bỏ qua. Cụ thể + disclaimer hợp lý = được cite.</div></div>
+  </div>
+  <div class="mindset-pair">
+    <div class="mindset-old"><div class="mindset-label">Tư duy cũ</div><div class="mindset-text">Content workflow: Marketing viết → Legal review 2 tuần → publish. Chất lượng trên tốc độ.</div></div>
+    <div class="mindset-new"><div class="mindset-label">Tư duy mới</div><div class="mindset-text">FAQ từ sales call hôm nay → draft ngày mai → Legal review 48h → publish. Tốc độ IS competitive advantage.</div></div>
+  </div>
+  <div class="mindset-pair">
+    <div class="mindset-old"><div class="mindset-label">Tư duy cũ</div><div class="mindset-text">Traffic = Google organic. AI traffic là noise, chưa cần đo lường.</div></div>
+    <div class="mindset-new"><div class="mindset-label">Tư duy mới</div><div class="mindset-text">AI referral là channel mới tăng 3x/năm. Cần dashboard riêng, KPI riêng, team owner riêng.</div></div>
+  </div>
+
+  <div class="h3" style="margin-top:40px">Theo từng cấp — thay đổi cụ thể cần thấy</div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Cấp độ</th><th>Bỏ ngay</th><th>Xây dựng</th></tr></thead>
+      <tbody>
+        <tr><td><strong>C-level / Management</strong></td><td>"AI search là việc của SEO team"</td><td>"AI search cần cross-functional ownership: legal + sales + tech + marketing"</td></tr>
+        <tr><td><strong>Marketing Director</strong></td><td>"Conversion copy mạnh hơn informational. FAQ làm giảm mystique."</td><td>"Informational content IS conversion. Client đến từ AI = educated = higher conversion."</td></tr>
+        <tr><td><strong>SEO Lead</strong></td><td>"Rank #1 Google = thành công. AI Overviews là threat."</td><td>"AI Overview appearance + Perplexity citation = KPI mới quan trọng ngang organic rank"</td></tr>
+        <tr><td><strong>Content Writer</strong></td><td>"Viết 2,000 từ, keyword density 1.5%, mở đầu bằng dẫn dắt hấp dẫn"</td><td>"Trả lời câu hỏi thực trong 2 câu đầu tiên. 500 từ tốt hơn 2,000 từ lan man với AI."</td></tr>
+        <tr><td><strong>Sales Consultant</strong></td><td>"Website là việc của marketing, không liên quan đến tôi"</td><td>"Câu hỏi client hỏi hôm nay → FAQ trên site tuần sau → AI cite → lead mới. Tôi là content source."</td></tr>
+        <tr><td><strong>Legal Team</strong></td><td>"Mọi nội dung phải hedge tối đa để an toàn pháp lý"</td><td>"Nội dung cụ thể + verified date = authority. SLA review FAQ = 48h, không phải 2 tuần."</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- GOVERNANCE -->
+<section class="section" id="governance">
+  <div class="section-eyebrow">09 · Governance</div>
+  <h2 class="section-title">Quy trình vận hành<br>mới cho AI search</h2>
+  <p class="section-lead">Governance là thứ biến intent thành kết quả bền vững. Không có governance rõ ràng, mọi effort sẽ bị tiêu hao vào coordination overhead.</p>
+
+  <div class="h3">Content workflow mới — từ insight đến publish</div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Loại nội dung</th><th>Trigger</th><th>Người tạo</th><th>Review</th><th>SLA</th></tr></thead>
+      <tbody>
+        <tr><td><strong>FAQ từ sales call</strong></td><td>Sales consultant flag câu hỏi mới</td><td>Content writer draft</td><td>Legal 48h + SEO schema</td><td>5 ngày làm việc</td></tr>
+        <tr><td><strong>Jurisdiction page update</strong></td><td>Regulatory change hoặc scheduled quarterly</td><td>Content + Legal</td><td>SEO + Compliance sign-off</td><td>10 ngày</td></tr>
+        <tr><td><strong>Regulatory alert</strong></td><td>Legal/Compliance phát hiện thay đổi</td><td>Legal draft → Content polish</td><td>Marketing review</td><td>48 giờ</td></tr>
+        <tr><td><strong>Thought leadership blog</strong></td><td>Consultant chủ động hoặc marketing pitch</td><td>Consultant (author) viết</td><td>SEO + Legal</td><td>7 ngày</td></tr>
+        <tr><td><strong>Schema / technical update</strong></td><td>New page launch hoặc audit finding</td><td>Dev implement</td><td>SEO validate</td><td>3 ngày</td></tr>
+        <tr><td><strong>FAQ từ support ticket</strong></td><td>Account manager flag</td><td>Content writer</td><td>Legal 48h</td><td>5 ngày</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="h3">RACI — ownership rõ ràng</div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Hạng mục</th><th>Responsible</th><th>Accountable</th><th>Consulted</th><th>Informed</th></tr></thead>
+      <tbody>
+        <tr><td>robots.txt / llms.txt</td><td>Dev</td><td>Tech Lead</td><td>SEO</td><td>Marketing</td></tr>
+        <tr><td>Schema implementation</td><td>Dev</td><td>Tech Lead</td><td>SEO</td><td>Content</td></tr>
+        <tr><td>FAQ content creation</td><td>Content + Sales</td><td>Content Manager</td><td>Legal</td><td>Marketing</td></tr>
+        <tr><td>AI referral KPI</td><td>Analytics</td><td>Marketing Director</td><td>Dev</td><td>C-level</td></tr>
+        <tr><td>Brand citation monitoring</td><td>Marketing</td><td>Marketing Director</td><td>SEO</td><td>C-level</td></tr>
+        <tr><td>Content accuracy / legal</td><td>Legal</td><td>Compliance Manager</td><td>Content</td><td>Sales</td></tr>
+        <tr><td>Competitive AI intelligence</td><td>Marketing + SEO</td><td>Marketing Director</td><td>Sales</td><td>C-level</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="h3">Monitoring cadence</div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Việc cần làm</th><th>Tần suất</th><th>Team</th><th>Output</th></tr></thead>
+      <tbody>
+        <tr><td>Test query "offshore company [jurisdiction]" trên Perplexity, ChatGPT, Gemini</td><td>Hàng tuần</td><td>SEO</td><td>Screenshot + tracking sheet</td></tr>
+        <tr><td>Review GA4 AI referral traffic + conversion</td><td>Hàng tuần</td><td>Analytics</td><td>Weekly digest</td></tr>
+        <tr><td>Server logs: AI bot crawl activity</td><td>Hàng tháng</td><td>Dev</td><td>Crawl health report</td></tr>
+        <tr><td>Schema validation với Rich Results Test</td><td>Sau mỗi deploy</td><td>Dev + SEO</td><td>Pass/fail log</td></tr>
+        <tr><td>Kiểm tra jurisdiction info còn đúng không</td><td>Hàng quý</td><td>Legal + Content</td><td>Content audit log</td></tr>
+        <tr><td>Competitive: BBCIncorp, Enterslice xuất hiện gì trên AI?</td><td>Hàng tháng</td><td>Marketing</td><td>Competitive brief</td></tr>
+        <tr><td>AI search strategy review toàn diện</td><td>Hàng quý</td><td>All teams + C-level</td><td>Strategy update presentation</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="h3">Nguyên tắc governance đặc thù với OCC</div>
+
+  <div class="gap-grid">
+    <div class="gap-card" style="border-left:3px solid var(--red)">
+      <div class="gap-head"><span class="gap-title">Accuracy-first — không compromise</span><span class="pill pill-red">Non-negotiable</span></div>
+      <div class="gap-desc">Jurisdiction law thay đổi nhanh. Nếu AI cite thông tin sai của OCC và client hành động theo → rủi ro pháp lý + reputational damage nghiêm trọng. Mọi nội dung có thông tin pháp lý phải có "Verified by Legal — [date]" và được update khi law thay đổi.</div>
+    </div>
+    <div class="gap-card" style="border-left:3px solid var(--amber)">
+      <div class="gap-head"><span class="gap-title">No content behind login for key info</span><span class="pill pill-amber">Structural decision</span></div>
+      <div class="gap-desc">Client portal là competitive moat nhưng AI không crawl được. Mọi thông tin muốn AI biết và cite phải có phiên bản public. Pricing, process, FAQ, jurisdiction info — phải accessible không cần login.</div>
+    </div>
+    <div class="gap-card" style="border-left:3px solid var(--green)">
+      <div class="gap-head"><span class="gap-title">Template chuẩn cho 70+ jurisdiction pages</span><span class="pill pill-green">Scale advantage</span></div>
+      <div class="gap-desc">Nếu Singapore có FAQ nhưng 69 trang còn lại không có → AI chỉ cite Singapore. Cần template chuẩn (answer-first → key highlights → cost table → process → FAQ → schema) và deployment đồng loạt. Đây là lợi thế scale không đối thủ nhỏ nào có thể copy.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<section class="section" id="roadmap">
+  <div class="section-eyebrow">10 · Roadmap</div>
+  <h2 class="section-title">90 ngày đầu —<br>từng bước cụ thể</h2>
+  <p class="section-lead">Thứ tự ưu tiên theo ROI / effort. Việc nào nhiều impact nhất với ít resource nhất được làm trước.</p>
+
+  <div style="border:1px solid var(--line);border-radius:12px;overflow:hidden;">
+    <div class="roadmap-item" style="padding:20px 24px">
+      <div class="roadmap-num">1</div>
+      <div class="roadmap-content">
+        <div class="roadmap-title">Audit &amp; fix robots.txt <span class="pill pill-red">Ngày 1</span></div>
+        <div class="roadmap-desc">Truy cập /robots.txt, confirm không có Disallow cho AI bots. Whitelist tất cả major AI crawlers. Kiểm tra Cloudflare dashboard không chặn GPTBot, ClaudeBot, PerplexityBot. Nếu đang chặn → fix ngay trước khi làm bất cứ việc gì khác.</div>
+        <div class="roadmap-meta"><span>Owner: Dev</span><span>Effort: 30 phút</span><span>ROI: Cực cao</span></div>
+      </div>
+    </div>
+    <div class="roadmap-item" style="padding:20px 24px">
+      <div class="roadmap-num">2</div>
+      <div class="roadmap-content">
+        <div class="roadmap-title">Tạo /llms.txt <span class="pill pill-red">Tuần 1</span></div>
+        <div class="roadmap-desc">SEO draft file: 25–30 URL quan trọng nhất, mô tả công ty và services theo format Markdown. Dev deploy tại /llms.txt. Kiểm tra accessible tại yourdomain.com/llms.txt. 2 giờ effort — quick win cao nhất so với effort bỏ ra.</div>
+        <div class="roadmap-meta"><span>Owner: Dev + SEO</span><span>Effort: 2 giờ</span><span>ROI: Rất cao</span></div>
+      </div>
+    </div>
+    <div class="roadmap-item" style="padding:20px 24px">
+      <div class="roadmap-num">3</div>
+      <div class="roadmap-content">
+        <div class="roadmap-title">FAQ + FAQPage schema — Singapore &amp; HK <span class="pill pill-amber">Tuần 1–2</span></div>
+        <div class="roadmap-desc">Content team viết 7–8 câu FAQ thực tế cho Singapore và Hong Kong pages (dựa trên template đã có trong tài liệu này). Legal review 48h. Dev inject JSON-LD FAQPage vào &lt;head&gt;. Validate bằng Google Rich Results Test.</div>
+        <div class="roadmap-meta"><span>Owner: Content + Dev</span><span>Effort: 3–4 ngày</span><span>ROI: Rất cao</span></div>
+      </div>
+    </div>
+    <div class="roadmap-item" style="padding:20px 24px">
+      <div class="roadmap-num">4</div>
+      <div class="roadmap-content">
+        <div class="roadmap-title">Answer-first rewrite — top 5 jurisdiction pages <span class="pill pill-amber">Tuần 2–3</span></div>
+        <div class="roadmap-desc">Rewrite opening paragraph của Singapore, HK, BVI, USA, Cayman theo format: definition → direct answer → key facts. Legal review 48h. Mỗi trang mất khoảng 1–2 giờ để rewrite đúng chuẩn AI-first.</div>
+        <div class="roadmap-meta"><span>Owner: Content + Legal</span><span>Effort: 1 tuần</span><span>ROI: Rất cao</span></div>
+      </div>
+    </div>
+    <div class="roadmap-item" style="padding:20px 24px">
+      <div class="roadmap-num">5</div>
+      <div class="roadmap-content">
+        <div class="roadmap-title">GA4 AI referral tracking setup <span class="pill pill-amber">Tuần 2</span></div>
+        <div class="roadmap-desc">Setup custom channel group trong GA4 cho perplexity.ai, chatgpt.com, copilot.microsoft.com, claude.ai. Từ tuần 3 sẽ có baseline data để so sánh progress sau khi implement các thay đổi.</div>
+        <div class="roadmap-meta"><span>Owner: Dev + Analytics</span><span>Effort: 2 giờ</span><span>ROI: Data infrastructure</span></div>
+      </div>
+    </div>
+    <div class="roadmap-item" style="padding:20px 24px">
+      <div class="roadmap-num">6</div>
+      <div class="roadmap-content">
+        <div class="roadmap-title">BVI, USA, UK FAQ + schema <span class="pill pill-amber">Tuần 3–4</span></div>
+        <div class="roadmap-desc">Tiếp tục roll out FAQ section và FAQPage schema cho BVI, USA (Delaware/Wyoming), UK. Cùng lúc implement HowTo schema cho "How It Works" 5-step process trên homepage và service pages.</div>
+        <div class="roadmap-meta"><span>Owner: Content + Dev</span><span>Effort: 1 tuần</span><span>ROI: Cao</span></div>
+      </div>
+    </div>
+    <div class="roadmap-item" style="padding:20px 24px">
+      <div class="roadmap-num">7</div>
+      <div class="roadmap-content">
+        <div class="roadmap-title">Organization schema + Author pages <span class="pill pill-blue">Tháng 2</span></div>
+        <div class="roadmap-desc">Organization JSON-LD vào homepage và about page. Tạo author pages cho 3–5 key consultants: photo, bio, credentials, jurisdiction specialization, LinkedIn. Person schema. Link từ tất cả blog posts đến author page. E-E-A-T signal quan trọng với Google.</div>
+        <div class="roadmap-meta"><span>Owner: Dev + Content + HR</span><span>Effort: 2 tuần</span><span>ROI: Medium-high</span></div>
+      </div>
+    </div>
+    <div class="roadmap-item" style="padding:20px 24px">
+      <div class="roadmap-num">8</div>
+      <div class="roadmap-content">
+        <div class="roadmap-title">Jurisdiction comparison page <span class="pill pill-blue">Tháng 2–3</span></div>
+        <div class="roadmap-desc">New page: so sánh 10–15 top jurisdictions theo cost, incorporation time, privacy level, corporate tax, bank account difficulty, renewal fee. Table format AI extract dễ nhất cho "best jurisdiction for [use case]" queries — volume cao nhất ngành.</div>
+        <div class="roadmap-meta"><span>Owner: Content + Dev + Sales</span><span>Effort: 2 tuần</span><span>ROI: Rất cao (long-term)</span></div>
+      </div>
+    </div>
+    <div class="roadmap-item" style="padding:20px 24px">
+      <div class="roadmap-num">9</div>
+      <div class="roadmap-content">
+        <div class="roadmap-title">Social citation seeding — Quora &amp; Reddit <span class="pill pill-gray">Tháng 2–3</span></div>
+        <div class="roadmap-desc">Consultants answer câu hỏi thực về offshore company trên r/digitalnomad, r/entrepreneur, Quora — không spam, chỉ value. Perplexity index rất mạnh Quora và Reddit. Mỗi answer quality là một citation point.</div>
+        <div class="roadmap-meta"><span>Owner: Marketing + Consultants</span><span>Effort: Ongoing 2h/tuần</span><span>ROI: Dài hạn, compound</span></div>
+      </div>
+    </div>
+    <div class="roadmap-item" style="padding:20px 24px;border-bottom:none">
+      <div class="roadmap-num">10</div>
+      <div class="roadmap-content">
+        <div class="roadmap-title">Monthly AI search review cadence <span class="pill pill-gray">Từ tháng 1</span></div>
+        <div class="roadmap-desc">Monthly meeting (45 phút): AI referral traffic report, brand citation test kết quả, schema validation log, competitive watch. Owner: Marketing Director. Báo cáo lên C-level hàng quý với AI search KPI riêng.</div>
+        <div class="roadmap-meta"><span>Owner: Marketing Director</span><span>Effort: 45 phút/tháng</span><span>ROI: Governance</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KPI -->
+<section class="section" id="kpi">
+  <div class="section-eyebrow">11 · KPIs mới</div>
+  <h2 class="section-title">Thước đo thành công<br>trong kỷ nguyên AI search</h2>
+  <p class="section-lead">Bổ sung các KPI mới này song song với KPI SEO truyền thống. Đây là leading indicators cho growth dài hạn.</p>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>KPI</th><th>Đo như thế nào</th><th>Target tháng 3</th><th>Target tháng 6</th></tr></thead>
+      <tbody>
+        <tr><td><strong>AI referral sessions</strong></td><td>GA4 custom channel group</td><td>Có baseline data</td><td>+30% so với baseline</td></tr>
+        <tr><td><strong>AI referral conversion rate</strong></td><td>GA4: conversions từ AI sources</td><td>Đo được</td><td>Ngang hoặc cao hơn organic</td></tr>
+        <tr><td><strong>AI Overview appearances</strong></td><td>Google Search Console + manual test</td><td>5 brand queries</td><td>20+ queries có AIO</td></tr>
+        <tr><td><strong>Perplexity citation rate</strong></td><td>Manual test 10 queries/tuần</td><td>OCC xuất hiện 1–2 queries</td><td>OCC xuất hiện 5+ queries</td></tr>
+        <tr><td><strong>Schema coverage</strong></td><td>Rich Results Test audit</td><td>Top 10 pages có schema</td><td>70+ jurisdiction pages có FAQPage</td></tr>
+        <tr><td><strong>FAQ page coverage</strong></td><td>Content audit tracker</td><td>5 jurisdiction pages</td><td>25+ jurisdiction pages</td></tr>
+        <tr><td><strong>AI bot crawl frequency</strong></td><td>Server logs (GPTBot, ClaudeBot)</td><td>Crawl không bị block</td><td>Regular crawl weekly</td></tr>
+        <tr><td><strong>Competitive AI share of voice</strong></td><td>Manual test vs BBCIncorp, Enterslice</td><td>Baseline established</td><td>Equal or above Enterslice</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="quote-block">
+    <div class="quote-text">"AI referral traffic từ quality sources như Perplexity thường có conversion rate cao hơn organic — user đã được AI pre-qualify và educate trước khi đến site."</div>
+    <div class="quote-attr">— Insight từ early adopters đo AI referral conversion, 2024–2025</div>
+  </div>
+
+  <div class="h3">Dashboard monthly report — format đề xuất</div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Section</th><th>Nội dung</th><th>Audience</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Executive summary</strong></td><td>3 số: AI referral sessions, AI conversion, schema coverage %</td><td>C-level</td></tr>
+        <tr><td><strong>AI citation test</strong></td><td>Screenshot Perplexity/ChatGPT trả lời 5 target queries — OCC có xuất hiện?</td><td>Marketing + SEO</td></tr>
+        <tr><td><strong>Technical health</strong></td><td>Schema validation results, bot crawl log, Core Web Vitals</td><td>Dev + SEO</td></tr>
+        <tr><td><strong>Content progress</strong></td><td>Số pages đã có FAQ, số FAQ mới published, author pages status</td><td>Content Manager</td></tr>
+        <tr><td><strong>Competitive watch</strong></td><td>Đối thủ xuất hiện gì mới trên AI? Có gap mới nào cần address?</td><td>All teams</td></tr>
+        <tr><td><strong>Next month priorities</strong></td><td>3 action items cụ thể với owner và deadline</td><td>All teams</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div style="margin-top:56px;padding-top:40px;border-top:1px solid var(--line);text-align:center">
+    <div style="font-family:var(--serif);font-size:28px;color:var(--accent);margin-bottom:12px;font-style:italic">Bắt đầu từ ngày mai.</div>
+    <p style="font-size:14px;color:var(--text2);max-width:480px;margin:0 auto;line-height:1.7">Việc #1 không cần budget, không cần approval, không cần meeting:<br>kiểm tra <code style="background:var(--bg3);padding:2px 6px;border-radius:4px;font-family:var(--mono);font-size:13px">offshorecompanycorp.com/robots.txt</code><br>ngay hôm nay.</p>
+  </div>
+</section>
+
+</main>
+
+<script>
+function setActive(el) {
+  document.querySelectorAll('.nav-item').forEach(function(n) { n.classList.remove('active'); });
+  el.classList.add('active');
+}
+
+// Scroll spy
+var sections = ['cover','executive','signals','audit','competitive','technical','content','stakeholders','mindset','governance','roadmap','kpi'];
+var navItems = document.querySelectorAll('.nav-item');
+
+window.addEventListener('scroll', function() {
+  var scrollY = window.scrollY + 100;
+  var current = '';
+  sections.forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el && el.offsetTop <= scrollY) current = id;
+  });
+
+  navItems.forEach(function(item) {
+    var href = item.getAttribute('href');
+    if (href && href === '#' + current) {
+      item.classList.add('active');
+    } else {
+      item.classList.remove('active');
+    }
+  });
+});
+</script>
+</body>
+</html>

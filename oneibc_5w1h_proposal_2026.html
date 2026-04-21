@@ -1,0 +1,1386 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>One IBC — Đề Xuất Hành Động 2026 · 5W1H Framework</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;1,9..144,400&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --ink:#0C1220;
+  --ink2:#1A2438;
+  --ink3:#354260;
+  --ink4:#6B7A96;
+  --ink5:#9BA8BF;
+  --white:#FFFFFF;
+  --off:#F7F8FA;
+  --surface:#EFF1F5;
+  --border:#DDE1EB;
+  --border2:#C8CEDC;
+
+  --navy:#0E1D45;
+  --navy2:#152454;
+  --accent:#1A3FA0;
+  --accent2:#2B55C8;
+  --accent-lt:#EBF0FF;
+  --accent-border:#BFCFFF;
+
+  --red:#B91C1C;
+  --red2:#DC2626;
+  --red-lt:#FEF2F2;
+  --red-bd:#FECACA;
+
+  --amber:#92400E;
+  --amber2:#D97706;
+  --amber-lt:#FFFBEB;
+  --amber-bd:#FDE68A;
+
+  --green:#065F46;
+  --green2:#059669;
+  --green-lt:#ECFDF5;
+  --green-bd:#A7F3D0;
+
+  --teal:#0F4C5C;
+  --teal2:#0891B2;
+  --teal-lt:#ECFEFF;
+  --teal-bd:#A5F3FC;
+
+  --w1:#F5A623; /* what */
+  --w2:#7C3AED; /* why */
+  --w3:#0891B2; /* who */
+  --w4:#059669; /* when */
+  --w5:#DC2626; /* where */
+  --w6:#1A3FA0; /* how */
+
+  --ff-serif:'Fraunces',Georgia,serif;
+  --ff-sans:'IBM Plex Sans',system-ui,sans-serif;
+  --ff-mono:'IBM Plex Mono',monospace;
+
+  --r4:4px;--r6:6px;--r8:8px;--r12:12px;--r16:16px;
+  --sh-xs:0 1px 2px rgba(0,0,0,.05);
+  --sh-sm:0 1px 3px rgba(0,0,0,.07),0 2px 6px rgba(0,0,0,.04);
+  --sh:0 2px 8px rgba(0,0,0,.08),0 6px 20px rgba(0,0,0,.05);
+}
+
+html{font-size:14px;scroll-behavior:smooth}
+body{font-family:var(--ff-sans);background:var(--off);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
+
+/* ── TOPBAR ── */
+.topbar{background:var(--navy);border-bottom:3px solid var(--accent2);position:sticky;top:0;z-index:200}
+.topbar-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:0 36px;height:52px}
+.topbar-brand{font-family:var(--ff-serif);font-size:14px;font-weight:700;color:#93C5FD;letter-spacing:-.01em}
+.topbar-brand span{color:rgba(255,255,255,.5);font-weight:300;margin:0 6px}
+.topbar-nav{display:flex;gap:0;overflow-x:auto}
+.topbar-nav a{font-family:var(--ff-mono);font-size:9.5px;color:#94A3B8;padding:8px 11px;text-decoration:none;white-space:nowrap;letter-spacing:.05em;text-transform:uppercase;border-bottom:2px solid transparent;transition:.15s}
+.topbar-nav a:hover{color:white;border-bottom-color:var(--accent2)}
+.topbar-date{font-family:var(--ff-mono);font-size:10px;color:#475569;white-space:nowrap}
+
+/* ── HERO ── */
+.hero{background:var(--navy2);color:white;padding:48px 0 40px;border-bottom:1px solid rgba(255,255,255,.06)}
+.hero-inner{max-width:1200px;margin:0 auto;padding:0 36px;display:grid;grid-template-columns:1fr auto;gap:32px;align-items:end}
+@media(max-width:800px){.hero-inner{grid-template-columns:1fr}}
+.hero-tag{font-family:var(--ff-mono);font-size:9.5px;color:#60A5FA;letter-spacing:.14em;text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.hero-tag::before{content:'';width:5px;height:5px;border-radius:50%;background:#60A5FA;animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.hero h1{font-family:var(--ff-serif);font-size:clamp(24px,3vw,38px);font-weight:700;line-height:1.1;letter-spacing:-.02em;color:white;margin-bottom:10px}
+.hero h1 em{color:#93C5FD;font-style:italic}
+.hero-sub{font-size:13px;color:#94A3B8;line-height:1.7;max-width:560px;font-weight:300}
+.hero-stats{display:flex;gap:0;border:1px solid rgba(255,255,255,.1);border-radius:var(--r12);overflow:hidden;margin-top:24px}
+.hs{flex:1;padding:14px 18px;border-right:1px solid rgba(255,255,255,.08)}
+.hs:last-child{border-right:none}
+.hs-val{font-family:var(--ff-mono);font-size:20px;font-weight:600;line-height:1;margin-bottom:3px}
+.hs-lbl{font-family:var(--ff-mono);font-size:9px;color:#64748B;text-transform:uppercase;letter-spacing:.08em}
+.hs-note{font-size:10.5px;color:#94A3B8;margin-top:2px}
+.hs-red .hs-val{color:#F87171}
+.hs-amber .hs-val{color:#FCD34D}
+.hs-green .hs-val{color:#6EE7B7}
+.hs-blue .hs-val{color:#93C5FD}
+
+/* ── 5W1H RIBBON ── */
+.w-ribbon{background:var(--ink2);border-bottom:1px solid rgba(255,255,255,.06);overflow-x:auto}
+.w-ribbon-inner{max-width:1200px;margin:0 auto;padding:0 36px;display:flex;gap:0}
+.w-tab{flex:1;min-width:110px;padding:12px 14px;text-align:center;text-decoration:none;border-bottom:3px solid transparent;transition:.15s}
+.w-tab:hover{background:rgba(255,255,255,.04)}
+.w-tab-icon{font-size:18px;display:block;margin-bottom:3px}
+.w-tab-label{font-family:var(--ff-mono);font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:.1em;display:block}
+.w-tab-sub{font-size:10px;color:#64748B;display:block}
+.wt1{border-bottom-color:var(--w1)}.wt1 .w-tab-label{color:var(--w1)}
+.wt2{border-bottom-color:var(--w2)}.wt2 .w-tab-label{color:#A78BFA}
+.wt3{border-bottom-color:var(--w3)}.wt3 .w-tab-label{color:#67E8F9}
+.wt4{border-bottom-color:var(--w4)}.wt4 .w-tab-label{color:#6EE7B7}
+.wt5{border-bottom-color:var(--w5)}.wt5 .w-tab-label{color:#FCA5A5}
+.wt6{border-bottom-color:var(--w6)}.wt6 .w-tab-label{color:#93C5FD}
+
+/* ── LAYOUT ── */
+.wrap{max-width:1200px;margin:0 auto;padding:0 36px}
+section{padding:44px 0 32px}
+.rule{height:1px;background:var(--border);margin:4px 0}
+
+/* ── SECTION HEAD ── */
+.sec-eye{font-family:var(--ff-mono);font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.sec-eye::after{content:'';flex:1;height:1px;background:var(--border)}
+.sec-title{font-family:var(--ff-serif);font-size:clamp(17px,2vw,22px);font-weight:700;color:var(--ink);letter-spacing:-.01em;margin-bottom:6px}
+.sec-desc{font-size:12.5px;color:var(--ink4);line-height:1.7;max-width:680px;margin-bottom:24px}
+
+/* ── W-SECTION HEADERS ── */
+.w-section-head{display:flex;align-items:center;gap:14px;margin-bottom:20px;padding:16px 20px;border-radius:var(--r8);border:1px solid var(--border)}
+.w-num{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--ff-serif);font-size:18px;font-weight:700;color:white;flex-shrink:0}
+.w-head-title{font-family:var(--ff-serif);font-size:18px;font-weight:700;color:var(--ink);line-height:1.2}
+.w-head-sub{font-size:12px;color:var(--ink4);margin-top:2px}
+.wh-what .w-num{background:var(--w1)}
+.wh-what{background:#FFFBEB;border-color:var(--amber-bd)}
+.wh-why .w-num{background:var(--w2)}
+.wh-why{background:#F5F3FF;border-color:#DDD6FE}
+.wh-who .w-num{background:var(--w3)}
+.wh-who{background:var(--teal-lt);border-color:var(--teal-bd)}
+.wh-when .w-num{background:var(--w4)}
+.wh-when{background:var(--green-lt);border-color:var(--green-bd)}
+.wh-where .w-num{background:var(--w5)}
+.wh-where{background:var(--red-lt);border-color:var(--red-bd)}
+.wh-how .w-num{background:var(--w6)}
+.wh-how{background:var(--accent-lt);border-color:var(--accent-border)}
+
+/* ── GRIDS ── */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+@media(max-width:960px){.g2,.g3,.g4{grid-template-columns:1fr}}
+
+/* ── CARDS ── */
+.card{background:var(--white);border:1px solid var(--border);border-radius:var(--r8);padding:18px 20px;box-shadow:var(--sh-xs)}
+.card-title{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:8px}
+.card-body{font-size:12.5px;color:var(--ink3);line-height:1.7}
+
+/* ── ISSUE CARDS ── */
+.issue{background:var(--white);border:1px solid var(--border);border-radius:var(--r8);padding:20px 22px;margin-bottom:14px;box-shadow:var(--sh-xs);display:grid;grid-template-columns:auto 1fr;gap:20px}
+@media(max-width:800px){.issue{grid-template-columns:1fr}}
+.issue-left{min-width:200px}
+.issue-badge{font-family:var(--ff-mono);font-size:9px;font-weight:700;padding:3px 8px;border-radius:var(--r4);text-transform:uppercase;letter-spacing:.08em;display:inline-block;margin-bottom:8px}
+.b-crit{background:var(--red-lt);color:var(--red);border:1px solid var(--red-bd)}
+.b-high{background:var(--amber-lt);color:var(--amber);border:1px solid var(--amber-bd)}
+.b-med{background:var(--accent-lt);color:var(--accent);border:1px solid var(--accent-border)}
+.issue-num{font-family:var(--ff-mono);font-size:32px;font-weight:600;line-height:1;color:var(--red2);display:block;margin-bottom:2px}
+.issue-num.amber{color:var(--amber2)}
+.issue-num.navy{color:var(--accent2)}
+.issue-num-lbl{font-size:10.5px;color:var(--ink5);line-height:1.4}
+.issue-right{}
+.issue-title{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:6px;line-height:1.3}
+.issue-body{font-size:12.5px;color:var(--ink3);line-height:1.7}
+.issue-tags{margin-top:10px;display:flex;flex-wrap:wrap;gap:6px}
+
+/* ── PILLS ── */
+.pill{display:inline-block;font-family:var(--ff-mono);font-size:9px;font-weight:600;padding:2px 8px;border-radius:100px;text-transform:uppercase;letter-spacing:.06em}
+.p-red{background:var(--red-lt);color:var(--red)}
+.p-amber{background:var(--amber-lt);color:var(--amber)}
+.p-green{background:var(--green-lt);color:var(--green)}
+.p-navy{background:var(--accent-lt);color:var(--accent)}
+.p-teal{background:var(--teal-lt);color:var(--teal)}
+.p-gray{background:var(--surface);color:var(--ink4)}
+
+/* ── TABLES ── */
+.tbl-wrap{overflow-x:auto;border-radius:var(--r8);border:1px solid var(--border);box-shadow:var(--sh-xs)}
+table{width:100%;border-collapse:collapse;font-size:12px}
+thead tr{background:var(--ink2);color:white}
+thead th{padding:10px 14px;text-align:left;font-family:var(--ff-mono);font-size:9.5px;font-weight:500;letter-spacing:.07em;text-transform:uppercase;white-space:nowrap}
+tbody tr{border-bottom:1px solid var(--border)}
+tbody tr:last-child{border-bottom:none}
+tbody tr:nth-child(even){background:#FAFBFC}
+tbody td{padding:9px 14px;color:var(--ink3);font-size:12px;line-height:1.5;vertical-align:top}
+tbody td:first-child{color:var(--ink);font-weight:600}
+.mono{font-family:var(--ff-mono);font-size:11px}
+.c-red{color:var(--red2);font-weight:600}
+.c-amber{color:var(--amber2);font-weight:600}
+.c-green{color:var(--green2);font-weight:600}
+.c-navy{color:var(--accent2);font-weight:600}
+
+/* ── 30-DAY PLAN ── */
+.sprint{background:var(--white);border:1px solid var(--border);border-radius:var(--r8);margin-bottom:14px;overflow:hidden;box-shadow:var(--sh-xs)}
+.sprint-head{padding:14px 18px;display:flex;align-items:center;gap:14px;border-bottom:1px solid var(--border)}
+.sprint-week{font-family:var(--ff-mono);font-size:11px;font-weight:700;color:white;background:var(--accent2);padding:4px 10px;border-radius:var(--r4);white-space:nowrap}
+.sprint-dates{font-family:var(--ff-mono);font-size:10px;color:var(--ink5)}
+.sprint-theme{font-size:13px;font-weight:600;color:var(--ink)}
+.sprint-body{padding:0}
+.sprint-item{padding:11px 18px;border-bottom:1px solid var(--border);display:grid;grid-template-columns:180px 1fr 100px 100px;gap:14px;align-items:start;font-size:12px}
+@media(max-width:900px){.sprint-item{grid-template-columns:1fr}}
+.sprint-item:last-child{border-bottom:none}
+.si-title{font-weight:600;color:var(--ink)}
+.si-body{color:var(--ink3);line-height:1.6}
+.si-owner{font-family:var(--ff-mono);font-size:10px;color:var(--ink5)}
+.si-kpi{font-family:var(--ff-mono);font-size:10px;color:var(--green2)}
+.sprint-col-head{background:var(--off);padding:7px 18px;display:grid;grid-template-columns:180px 1fr 100px 100px;gap:14px;border-bottom:1px solid var(--border)}
+@media(max-width:900px){.sprint-col-head{display:none}}
+.sch{font-family:var(--ff-mono);font-size:9px;color:var(--ink5);text-transform:uppercase;letter-spacing:.08em}
+
+/* ── STAFFING / ASK ── */
+.dept-block{background:var(--white);border:1px solid var(--border);border-radius:var(--r8);margin-bottom:20px;overflow:hidden;box-shadow:var(--sh-xs)}
+.dept-head{padding:14px 20px;display:flex;align-items:center;justify-content:space-between;border-bottom:2px solid var(--border)}
+.dept-name{font-size:14px;font-weight:700;color:var(--ink)}
+.dept-meta{font-family:var(--ff-mono);font-size:10px;color:var(--ink5)}
+.dept-summary{padding:14px 20px;background:var(--off);border-bottom:1px solid var(--border);font-size:12.5px;color:var(--ink3);line-height:1.6;display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+@media(max-width:800px){.dept-summary{grid-template-columns:1fr}}
+.ds-item-label{font-family:var(--ff-mono);font-size:9px;color:var(--ink5);text-transform:uppercase;letter-spacing:.08em;margin-bottom:3px}
+.ds-item-val{font-size:12.5px;font-weight:600;color:var(--ink)}
+.ds-item-sub{font-size:11px;color:var(--ink4)}
+.role-block{padding:16px 20px;border-bottom:1px solid var(--border)}
+.role-block:last-child{border-bottom:none}
+.role-head{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px;gap:14px;flex-wrap:wrap}
+.role-title{font-size:13px;font-weight:700;color:var(--ink)}
+.role-type{font-family:var(--ff-mono);font-size:9px;padding:2px 8px;border-radius:var(--r4);font-weight:600}
+.rt-new{background:#FEF9C3;color:#854D0E}
+.rt-upgrade{background:var(--accent-lt);color:var(--accent)}
+.rt-exist{background:var(--green-lt);color:var(--green)}
+.rt-hire{background:#FEE2E2;color:#991B1B}
+.ask-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:12px}
+@media(max-width:800px){.ask-grid{grid-template-columns:1fr}}
+.ask-dim-block{background:var(--off);border:1px solid var(--border);border-radius:var(--r6);padding:12px 14px}
+.ask-dim-tag{font-family:var(--ff-mono);font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;padding:2px 6px;border-radius:var(--r4);display:inline-block}
+.ask-a .ask-dim-tag{background:#FEF3C7;color:#92400E}
+.ask-s .ask-dim-tag{background:#DBEAFE;color:#1E40AF}
+.ask-k .ask-dim-tag{background:#D1FAE5;color:#065F46}
+.ask-dim-content{font-size:12px;color:var(--ink3);line-height:1.65}
+.interview-qs{margin-top:10px}
+.iq-title{font-family:var(--ff-mono);font-size:9px;color:var(--ink5);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px}
+.iq-list{list-style:none;padding:0}
+.iq-list li{font-size:12px;color:var(--ink3);line-height:1.6;padding:6px 0 6px 16px;position:relative;border-bottom:1px solid var(--border)}
+.iq-list li:last-child{border-bottom:none}
+.iq-list li::before{content:'Q';position:absolute;left:0;font-family:var(--ff-mono);font-size:9px;font-weight:700;color:var(--accent2);top:8px}
+
+/* ── PARTNERSHIP SCOPE ── */
+.partner-card{background:var(--white);border:1px solid var(--border);border-radius:var(--r8);overflow:hidden;box-shadow:var(--sh-xs);margin-bottom:16px}
+.partner-head{padding:16px 20px;display:flex;align-items:center;gap:16px;border-bottom:2px solid var(--border)}
+.partner-logo-box{width:48px;height:48px;border-radius:var(--r8);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.partner-name{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:2px}
+.partner-meta{font-size:11px;color:var(--ink4);line-height:1.5}
+.partner-body{padding:16px 20px;display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media(max-width:800px){.partner-body{grid-template-columns:1fr}}
+.col-lbl{font-family:var(--ff-mono);font-size:9px;color:var(--ink5);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px}
+.list-b{list-style:none;padding:0}
+.list-b li{font-size:12.5px;color:var(--ink3);line-height:1.65;padding:4px 0 4px 14px;position:relative;border-bottom:1px solid var(--border)}
+.list-b li:last-child{border-bottom:none}
+.list-b li::before{content:'—';position:absolute;left:0;color:var(--ink5);font-size:11px}
+.process-flow{margin-top:16px;padding:14px 20px;background:var(--off);border-top:1px solid var(--border)}
+.pf-title{font-family:var(--ff-mono);font-size:9px;color:var(--ink5);text-transform:uppercase;letter-spacing:.1em;margin-bottom:12px}
+.pf-steps{display:flex;gap:0;overflow-x:auto}
+.pf-step{flex:1;min-width:110px;text-align:center;position:relative;padding:0 8px}
+.pf-step::after{content:'→';position:absolute;right:-6px;top:12px;color:var(--ink5);font-size:13px}
+.pf-step:last-child::after{display:none}
+.pf-dot{width:28px;height:28px;border-radius:50%;background:var(--accent2);color:white;font-family:var(--ff-mono);font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;margin:0 auto 6px}
+.pf-step-lbl{font-size:10.5px;color:var(--ink3);line-height:1.4}
+.pf-step-sub{font-family:var(--ff-mono);font-size:9px;color:var(--ink5);margin-top:2px}
+
+/* ── BSC MINI ── */
+.bsc-mini{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:800px){.bsc-mini{grid-template-columns:1fr}}
+.bsc-p{background:var(--white);border:1px solid var(--border);border-radius:var(--r8);padding:16px 18px;box-shadow:var(--sh-xs)}
+.bsc-p-head{display:flex;align-items:center;gap:10px;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid var(--border)}
+.bsc-p-icon{font-size:18px}
+.bsc-p-title{font-size:13px;font-weight:700;color:var(--ink)}
+.bsc-p-sub{font-size:10.5px;color:var(--ink4)}
+.kpi-row{display:grid;grid-template-columns:1fr 85px 90px;gap:8px;font-size:11.5px;padding:6px 0;border-bottom:1px solid var(--border);align-items:start}
+.kpi-row:last-child{border-bottom:none}
+.kpi-name{font-weight:600;color:var(--ink);line-height:1.4}
+.kpi-base{font-family:var(--ff-mono);font-size:10.5px;color:var(--ink5)}
+.kpi-target{font-family:var(--ff-mono);font-size:10.5px;font-weight:600}
+.kpi-col-head{display:grid;grid-template-columns:1fr 85px 90px;gap:8px;padding-bottom:6px;margin-bottom:4px;border-bottom:1px solid var(--border)}
+.kch{font-family:var(--ff-mono);font-size:9px;color:var(--ink5);text-transform:uppercase;letter-spacing:.07em}
+
+/* ── HIGHLIGHT / CALLOUT ── */
+.callout{border-radius:var(--r8);padding:14px 18px;margin:14px 0;border-left:4px solid}
+.callout-red{background:var(--red-lt);border-color:var(--red2)}
+.callout-amber{background:var(--amber-lt);border-color:var(--amber2)}
+.callout-navy{background:var(--accent-lt);border-color:var(--accent2)}
+.callout-green{background:var(--green-lt);border-color:var(--green2)}
+.callout p{font-size:12.5px;color:var(--ink3);line-height:1.7}
+.callout strong{color:var(--ink)}
+
+/* ── FOOTNOTE ── */
+.footnote{font-size:11px;color:var(--ink5);font-style:italic;line-height:1.6;border-top:1px solid var(--border);margin-top:16px;padding-top:10px}
+
+/* ── FOOTER ── */
+.doc-footer{background:var(--navy);padding:20px 0;margin-top:48px;border-top:1px solid rgba(255,255,255,.06)}
+.footer-inner{max-width:1200px;margin:0 auto;padding:0 36px;display:flex;justify-content:space-between;align-items:center;font-family:var(--ff-mono);font-size:10px}
+.footer-inner span{color:#475569}
+</style>
+</head>
+<body>
+
+<!-- ── TOPBAR ── -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="topbar-brand">One IBC <span>/</span> Đề Xuất Hành Động 2026</div>
+    <nav class="topbar-nav">
+      <a href="#what">What</a>
+      <a href="#why">Why</a>
+      <a href="#who">Who</a>
+      <a href="#when">When</a>
+      <a href="#where">Where</a>
+      <a href="#how">How</a>
+      <a href="#staffing">Nhân sự</a>
+      <a href="#partners">Partnerships</a>
+      <a href="#bsc">BSC</a>
+    </nav>
+    <div class="topbar-date">02/05/2026</div>
+  </div>
+</div>
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-tag">Tài liệu nội bộ · Leadership Use Only · v2.0</div>
+      <h1>Đề Xuất Hành Động <em>Chiến Lược</em><br>One IBC &amp; OCC · 2026</h1>
+      <p class="hero-sub">Tổng hợp từ 3 nguồn dữ liệu nội bộ: Chiến lược 2026, Governance Report, MKT Intelligence Module. Trình bày theo framework 5W1H — từ chẩn đoán đến kế hoạch hành động 30 ngày và định biên nhân sự.</p>
+      <div class="hero-stats">
+        <div class="hs hs-red"><div class="hs-val">▼14.8%</div><div class="hs-lbl">Revenue 2025</div><div class="hs-note">$5.89M vs $6.91M (2024)</div></div>
+        <div class="hs hs-red"><div class="hs-val">70.8%</div><div class="hs-lbl">Q1/2026 vs Plan</div><div class="hs-note">Gap $394,516</div></div>
+        <div class="hs hs-amber"><div class="hs-val">0.14%</div><div class="hs-lbl">Ads Lead→Won</div><div class="hs-note">Gap 63× vs Non-Ads</div></div>
+        <div class="hs hs-blue"><div class="hs-val">$6.41M</div><div class="hs-lbl">GP Plan 2026</div><div class="hs-note">5 depts · full year</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── 5W1H RIBBON ── -->
+<div class="w-ribbon">
+  <div class="w-ribbon-inner">
+    <a href="#what" class="w-tab wt1"><span class="w-tab-icon">❓</span><span class="w-tab-label">What</span><span class="w-tab-sub">Vấn đề là gì</span></a>
+    <a href="#why" class="w-tab wt2"><span class="w-tab-icon">🔍</span><span class="w-tab-label">Why</span><span class="w-tab-sub">Tại sao xảy ra</span></a>
+    <a href="#who" class="w-tab wt3"><span class="w-tab-icon">👥</span><span class="w-tab-label">Who</span><span class="w-tab-sub">Ai chịu trách nhiệm</span></a>
+    <a href="#when" class="w-tab wt4"><span class="w-tab-icon">📅</span><span class="w-tab-label">When</span><span class="w-tab-sub">30 ngày cấp thiết</span></a>
+    <a href="#where" class="w-tab wt5"><span class="w-tab-icon">📍</span><span class="w-tab-label">Where</span><span class="w-tab-sub">Ưu tiên thị trường</span></a>
+    <a href="#how" class="w-tab wt6"><span class="w-tab-icon">⚙️</span><span class="w-tab-label">How</span><span class="w-tab-sub">Cách thực thi</span></a>
+  </div>
+</div>
+
+<!-- ══════════ WHAT ══════════ -->
+<section id="what">
+<div class="wrap">
+  <div class="sec-eye" style="color:var(--w1)">01 — What <span style="font-weight:300;text-transform:none;letter-spacing:0;color:var(--ink5)">· Vấn đề cốt lõi là gì</span></div>
+  <div class="w-section-head wh-what">
+    <div class="w-num" style="background:var(--w1)">W1</div>
+    <div><div class="w-head-title">Doanh nghiệp đang mất đồng thời Volume và Margin</div>
+    <div class="w-head-sub">Không phải khủng hoảng đơn lẻ — đây là suy giảm có cấu trúc trên nhiều mặt trận cùng lúc</div></div>
+  </div>
+
+  <!-- Issue 1 -->
+  <div class="issue">
+    <div class="issue-left">
+      <span class="issue-badge b-crit">P0 Critical</span>
+      <span class="issue-num">▼23.6%</span>
+      <span class="issue-num-lbl">Gross Profit 2025 vs 2024<br>$4.94M → $3.78M<br>GP Margin: 71.5% → 64.1%</span>
+    </div>
+    <div class="issue-right">
+      <div class="issue-title">GP giảm nhanh hơn doanh thu — chi phí vận hành kém linh hoạt</div>
+      <div class="issue-body">Doanh thu giảm 14.8% nhưng GP giảm 23.6%. Revenue/case tăng nhẹ ($1,335 → $1,361) nhưng GP/case giảm 8.6% ($954 → $872). Tổ chức phải xử lý khối lượng tương đương để thu về lợi nhuận ít hơn — dấu hiệu của cơ cấu chi phí cứng nhắc và dịch vụ bị xuống cấp giá trị. Mảng Bank GP giảm 54.5% và RM giảm 28.1% — hai mảng tốn chi phí vận hành cao nhất.</div>
+      <div class="issue-tags"><span class="pill p-red">Bank ▼54.5% GP</span><span class="pill p-red">RM ▼28.1% GP</span><span class="pill p-amber">ATA ▼27.5% GP</span><span class="pill p-amber">Renew ▼19.6% GP</span></div>
+    </div>
+  </div>
+
+  <!-- Issue 2 -->
+  <div class="issue">
+    <div class="issue-left">
+      <span class="issue-badge b-crit">P0 Critical</span>
+      <span class="issue-num">7.2%</span>
+      <span class="issue-num-lbl">Bank Dept Q1/2026<br>$5,212 / $72,000 plan<br>T3 actual = $0 (trống)</span>
+    </div>
+    <div class="issue-right">
+      <div class="issue-title">Bank gần như đóng băng — đây là process issue, không phải sales issue</div>
+      <div class="issue-body">6 headcount (1+5) nhưng convert rate &lt;10% so với target 60%. Nguyên nhân: activation delay từ phía bank partner, không phải thiếu khách. HK Bank Intro đắt hơn BBCIncorp 31.8% ($1,060 vs $723) và quy trình KYC mất 7 ngày vs 2 ngày của đối thủ. Không có pipeline visibility để phân biệt "pending" vs "lost".</div>
+      <div class="issue-tags"><span class="pill p-red">Partner activation delay</span><span class="pill p-red">KYC 7 ngày vs 2 ngày</span><span class="pill p-red">Price gap −31.8%</span></div>
+    </div>
+  </div>
+
+  <!-- Issue 3 -->
+  <div class="issue">
+    <div class="issue-left">
+      <span class="issue-badge b-crit">P0 Critical</span>
+      <span class="issue-num amber">40.9%</span>
+      <span class="issue-num-lbl">RM Dept Q1/2026<br>$143,814 / $351,509 plan<br>Gap $207,695</span>
+    </div>
+    <div class="issue-right">
+      <div class="issue-title">RM — nghiêm trọng nhất toàn công ty, gốc rễ là headcount và quy trình qualification</div>
+      <div class="issue-body">T1–T2 chỉ có 10 RM thực tế vs plan 20 RM. Mỗi RM thiếu = $17,575/tháng. Q2 forecast giữ 100% ($513k) nhưng chỉ khả thi nếu ≥18 RM productive từ T4. ~65% lost deals là "Not Interesting Anymore" — follow-up chậm, lead vào phễu khi chưa đủ readiness, thiếu qualification layer trước khi tạo Opp.</div>
+      <div class="issue-tags"><span class="pill p-amber">10 RM thực tế vs 20 plan</span><span class="pill p-amber">65% lost: Not Interesting</span><span class="pill p-amber">150+ Spam Opp (10%+)</span></div>
+    </div>
+  </div>
+
+  <!-- Issue 4 -->
+  <div class="issue">
+    <div class="issue-left">
+      <span class="issue-badge b-crit">P0 Critical</span>
+      <span class="issue-num">0.14%</span>
+      <span class="issue-num-lbl">Ads Lead→Won<br>Gap 63× vs Non-Ads (8.8%)<br>60% budget → 8% doanh thu</span>
+    </div>
+    <div class="issue-right">
+      <div class="issue-title">Paid Ads: 60% ngân sách marketing tạo ra chỉ 8% doanh thu thực</div>
+      <div class="issue-body">649 campaigns, $69,093 spend mẫu Q1/2026, CPL $77.8. DSA Incorp: $685/lead, OCC CPA City Top: $244/lead — cả hai zero conversion sang Opp. PMax MQL rate &lt;15% — traffic không đủ intent. Trong khi đó kênh Referral/Partner có win-rate 75–84% nhưng được phân bổ ngân sách thấp nhất.</div>
+      <div class="issue-tags"><span class="pill p-red">DSA $685/lead — zero conv</span><span class="pill p-red">PMax MQL &lt;15%</span><span class="pill p-green">Partner win-rate 75–84%</span></div>
+    </div>
+  </div>
+
+  <!-- Issue 5 -->
+  <div class="issue">
+    <div class="issue-left">
+      <span class="issue-badge b-high">P1 High</span>
+      <span class="issue-num amber">−31.8%</span>
+      <span class="issue-num-lbl">HK Bank Intro vs BBCIncorp<br>SG Renewal −27.7% vs Healy<br>$2.38M revenue at risk</span>
+    </div>
+    <div class="issue-right">
+      <div class="issue-title">Price gap nguy hiểm tại 3 ô dịch vụ trọng yếu — không cạnh tranh được trên giá đơn lẻ</div>
+      <div class="issue-body">HK chiếm 37% total rev, SG = 17.4% — cộng lại $2.38M at risk. BVI Bank Intro −17.4% vs SFM. SG Bank Intro −24.3% vs Healy. HK Renewal −17.8% vs BBCIncorp. Đối thủ không chỉ rẻ hơn mà còn nhanh hơn (BBCIncorp KYC 2 ngày, automated portal).</div>
+      <div class="issue-tags"><span class="pill p-red">HK 37% rev — at risk</span><span class="pill p-red">SG 17.4% rev — at risk</span><span class="pill p-amber">BBCIncorp 95 mentions lost</span></div>
+    </div>
+  </div>
+
+  <!-- Issue 6 -->
+  <div class="issue">
+    <div class="issue-left">
+      <span class="issue-badge b-high">P1 High</span>
+      <span class="issue-num amber navy">0</span>
+      <span class="issue-num-lbl">FAQ Schema trên website<br>vs 70+ jur pages có thể tối ưu<br>/llms.txt = 404</span>
+    </div>
+    <div class="issue-right">
+      <div class="issue-title">AI Search: 60% Google searches không click vào site — OCC bỏ ngỏ kênh CPL thấp nhất</div>
+      <div class="issue-body">AI referral traffic tăng 3× trong 2024–2025. OCC có content moat (70+ jur pages) nhưng 0 FAQ schema, không có /llms.txt. Đối thủ Enterslice được AI cite thường xuyên hơn không phải vì content tốt hơn — chỉ vì có FAQPage JSON-LD. Gap có thể fix trong 2–4 tuần với effort rất thấp.</div>
+      <div class="issue-tags"><span class="pill p-navy">0 FAQ schema</span><span class="pill p-navy">70+ jur pages chưa tối ưu</span><span class="pill p-navy">Fix được trong 2–4 tuần</span></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<div class="wrap"><div class="rule"></div></div>
+
+<!-- ══════════ WHY ══════════ -->
+<section id="why">
+<div class="wrap">
+  <div class="sec-eye" style="color:#A78BFA">02 — Why <span style="font-weight:300;text-transform:none;letter-spacing:0;color:var(--ink5)">· Tại sao xảy ra — Phân tích đa tầng</span></div>
+  <div class="w-section-head wh-why">
+    <div class="w-num" style="background:var(--w2)">W2</div>
+    <div><div class="w-head-title">Marketing không phải thủ phạm duy nhất — 4 tầng nguyên nhân</div>
+    <div class="w-head-sub">Hiểu đúng nguyên nhân là điều kiện tiên quyết để không đổ lỗi sai chỗ và fix sai chỗ</div></div>
+  </div>
+
+  <div class="g2">
+    <div class="card">
+      <div class="card-title" style="color:var(--red2)">🌏 Tầng 1 — Thị trường (ngoài tầm kiểm soát)</div>
+      <div class="card-body">
+        <ul style="list-style:none;padding:0">
+          <li style="padding:5px 0 5px 14px;position:relative;border-bottom:1px solid var(--border)"><span style="position:absolute;left:0;color:var(--ink5)">—</span><strong>Information asymmetry bị xói mòn:</strong> 7+ đối thủ publish so sánh jur miễn phí. Khách click ad rồi so sánh 3–5 tab → CPL thực bị pha loãng</li>
+          <li style="padding:5px 0 5px 14px;position:relative;border-bottom:1px solid var(--border)"><span style="position:absolute;left:0;color:var(--ink5)">—</span><strong>Boutique firm race to bottom:</strong> mua cùng registered agent BVI/SC, offer giá thấp hơn 13–32%. Không có exclusive contracts để ngăn</li>
+          <li style="padding:5px 0 5px 14px;position:relative;border-bottom:1px solid var(--border)"><span style="position:absolute;left:0;color:var(--ink5)">—</span><strong>CPL ngành tăng 5%/năm:</strong> Google Ads B2B Search 2025 ~$70/lead — OI ở $77.8 tức là đang ở mức hợp lý nhưng xu hướng không thuận</li>
+          <li style="padding:5px 0 5px 14px;position:relative"><span style="position:absolute;left:0;color:var(--ink5)">—</span><strong>EU BEPS/OECD min tax:</strong> narrative "offshore tax haven" bị thu hẹp → CSP phải reposition sang compliance advisory — One IBC chưa làm được</li>
+        </ul>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title" style="color:var(--amber2)">📦 Tầng 2 — Sản phẩm (cần đầu tư fix)</div>
+      <div class="card-body">
+        <ul style="list-style:none;padding:0">
+          <li style="padding:5px 0 5px 14px;position:relative;border-bottom:1px solid var(--border)"><span style="position:absolute;left:0;color:var(--ink5)">—</span><strong>KYC thủ công 7 ngày:</strong> BBCIncorp automated 2 ngày — conversion sau click bị tổn thất không phải vì quảng cáo kém</li>
+          <li style="padding:5px 0 5px 14px;position:relative;border-bottom:1px solid var(--border)"><span style="position:absolute;left:0;color:var(--ink5)">—</span><strong>Bundle pricing chưa được thiết kế:</strong> khách compare giá đơn lẻ thay vì perceived value → luôn thua trên giá headline</li>
+          <li style="padding:5px 0 5px 14px;position:relative;border-bottom:1px solid var(--border)"><span style="position:absolute;left:0;color:var(--ink5)">—</span><strong>US win-rate 13%:</strong> thiếu Substance Program (EIN + bank intro + registered agent + virtual office) — MKT không thể bán sản phẩm không tồn tại</li>
+          <li style="padding:5px 0 5px 14px;position:relative"><span style="position:absolute;left:0;color:var(--ink5)">—</span><strong>Trustpilot US 1.9–2.4/5:</strong> trust signal yếu kém làm giảm conversion dù ad quality tốt. SFM Feefo 4.8/5 là lợi thế lớn hơn giá</li>
+        </ul>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title" style="color:var(--red2)">🏢 Tầng 3 — Quản trị nội bộ (cần unblock)</div>
+      <div class="card-body">
+        <ul style="list-style:none;padding:0">
+          <li style="padding:5px 0 5px 14px;position:relative;border-bottom:1px solid var(--border)"><span style="position:absolute;left:0;color:var(--ink5)">—</span><strong>AgentForce không go-live sau 1 năm:</strong> blocker cho toàn bộ qualification automation. Không có lý do rõ ràng → cần post-mortem ngay</li>
+          <li style="padding:5px 0 5px 14px;position:relative;border-bottom:1px solid var(--border)"><span style="position:absolute;left:0;color:var(--ink5)">—</span><strong>Dual brand dilution:</strong> OCC #302K vs OIBC #840K global rank. SEO budget bị chia đôi, retargeting overlap, brand confusion HK/SG/US</li>
+          <li style="padding:5px 0 5px 14px;position:relative;border-bottom:1px solid var(--border)"><span style="position:absolute;left:0;color:var(--ink5)">—</span><strong>Sales KPI tạo incentive sai:</strong> đo theo số Opp → tạo 150+ duplicate/spam Opp. Campaign attribution bị ô nhiễm, MKT bị đổ lỗi oan</li>
+          <li style="padding:5px 0 5px 14px;position:relative"><span style="position:absolute;left:0;color:var(--ink5)">—</span><strong>Leadership trapped in quota:</strong> channel Partner có win-rate 75–84% nhưng không ai develop vì leadership đang bán hàng trực tiếp</li>
+        </ul>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title" style="color:var(--accent2)">📣 Tầng 4 — Marketing thực sự có lỗi</div>
+      <div class="card-body">
+        <ul style="list-style:none;padding:0">
+          <li style="padding:5px 0 5px 14px;position:relative;border-bottom:1px solid var(--border)"><span style="position:absolute;left:0;color:var(--ink5)">—</span><strong>Campaign structure kém:</strong> 649 campaigns nhiều DSA/CPA có CPL &gt;$200, zero conversion 90 ngày — chưa bị pause</li>
+          <li style="padding:5px 0 5px 14px;position:relative;border-bottom:1px solid var(--border)"><span style="position:absolute;left:0;color:var(--ink5)">—</span><strong>Landing page generic:</strong> "company formation" không tách theo jur × service × geo. Visitor từ India và US xem cùng một trang</li>
+          <li style="padding:5px 0 5px 14px;position:relative;border-bottom:1px solid var(--border)"><span style="position:absolute;left:0;color:var(--ink5)">—</span><strong>AI Search gap không được xử lý:</strong> 0 FAQ schema, /llms.txt 404 — gap dễ fix nhưng không ai làm</li>
+          <li style="padding:5px 0 5px 14px;position:relative"><span style="position:absolute;left:0;color:var(--ink5)">—</span><strong>Không có Comparison Page:</strong> bỏ ngỏ organic traffic "OI vs BBCIncorp/SFM" — high-intent, high-value</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout callout-amber" style="margin-top:18px">
+    <p><strong>Kết luận chẩn đoán:</strong> Marketing chỉ chịu trách nhiệm ~25% nguyên nhân. 75% còn lại là thị trường (cấu trúc ngành thay đổi), sản phẩm (KYC chậm, bundle thiếu, US substance không có) và quản trị (AgentForce blocked, KPI sai, headcount ramp chậm). Giải pháp phải đồng bộ cả 4 tầng — không thể chỉ tối ưu ads.</p>
+  </div>
+</div>
+</section>
+
+<div class="wrap"><div class="rule"></div></div>
+
+<!-- ══════════ WHO ══════════ -->
+<section id="who">
+<div class="wrap">
+  <div class="sec-eye" style="color:var(--teal2)">03 — Who <span style="font-weight:300;text-transform:none;letter-spacing:0;color:var(--ink5)">· Ai chịu trách nhiệm gì</span></div>
+  <div class="w-section-head wh-who">
+    <div class="w-num" style="background:var(--w3)">W3</div>
+    <div><div class="w-head-title">Ma Trận Trách Nhiệm — Stakeholder &amp; Owner</div>
+    <div class="w-head-sub">Mỗi vấn đề có một người phải ra quyết định và một người phải thực thi</div></div>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Stakeholder</th><th>Role</th><th>Quyết định cần có</th><th>Deadline</th><th>Hậu quả nếu không unblock</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>CEO / MD</td>
+          <td><span class="pill p-red">Manage Closely</span></td>
+          <td>Approve budget reallocation Ads → Partner/LinkedIn. Dual brand decision. AgentForce: Continue/Pivot/Cancel</td>
+          <td class="mono c-red">30/04/2026</td>
+          <td>Partner program không có funding; LinkedIn không có nhân sự; AgentForce block vô thời hạn</td>
+        </tr>
+        <tr>
+          <td>COO / Ops Director</td>
+          <td><span class="pill p-red">Manage Closely</span></td>
+          <td>Cam kết SLA HK KYC 3 ngày. Escalate Bank partner. Vendor KPI Dashboard live</td>
+          <td class="mono c-red">07/05/2026</td>
+          <td>HK Banking Bundle không thể launch. Bank GP tiếp tục ở 7.2%. Partner payment delay tiếp diễn</td>
+        </tr>
+        <tr>
+          <td>Head of Marketing</td>
+          <td><span class="pill p-red">Manage Closely</span></td>
+          <td>Pause DSA/CPA CPL &gt;$200. Proposal budget reallocation trình CEO. AI Search deployment brief Dev team</td>
+          <td class="mono c-red">07/05/2026</td>
+          <td>$10–15k/tháng tiếp tục bị đốt vào campaigns zero ROI</td>
+        </tr>
+        <tr>
+          <td>Head of Sales / RM Lead</td>
+          <td><span class="pill p-amber">Keep Satisfied</span></td>
+          <td>RM headcount audit — xác nhận số active thực tế vs on-paper. Align MQL definition với MKT</td>
+          <td class="mono c-amber">25/04/2026</td>
+          <td>Q2 RM plan $513k chỉ khả thi trên giấy; Sales/MKT tiếp tục blame game về lead quality</td>
+        </tr>
+        <tr>
+          <td>CFO / Finance</td>
+          <td><span class="pill p-amber">Keep Satisfied</span></td>
+          <td>Sign-off Partner commission structure. Payment reserve fund top 10 partners. Budget Q2 revision</td>
+          <td class="mono c-amber">15/05/2026</td>
+          <td>Partner program không ra được. Chargeback và complaint từ partner tiếp tục</td>
+        </tr>
+        <tr>
+          <td>HK Office Lead</td>
+          <td><span class="pill p-navy">Keep Informed</span></td>
+          <td>Confirm KYC SLA 3 ngày khả thi. Root cause Bank activation delay (partner vs internal)</td>
+          <td class="mono c-amber">07/05/2026</td>
+          <td>HK Banking Bundle bị delay launch. HK = 37% total rev tiếp tục bị BBCIncorp lấn sân</td>
+        </tr>
+        <tr>
+          <td>Anh Dương (AgentForce)</td>
+          <td><span class="pill p-navy">Unblock</span></td>
+          <td>Post-mortem: lý do không go-live sau 1 năm. Timeline rõ ràng hoặc pivot decision</td>
+          <td class="mono c-red">30/04/2026</td>
+          <td>Qualification automation không có → spam Opp tiếp tục ~10%+ → attribution bị ô nhiễm</td>
+        </tr>
+        <tr>
+          <td>Bin Media (Agency)</td>
+          <td><span class="pill p-gray">Monitor</span></td>
+          <td>Re-brief: pause DSA/CPA ngay. New brief: OCC PMax jur-specific. KPI mới: CPL &lt;$45</td>
+          <td class="mono c-amber">07/05/2026</td>
+          <td>Ngân sách tiếp tục bị phân bổ vào campaigns không có ROI</td>
+        </tr>
+        <tr>
+          <td>ATA Team Lead</td>
+          <td><span class="pill p-green">Leverage</span></td>
+          <td>Document SOP multi-jur upsell (BVI+HK combo $962/cty). Knowledge transfer cho Renewal + Service</td>
+          <td class="mono c-green">31/05/2026</td>
+          <td>Model tốt nhất của công ty không được scale — ATA 111.4% Q1 nhưng chỉ là silo</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</section>
+
+<div class="wrap"><div class="rule"></div></div>
+
+<!-- ══════════ WHEN ══════════ -->
+<section id="when">
+<div class="wrap">
+  <div class="sec-eye" style="color:var(--green2)">04 — When <span style="font-weight:300;text-transform:none;letter-spacing:0;color:var(--ink5)">· 30 ngày cấp thiết từ 02/05/2026</span></div>
+  <div class="w-section-head wh-when">
+    <div class="w-num" style="background:var(--w4)">W4</div>
+    <div><div class="w-head-title">Kế Hoạch Hành Động 30 Ngày — 02/05 đến 31/05/2026</div>
+    <div class="w-head-sub">Mỗi tuần có chủ đề rõ ràng. Chỉ chọn những việc có thể thực thi trong 30 ngày — không phải wishlist</div></div>
+  </div>
+
+  <!-- WEEK 1 -->
+  <div class="sprint">
+    <div class="sprint-head">
+      <span class="sprint-week">TUẦN 1</span>
+      <span class="sprint-dates">02–09/05/2026</span>
+      <span class="sprint-theme">🔴 Dừng chảy máu — Audit, Escalate, Quyết định</span>
+    </div>
+    <div class="sprint-col-head">
+      <span class="sch">Hành động</span><span class="sch">Chi tiết thực thi</span><span class="sch">Owner</span><span class="sch">KPI / Output</span>
+    </div>
+    <div class="sprint-body">
+      <div class="sprint-item">
+        <div class="si-title">Pause DSA/CPA &gt;$200 CPL</div>
+        <div class="si-body">Brief Bin Media: dừng ngay tất cả campaigns có CPL &gt;$200 và zero Opp conversion trong 90 ngày. Ước tính tiết kiệm $10–15k/tháng. Không cần approval phức tạp — chỉ cần Head of MKT sign-off.</div>
+        <div class="si-owner">Dir. MKT + Bin Media</div>
+        <div class="si-kpi">CPL bình quân &lt;$55 trong tuần</div>
+      </div>
+      <div class="sprint-item">
+        <div class="si-title">AgentForce Post-mortem</div>
+        <div class="si-body">Họp CEO + Anh Dương: lý do không go-live sau 1 năm. Output: quyết định Continue (với timeline rõ) / Pivot sang Typeform+Zapier+SF (30 ngày). Không kéo dài thêm.</div>
+        <div class="si-owner">CEO + Anh Dương</div>
+        <div class="si-kpi">Quyết định bằng văn bản trước 07/05</div>
+      </div>
+      <div class="sprint-item">
+        <div class="si-title">RM Headcount Audit</div>
+        <div class="si-body">Xác nhận số RM đang active thực tế (deal trong 30 ngày) vs on-paper. Mỗi RM thiếu = $17,575/tháng. Báo cáo lên CEO trước 07/05. Nếu &lt;14 RM active → trigger tuyển dụng khẩn cấp ngay.</div>
+        <div class="si-owner">Head of Sales</div>
+        <div class="si-kpi">Số RM active thực tế xác nhận</div>
+      </div>
+      <div class="sprint-item">
+        <div class="si-title">Bank Escalation</div>
+        <div class="si-body">Họp COO + HK Office + Bank partner: phân loại cases đang pending activation vs confirmed lost. Xác định: bottleneck là bank partner hay internal process? Output: action plan rõ ràng với timeline.</div>
+        <div class="si-owner">COO + HK Office</div>
+        <div class="si-kpi">Pipeline phân loại xong; root cause xác định</div>
+      </div>
+      <div class="sprint-item">
+        <div class="si-title">Renewal Late AR $38k</div>
+        <div class="si-body">Pull danh sách outstanding T3/2026 payment. Proactive call/email top 50 cty. Mục tiêu: confirm payment trước 15/05 để book vào T5. Đây là recovery "tự nhiên" — chỉ cần follow-up.</div>
+        <div class="si-owner">Renewal Lead</div>
+        <div class="si-kpi">$38k AR xác nhận booking date</div>
+      </div>
+      <div class="sprint-item">
+        <div class="si-title">Payoneer Partnership Review</div>
+        <div class="si-body">Review Partnership offer từ Payoneer (NASDAQ-listed). So sánh với Airwallex và Aspire Singapore đang xúc tiến. Xác định: điều khoản, commission structure, onboarding flow cho khách hàng One IBC. Assign BD lead.</div>
+        <div class="si-owner">CEO + BD Lead</div>
+        <div class="si-kpi">Go/No-go decision trước 09/05</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WEEK 2 -->
+  <div class="sprint">
+    <div class="sprint-head">
+      <span class="sprint-week">TUẦN 2</span>
+      <span class="sprint-dates">10–16/05/2026</span>
+      <span class="sprint-theme">🟡 Build nền tảng — AI Search, Qualifier Flow, Bundle Design</span>
+    </div>
+    <div class="sprint-col-head">
+      <span class="sch">Hành động</span><span class="sch">Chi tiết thực thi</span><span class="sch">Owner</span><span class="sch">KPI / Output</span>
+    </div>
+    <div class="sprint-body">
+      <div class="sprint-item">
+        <div class="si-title">FAQ Schema + /llms.txt Live</div>
+        <div class="si-body">Deploy FAQPage JSON-LD cho 5 trang traffic cao nhất: SG, HK, BVI, US, UK formation. Tạo /llms.txt tại root domain. Effort: 2–4 ngày dev. Submit lại sitemap cho Google Search Console sau khi deploy.</div>
+        <div class="si-owner">Dev + SEO Team</div>
+        <div class="si-kpi">5 trang có structured data; /llms.txt live</div>
+      </div>
+      <div class="sprint-item">
+        <div class="si-title">Guided Qualifier Flow (MVP)</div>
+        <div class="si-body">Thay form đơn giản bằng 4–6 câu hỏi: mục đích thành lập, ngành nghề, quốc tịch, timeline. Nếu AgentForce pivot → dùng Typeform + Zapier + SF routing. High-intent → Senior Consultant ≤15 phút. Low-intent → nurture email sequence.</div>
+        <div class="si-owner">MKT + Web + Sales Ops</div>
+        <div class="si-kpi">Qualifier live; Spam Opp &lt;7% (từ 10%+)</div>
+      </div>
+      <div class="sprint-item">
+        <div class="si-title">HK Banking Bundle Design</div>
+        <div class="si-body">Workshop Product + Ops HK: thiết kế "Banking Access Package" — pre-KYC consultation, document checklist, dedicated banker intro, 30-day follow-up support. SLA cam kết 3 ngày. Pricing và positioning vs BBCIncorp $723.</div>
+        <div class="si-owner">Product + COO + HK Office</div>
+        <div class="si-kpi">Bundle spec hoàn chỉnh; SLA được commit</div>
+      </div>
+      <div class="sprint-item">
+        <div class="si-title">MQL Definition Workshop</div>
+        <div class="si-body">Họp MKT + Sales: thống nhất MQL criteria (3 điều kiện tối thiểu). Update trong SF. Mục tiêu: MKT và Sales dùng cùng một định nghĩa → kết thúc blame game lead quality. Output: MQL definition document được CEO sign-off.</div>
+        <div class="si-owner">Dir. MKT + Head of Sales</div>
+        <div class="si-kpi">MQL definition v1 trong SF</div>
+      </div>
+      <div class="sprint-item">
+        <div class="si-title">Payoneer/Airwallex/Aspire Onboarding Flow</div>
+        <div class="si-body">Phối hợp RM + Banking: thiết kế customer journey cho từng partnership — ai tiếp cận (khách mới vs cũ), quy trình mở account, document cần, SLA mong đợi. Chuẩn bị brief cho RM team về sản phẩm mới.</div>
+        <div class="si-owner">BD Lead + RM Lead + Banking</div>
+        <div class="si-kpi">Onboarding flow v1 cho 3 partners</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WEEK 3 -->
+  <div class="sprint">
+    <div class="sprint-head">
+      <span class="sprint-week">TUẦN 3</span>
+      <span class="sprint-dates">17–23/05/2026</span>
+      <span class="sprint-theme">🔵 Launch &amp; Execute — ES Filing, Upsell, Landing Page</span>
+    </div>
+    <div class="sprint-col-head">
+      <span class="sch">Hành động</span><span class="sch">Chi tiết thực thi</span><span class="sch">Owner</span><span class="sch">KPI / Output</span>
+    </div>
+    <div class="sprint-body">
+      <div class="sprint-item">
+        <div class="si-title">ES Filing BVI Queue</div>
+        <div class="si-body">Phân loại toàn bộ ES Filing cases: urgent (&lt;25/5), normal (25–31/5), buffer (T6). Deadline 31/5. Nếu backlog &gt;30 cases vào 17/5 → thuê 1 temp bookkeeper ($500, bảo vệ $15k+ revenue). Zero missed deadlines.</div>
+        <div class="si-owner">Service Dept Lead</div>
+        <div class="si-kpi">0 missed deadlines; queue sorted</div>
+      </div>
+      <div class="sprint-item">
+        <div class="si-title">Landing Page T5 Launch (Top 3 Jur)</div>
+        <div class="si-body">Launch landing page tách theo jur × service cho HK, BVI, SG. Mỗi page có: social proof theo jur, CTA phù hợp intent, Qualifier Flow. A/B test vs generic page. Sample target: ≥500 clicks/variant trong 2 tuần.</div>
+        <div class="si-owner">MKT + Web + Bin Media</div>
+        <div class="si-kpi">3 landing pages live; A/B test bắt đầu</div>
+      </div>
+      <div class="sprint-item">
+        <div class="si-title">ATA Upsell Campaign (50 cty)</div>
+        <div class="si-body">Identify 50 single-jur clients trong ATA base. Email/call campaign: offer BVI+HK combo ($962/cty thêm). Script dựa trên model đã thành công Q1. Mục tiêu: 20% conversion = 10 deals = ~$9,620 GP incremental.</div>
+        <div class="si-owner">ATA Team Lead</div>
+        <div class="si-kpi">20 proposals gửi; ≥10 deals target</div>
+      </div>
+      <div class="sprint-item">
+        <div class="si-title">Sales KPI Redesign</div>
+        <div class="si-body">Đề xuất thay KPI từ "số Opp tạo ra" sang "Opp post-qualify × Win Rate". Cần CEO sign-off và Sales Head alignment. Loại bỏ incentive tạo Opp ảo — nguyên nhân trực tiếp của 150+ spam Opp trong CRM.</div>
+        <div class="si-owner">CEO + Head of Sales + CFO</div>
+        <div class="si-kpi">KPI mới được approve; effective từ T6</div>
+      </div>
+      <div class="sprint-item">
+        <div class="si-title">Fintech Partnership Activation</div>
+        <div class="si-body">Gửi thông tin Payoneer/Airwallex/Aspire cho RM team. Brief toàn bộ RM: khi nào giới thiệu, quy trình ra sao, commission nếu có. Identify top 30 existing clients phù hợp cho outreach đầu tiên (ưu tiên HK + SG SMEs).</div>
+        <div class="si-owner">BD Lead + RM Lead</div>
+        <div class="si-kpi">30 clients identified; outreach bắt đầu</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WEEK 4 -->
+  <div class="sprint">
+    <div class="sprint-head">
+      <span class="sprint-week">TUẦN 4</span>
+      <span class="sprint-dates">24–31/05/2026</span>
+      <span class="sprint-theme">📊 Review &amp; Accelerate — Measure, Adjust, Set Q3 Plan</span>
+    </div>
+    <div class="sprint-col-head">
+      <span class="sch">Hành động</span><span class="sch">Chi tiết thực thi</span><span class="sch">Owner</span><span class="sch">KPI / Output</span>
+    </div>
+    <div class="sprint-body">
+      <div class="sprint-item">
+        <div class="si-title">Mid-Q2 Performance Review</div>
+        <div class="si-body">Director-level meeting: review GP actual vs Q2 forecast ($1,726,611). Nếu gap &gt;15% → trigger intervention plan. Kiểm tra: RM pipeline, Renewal payment rate, Bank activation status, ES Filing queue.</div>
+        <div class="si-owner">CEO + All Dept Leads</div>
+        <div class="si-kpi">Q2 forecast deviation &lt;10%</div>
+      </div>
+      <div class="sprint-item">
+        <div class="si-title">HK Banking Bundle Soft Launch</div>
+        <div class="si-body">Nếu SLA 3 ngày được cam kết từ HK Office: launch Banking Access Bundle cho 10 clients đầu tiên (beta). Collect feedback. Đo: tỷ lệ acceptance, SLA compliance thực tế, NPS. Chuẩn bị cho full launch T6.</div>
+        <div class="si-owner">Product + HK Office + MKT</div>
+        <div class="si-kpi">10 beta users; SLA compliance %</div>
+      </div>
+      <div class="sprint-item">
+        <div class="si-title">Affiliate Portal MVP</div>
+        <div class="si-body">Partner Portal MVP live: dashboard tracking commission, lead status, performance. Commission structure được CFO sign-off. Target: 5–10 active affiliates onboarded trong T5. Foundation cho 50 partners Q4.</div>
+        <div class="si-owner">BD + MKT + Finance</div>
+        <div class="si-kpi">Portal live; 5+ partners onboarded</div>
+      </div>
+      <div class="sprint-item">
+        <div class="si-title">30-Day Report &amp; Q3 Planning</div>
+        <div class="si-body">Tổng hợp kết quả 30 ngày: CPL trước/sau pause, AI Search traffic, Qualifier spam rate, RM active count, Bank pipeline clarity, ES Filing on-time rate. Brief cho Q3 initiatives: LinkedIn, SG Bundle, MS Ads test.</div>
+        <div class="si-owner">Dir. MKT + Head of Sales + COO</div>
+        <div class="si-kpi">30-day report + Q3 brief ready</div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<div class="wrap"><div class="rule"></div></div>
+
+<!-- ══════════ WHERE ══════════ -->
+<section id="where">
+<div class="wrap">
+  <div class="sec-eye" style="color:var(--red2)">05 — Where <span style="font-weight:300;text-transform:none;letter-spacing:0;color:var(--ink5)">· Ưu tiên thị trường và jurisdiction</span></div>
+  <div class="w-section-head wh-where">
+    <div class="w-num" style="background:var(--w5)">W5</div>
+    <div><div class="w-head-title">Phân Bổ Nguồn Lực Theo Thị Trường — Giữ, Tăng, Thu Hẹp</div>
+    <div class="w-head-sub">Không phải tất cả thị trường đều xứng đáng đầu tư như nhau trong 2026</div></div>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Jurisdiction</th><th>Tỷ trọng Rev</th><th>Win Rate</th><th>Avg Ticket</th><th>Price Gap vs Đối thủ</th><th>Ưu tiên 2026</th><th>Action</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Hong Kong (HK)</td>
+          <td class="mono">37% total rev</td>
+          <td class="mono c-amber">52.0%</td>
+          <td class="mono">$1,756</td>
+          <td><span class="pill p-red">Bank Intro −31.8%</span><span class="pill p-amber">Renewal −17.8%</span></td>
+          <td><span class="pill p-red">CRITICAL DEFEND</span></td>
+          <td>Bundle Bank Intro; SLA 3 ngày; BBCIncorp counter-messaging</td>
+        </tr>
+        <tr>
+          <td>BVI (Anh)</td>
+          <td class="mono">30.6% GP weight</td>
+          <td class="mono c-green">61.3%</td>
+          <td class="mono">$1,791</td>
+          <td><span class="pill p-amber">Bank Intro −17.4%</span><span class="pill p-amber">Formation −13.8%</span></td>
+          <td><span class="pill p-amber">MAINTAIN &amp; GROW</span></td>
+          <td>OCC volume play; PMax jur-specific; "Dedicated RM + No Hidden Fees" messaging</td>
+        </tr>
+        <tr>
+          <td>Singapore (SG)</td>
+          <td class="mono">17.4% rev</td>
+          <td class="mono c-red">48.5%</td>
+          <td class="mono">$2,958</td>
+          <td><span class="pill p-red">Renewal −27.7%</span><span class="pill p-red">Bank Intro −24.3%</span></td>
+          <td><span class="pill p-red">HIGH PRIORITY FIX</span></td>
+          <td>SG Compliance Renewal Bundle; ATA cross-sell; LinkedIn advisory content</td>
+        </tr>
+        <tr>
+          <td>Seychelles (SC)</td>
+          <td class="mono">12.1% GP</td>
+          <td class="mono c-green">63.8%</td>
+          <td class="mono">$1,171</td>
+          <td><span class="pill p-green">Cạnh tranh ổn</span></td>
+          <td><span class="pill p-navy">OCC SCALE</span></td>
+          <td>Volume play qua OCC portal; affiliate channel; standardized SLA</td>
+        </tr>
+        <tr>
+          <td>Cayman (KY)</td>
+          <td class="mono">2.9% GP</td>
+          <td class="mono c-red">28.4%</td>
+          <td class="mono">$3,810</td>
+          <td><span class="pill p-amber">Complex structure</span></td>
+          <td><span class="pill p-gray">NICHE ONLY</span></td>
+          <td>Chỉ nhận deals có referral introduction. Không advertise trực tiếp</td>
+        </tr>
+        <tr>
+          <td>United States (US)</td>
+          <td class="mono">—</td>
+          <td class="mono c-red">13.1%</td>
+          <td class="mono">$2,000</td>
+          <td><span class="pill p-red">Thiếu Substance Program</span></td>
+          <td><span class="pill p-amber">BUILD Q4</span></td>
+          <td>US Substance Package (EIN+bank+reg agent+virtual office) — MS Ads Q4</td>
+        </tr>
+        <tr>
+          <td>UAE</td>
+          <td class="mono">—</td>
+          <td class="mono c-red">~6%</td>
+          <td class="mono">—</td>
+          <td><span class="pill p-red">Thiếu local expertise</span></td>
+          <td><span class="pill p-gray">Q4/2026</span></td>
+          <td>One IBC advisory track; LinkedIn MENA targeting. Không đưa vào OCC</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</section>
+
+<div class="wrap"><div class="rule"></div></div>
+
+<!-- ══════════ HOW ══════════ -->
+<section id="how">
+<div class="wrap">
+  <div class="sec-eye" style="color:var(--accent2)">06 — How <span style="font-weight:300;text-transform:none;letter-spacing:0;color:var(--ink5)">· Cách thực thi — Channel Mix và Dual Brand Model</span></div>
+  <div class="w-section-head wh-how">
+    <div class="w-num" style="background:var(--w6)">W6</div>
+    <div><div class="w-head-title">Tái Cơ Cấu Channel Mix &amp; Mô Hình OCC vs One IBC</div>
+    <div class="w-head-sub">Phân tách rõ Volume Engine (OCC) và Advisory Engine (One IBC) — mỗi engine cần channel và metric khác nhau</div></div>
+  </div>
+
+  <div class="g2" style="margin-bottom:18px">
+    <div class="card" style="border-left:4px solid var(--amber2)">
+      <div class="card-title">OCC — OffshoreCompanyCorp · Volume Engine</div>
+      <div class="card-body">
+        <strong>Thị trường:</strong> BVI, Seychelles, Belize, HK (gói đơn giản)<br>
+        <strong>Mô hình:</strong> E-commerce / Self-service / Standardized SLA<br>
+        <strong>Ticket:</strong> $450–$1,500 · Volume cao · Quy trình chuẩn hóa<br>
+        <strong>Kênh:</strong> Google PMax (jur-specific), Affiliate Portal, OCC Portal<br>
+        <strong>Tech cần:</strong> AgentForce pre-qualify, instant quote, automated KYC<br>
+        <strong>KPI:</strong> CPL, Lead→Opp%, Time-to-close, Spam rate &lt;3%
+      </div>
+    </div>
+    <div class="card" style="border-left:4px solid var(--accent2)">
+      <div class="card-title">One IBC — Advisory Platform · Value Engine</div>
+      <div class="card-body">
+        <strong>Thị trường:</strong> Singapore, UAE, US (DE/WY), HK structuring phức tạp<br>
+        <strong>Mô hình:</strong> Consulting-led — bán advisory solution, không bán giấy tờ đơn thuần<br>
+        <strong>Ticket:</strong> $3k–$10k+ · Cross-sell Bank + ATA + Renew + Tax<br>
+        <strong>Kênh:</strong> LinkedIn B2B, Referral/Partner, Webinar, Direct BD<br>
+        <strong>Tech cần:</strong> CRM advisory workflow, multi-office context handoff<br>
+        <strong>KPI:</strong> Revenue/client, Cross-sell rate, Renewal retention, NPS
+      </div>
+    </div>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Kênh</th><th>Trạng thái hiện tại</th><th>Win Rate / Hiệu suất</th><th>Định hướng 2026</th><th>Target KPI</th></tr></thead>
+      <tbody>
+        <tr><td>Google Ads DSA/CPA</td><td><span class="pill p-red">CPL $244–$685, zero conv</span></td><td class="mono c-red">0%</td><td><strong>Pause ngay</strong> — tiết kiệm $10–15k/tháng</td><td class="mono">—</td></tr>
+        <tr><td>Google Ads PMax</td><td><span class="pill p-amber">Generic, not jur-specific</span></td><td class="mono c-amber">0.14% L→Won</td><td>OCC only: BVI/SC/BZ — tách jur × landing page</td><td class="mono">CPL &lt;$45; L→Won &gt;1.5%</td></tr>
+        <tr><td>Affiliate / Partner / Referral</td><td><span class="pill p-amber">&lt;10% rev, manual</span></td><td class="mono c-green">75–84% WR</td><td><strong>Scale mạnh</strong> — Portal MVP T5; 50 partners Q4</td><td class="mono">&gt;20% total rev Q4</td></tr>
+        <tr><td>AI Search / GEO</td><td><span class="pill p-red">0 FAQ schema; /llms.txt 404</span></td><td class="mono">CPL thấp nhất</td><td><strong>P0 tuần 2</strong> — FAQ schema + llms.txt</td><td class="mono">Track AI referral GA4</td></tr>
+        <tr><td>LinkedIn (One IBC)</td><td><span class="pill p-gray">Chưa có</span></td><td class="mono">High intent B2B</td><td>Q3: Webinar series CEO/CFO/Founder SG/HK/UAE</td><td class="mono">100+ att/session; 5+ SQL</td></tr>
+        <tr><td>SEO Comparison Pages</td><td><span class="pill p-gray">Chưa có</span></td><td class="mono">High-value organic</td><td>Q3: "OI vs BBCIncorp/SFM/Healy" E-E-A-T pages</td><td class="mono">Organic "review" traffic</td></tr>
+        <tr><td>Microsoft Ads (Bing)</td><td><span class="pill p-gray">Chưa có</span></td><td class="mono">B2B US/UK/AU</td><td>Q4: $3k/tháng test; BVI/DE keywords</td><td class="mono">CPL &lt;$60; Opp &gt;5%</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</section>
+
+<div class="wrap"><div class="rule"></div></div>
+
+<!-- ══════════ STAFFING ══════════ -->
+<section id="staffing">
+<div class="wrap">
+  <div class="sec-eye" style="color:var(--teal2)">07 — Định biên nhân sự</div>
+  <h2 class="sec-title">Định Biên Nhân Sự Theo Department + ASK Matrix &amp; Câu Hỏi Phỏng Vấn</h2>
+  <p class="sec-desc">Phân tích headcount hiện tại, gap, và yêu cầu cụ thể (Attitude / Skill / Knowledge) cho từng vị trí cần tuyển — kèm bộ câu hỏi phỏng vấn có thể dùng ngay.</p>
+
+  <!-- RM DEPT -->
+  <div class="dept-block">
+    <div class="dept-head" style="border-bottom-color:var(--red2)">
+      <div class="dept-name">📋 RM Department (Relationship Management)</div>
+      <div class="dept-meta">Q1/2026: 40.9% plan · Gap $207,695 · CRITICAL</div>
+    </div>
+    <div class="dept-summary">
+      <div><div class="ds-item-label">Headcount hiện tại</div><div class="ds-item-val">10 RM active (T1–T2)</div><div class="ds-item-sub">Plan yêu cầu 20 RM từ T3/2026</div></div>
+      <div><div class="ds-item-label">KPI cá nhân (Level 2)</div><div class="ds-item-val">$17,575 GP/người/tháng</div><div class="ds-item-sub">Tương đương ~2 deals/tháng avg ticket $1,600</div></div>
+      <div><div class="ds-item-label">Gap cần lấp</div><div class="ds-item-val">Cần thêm 8–10 RM</div><div class="ds-item-sub">Ưu tiên tuyển Q2/2026, productive từ T5–T6</div></div>
+    </div>
+    <div class="role-block">
+      <div class="role-head">
+        <div class="role-title">Senior RM × 8–10 người (tuyển Q2, onboard T5–T6)</div>
+        <span class="role-type rt-hire">🔴 Tuyển khẩn cấp</span>
+      </div>
+      <div class="ask-grid">
+        <div class="ask-dim-block ask-a"><div class="ask-dim-tag">Attitude (A)</div><div class="ask-dim-content">Chủ động, không chờ lead ấm. Kiên trì nhưng không spam. Ownership mindset — từng deal là trách nhiệm cá nhân. Không defensive khi deal lost — báo cáo thẳng thắn. Thích cạnh tranh, biết theo dõi pipeline hàng ngày.</div></div>
+        <div class="ask-dim-block ask-s"><div class="ask-dim-tag">Skill (S)</div><div class="ask-dim-content">Consultative selling (không phải order-taker). SF CRM ghi chép đúng quy trình. Discovery call structure — qualify intent + timeline + budget trong 15 phút. Objection handling về price gap. Tiếng Anh business level.</div></div>
+        <div class="ask-dim-block ask-k"><div class="ask-dim-tag">Knowledge (K)</div><div class="ask-dim-content">BVI/SC/HK/SG formation basics. KYC requirements per jurisdiction. Pricing và competitive positioning vs SFM/BBCIncorp/Healy. Bank Intro process và timeline. ICP: founder/SME/HNWI theo từng jur.</div></div>
+      </div>
+      <div class="interview-qs">
+        <div class="iq-title">Câu hỏi phỏng vấn gợi ý</div>
+        <ul class="iq-list">
+          <li>Hãy mô tả một deal bạn phải theo đuổi hơn 3 tuần trước khi close. Bạn đã làm gì để giữ khách không bỏ đi?</li>
+          <li>Nếu khách nói "BBCIncorp rẻ hơn 30% so với anh/chị", bạn sẽ xử lý như thế nào? (Đánh giá: có biết bundle value hay chỉ giảm giá)</li>
+          <li>Trong ngày đầu tiên làm việc, bạn sẽ review gì trong Salesforce để hiểu pipeline của team?</li>
+          <li>Hãy cho tôi xem cách bạn chuẩn bị cho một discovery call với một founder đang tìm cấu trúc holding company tại Singapore.</li>
+          <li>Bạn đã từng bỏ qua một deal vì thấy khách không đủ điều kiện KYC chưa? Quyết định đó dựa trên tiêu chí gì?</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- BANK DEPT -->
+  <div class="dept-block">
+    <div class="dept-head" style="border-bottom-color:var(--red2)">
+      <div class="dept-name">🏦 Bank Department</div>
+      <div class="dept-meta">Q1/2026: 7.2% plan · Gap $66,788 · Process issue — NOT sales issue</div>
+    </div>
+    <div class="dept-summary">
+      <div><div class="ds-item-label">Headcount hiện tại</div><div class="ds-item-val">6 HC (1+5)</div><div class="ds-item-sub">Convert rate &lt;10% vs target 60% — bế tắc ở process</div></div>
+      <div><div class="ds-item-label">KPI team (Mức 3)</div><div class="ds-item-val">$4,000 GP/người/tháng</div><div class="ds-item-sub">$24,000/tháng tổng team — hiện đạt &lt;$2,000/tháng</div></div>
+      <div><div class="ds-item-label">Vấn đề cốt lõi</div><div class="ds-item-val">Partner activation delay</div><div class="ds-item-sub">Cần người hiểu banking ops + có relationship ngân hàng</div></div>
+    </div>
+    <div class="role-block">
+      <div class="role-head">
+        <div class="role-title">Banking Operations Lead / Senior Bank Intro Specialist × 1 (upgrade hoặc tuyển mới)</div>
+        <span class="role-type rt-upgrade">🔵 Upgrade hoặc tuyển</span>
+      </div>
+      <p style="font-size:12px;color:var(--ink4);margin-bottom:12px">Vị trí này khác với "sales người mở account" — cần người hiểu banking compliance, có thể escalate với partner ngân hàng, và xây dựng SLA tracking.</p>
+      <div class="ask-grid">
+        <div class="ask-dim-block ask-a"><div class="ask-dim-tag">Attitude (A)</div><div class="ask-dim-content">Kiên nhẫn với quy trình ngân hàng nhưng không thụ động khi bị delay. Biết escalate đúng lúc, đúng người. Cẩn thận với compliance — không tạo shortcuts có thể gây vấn đề KYC. Documentation mindset.</div></div>
+        <div class="ask-dim-block ask-s"><div class="ask-dim-tag">Skill (S)</div><div class="ask-dim-content">Banking compliance process (KYC/AML/KYB). Pipeline tracking và SLA management. Relationship building với banker contacts. Document checklist chuẩn bị cho từng loại account. Tiếng Anh business — làm việc với ngân hàng quốc tế.</div></div>
+        <div class="ask-dim-block ask-k"><div class="ask-dim-tag">Knowledge (K)</div><div class="ask-dim-content">Quy trình mở tài khoản ngân hàng tại HK/SG/UAE. KYC requirements theo loại business. Lý do phổ biến account bị từ chối và cách pre-screen. Danh sách ngân hàng phù hợp theo loại hình doanh nghiệp và jurisdiction.</div></div>
+      </div>
+      <div class="interview-qs">
+        <div class="iq-title">Câu hỏi phỏng vấn gợi ý</div>
+        <ul class="iq-list">
+          <li>Một khách hàng của bạn đã submit hồ sơ mở tài khoản ngân hàng HK 2 tuần trước và vẫn chưa có phản hồi từ phía ngân hàng. Bạn sẽ làm gì? (Đánh giá: có biết escalation path không)</li>
+          <li>Những ngành nghề nào bạn sẽ không giới thiệu mở tài khoản tại ngân hàng HK, và tại sao?</li>
+          <li>Sự khác biệt giữa KYC và KYB là gì? Khi nào cần enhanced due diligence?</li>
+          <li>Bạn đã từng xây dựng tracking system để theo dõi trạng thái applications chưa? Describe cách bạn làm.</li>
+          <li>Nếu một khách hàng tốt bị ngân hàng từ chối không rõ lý do, bạn sẽ làm gì tiếp theo?</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- MARKETING DEPT -->
+  <div class="dept-block">
+    <div class="dept-head" style="border-bottom-color:var(--accent2)">
+      <div class="dept-name">📣 Marketing Department</div>
+      <div class="dept-meta">Cần tái cơ cấu từ campaign execution → governance + channel diversification</div>
+    </div>
+    <div class="dept-summary">
+      <div><div class="ds-item-label">Vấn đề cốt lõi</div><div class="ds-item-val">1 brand, 2 play</div><div class="ds-item-sub">OCC (volume) và One IBC (advisory) cần người chuyên trách riêng</div></div>
+      <div><div class="ds-item-label">KPI hiện bị miss</div><div class="ds-item-val">Ads 0.14% L→Won</div><div class="ds-item-sub">Target: &gt;1.5%; CPL từ $77.8 → &lt;$45</div></div>
+      <div><div class="ds-item-label">Gap lớn nhất</div><div class="ds-item-val">AI Search + Partner</div><div class="ds-item-sub">0 FAQ schema; Partner channel manual</div></div>
+    </div>
+
+    <div class="role-block">
+      <div class="role-head">
+        <div class="role-title">Affiliate &amp; Partner Manager × 1 (NEW HIRE — ưu tiên Q2)</div>
+        <span class="role-type rt-new">🟡 New hire — Q2</span>
+      </div>
+      <p style="font-size:12px;color:var(--ink4);margin-bottom:12px">KPI duy nhất: Partner-sourced Revenue Growth. Win-rate kênh Partner 75–84% justifies đầu tư headcount này trước bất kỳ MKT hire nào khác.</p>
+      <div class="ask-grid">
+        <div class="ask-dim-block ask-a"><div class="ask-dim-tag">Attitude (A)</div><div class="ask-dim-content">Chủ động outreach — không ngồi chờ partner liên hệ. Relationship-first, bán hàng sau. Chịu được chu kỳ dài (partner ramp 3–6 tháng trước khi tạo revenue). Tin vào win-win model — không squeeze commission.</div></div>
+        <div class="ask-dim-block ask-s"><div class="ask-dim-tag">Skill (S)</div><div class="ask-dim-content">B2B partnership outreach và onboarding. Salesforce CRM. Negotiation và contract basics. Commission tracking và reporting. Dashboard/portal management. Tiếng Anh business (partners SG/HK/UAE).</div></div>
+        <div class="ask-dim-block ask-k"><div class="ask-dim-tag">Knowledge (K)</div><div class="ask-dim-content">CSP industry basics: BVI/SC/SG/HK. Referral/affiliate models và commission structures. ICP của partners: accounting firm, law firm, tax advisor, accountant. Channel economics — LTV của 1 partner vs 1 direct client.</div></div>
+      </div>
+      <div class="interview-qs">
+        <div class="iq-title">Câu hỏi phỏng vấn gợi ý</div>
+        <ul class="iq-list">
+          <li>Bạn đã từng xây dựng partner/affiliate program từ đầu chưa? Walk me through từng bước bạn làm.</li>
+          <li>Làm thế nào để bạn identify 10 accounting firm tại Singapore có thể là partner tiềm năng của One IBC? (Đánh giá: có research methodology không)</li>
+          <li>Một partner đã refer 5 clients nhưng không có deal nào close vì khách không đủ điều kiện KYC. Bạn xử lý như thế nào với partner đó?</li>
+          <li>Mô tả cách bạn sẽ thiết kế Tier 1/2/3 commission structure cho One IBC — cân nhắc gì?</li>
+          <li>Sau 90 ngày, bạn sẽ báo cáo những metrics nào lên CEO để chứng minh ROI của partner channel?</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="role-block">
+      <div class="role-head">
+        <div class="role-title">One IBC Growth &amp; Content Lead × 1 (new hire hoặc upgrade nội bộ — Q2–Q3)</div>
+        <span class="role-type rt-upgrade">🔵 New hire Q3</span>
+      </div>
+      <div class="ask-grid">
+        <div class="ask-dim-block ask-a"><div class="ask-dim-tag">Attitude (A)</div><div class="ask-dim-content">Tư duy dài hạn — content không tạo revenue ngay. Viết tốt với quan điểm rõ ràng. Không defensive khi content không perform — iterate dựa trên data. Tự học liên tục về ngành CSP, tax, compliance.</div></div>
+        <div class="ask-dim-block ask-s"><div class="ask-dim-tag">Skill (S)</div><div class="ask-dim-content">LinkedIn organic + ads B2B. Content strategy và editorial calendar. Webinar operations (Zoom/LinkedIn Live). SEO on-page basics. GA4 content tracking. Interview/extract insights từ CEO + Senior Consultants.</div></div>
+        <div class="ask-dim-block ask-k"><div class="ask-dim-tag">Knowledge (K)</div><div class="ask-dim-content">Financial/legal services content marketing. ICP One IBC: CEO/CFO/Founder tại SG/HK/UAE. Advisory positioning vs transactional. E-E-A-T và Google quality guidelines. Competitive landscape CSP.</div></div>
+      </div>
+      <div class="interview-qs">
+        <div class="iq-title">Câu hỏi phỏng vấn gợi ý</div>
+        <ul class="iq-list">
+          <li>Cho xem một piece of content bạn đã tạo trong ngành financial/legal/advisory — tại sao nó hiệu quả?</li>
+          <li>Nếu bạn phải viết LinkedIn post cho CEO One IBC về chủ đề "Tại sao Singapore vẫn là lựa chọn tốt nhất cho startup ASEAN trong 2026", bạn sẽ approach như thế nào?</li>
+          <li>Làm thế nào để bạn đo ROI của một webinar series trong B2B services? KPIs nào thực sự có ý nghĩa?</li>
+          <li>Mô tả cách bạn sẽ build editorial calendar 3 tháng cho LinkedIn One IBC khi mà team chỉ có 1 người.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="role-block">
+      <div class="role-head">
+        <div class="role-title">AI Search &amp; Technical SEO Specialist × 1 (contractor Q2, FTE Q3 nếu thành công)</div>
+        <span class="role-type rt-new">🟡 Contractor Q2</span>
+      </div>
+      <div class="ask-grid">
+        <div class="ask-dim-block ask-a"><div class="ask-dim-tag">Attitude (A)</div><div class="ask-dim-content">Detail-oriented — JSON-LD không chấp nhận sai một dấu. Tự học liên tục — GEO/AI Search thay đổi hàng tuần. Không ngại làm "boring" work: audit 70 trang, check structured data từng trang. Proactive về monitoring.</div></div>
+        <div class="ask-dim-block ask-s"><div class="ask-dim-tag">Skill (S)</div><div class="ask-dim-content">JSON-LD structured data (FAQPage, Organization, BreadcrumbList). Technical SEO audit. Core Web Vitals optimization. Google Search Console advanced use. Screaming Frog hoặc equivalent. HTML/JS basics đủ để tự deploy schema.</div></div>
+        <div class="ask-dim-block ask-k"><div class="ask-dim-tag">Knowledge (K)</div><div class="ask-dim-content">GEO (Generative Engine Optimization) fundamentals. E-E-A-T signals. AI Search ranking: FAQPage 92%, E-E-A-T 95%. llms.txt standard. Schema.org vocabulary. How Perplexity/ChatGPT/Gemini index và cite content.</div></div>
+      </div>
+      <div class="interview-qs">
+        <div class="iq-title">Câu hỏi phỏng vấn gợi ý</div>
+        <ul class="iq-list">
+          <li>Viết cho tôi FAQPage JSON-LD schema cho trang "BVI Company Formation" của One IBC — live coding hoặc trên giấy.</li>
+          <li>Tại sao Enterslice được Perplexity cite thường xuyên hơn OCC dù OCC có nhiều jurisdiction pages hơn?</li>
+          <li>Bạn hiểu llms.txt là gì? Nó khác robots.txt như thế nào và tại sao nó quan trọng trong 2026?</li>
+          <li>Nếu một trang có LCP &gt;4 giây và Core Web Vitals fail, bạn sẽ diagnose và fix bắt đầu từ đâu?</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- BD/PARTNERSHIP -->
+  <div class="dept-block">
+    <div class="dept-head" style="border-bottom-color:var(--teal2)">
+      <div class="dept-name">🤝 BD / Partnership Department (NEW FUNCTION)</div>
+      <div class="dept-meta">Mới — cần thiết lập để handle Payoneer/Airwallex/Aspire + Affiliate Portal</div>
+    </div>
+    <div class="dept-summary">
+      <div><div class="ds-item-label">Lý do cần tách</div><div class="ds-item-val">3 fintech partners cùng lúc</div><div class="ds-item-sub">Payoneer, Airwallex, Aspire — cần người phụ trách chuyên trách</div></div>
+      <div><div class="ds-item-label">Win rate kênh Partner</div><div class="ds-item-val">75–84%</div><div class="ds-item-sub">Cao nhất trong tất cả kênh — cần được scale</div></div>
+      <div><div class="ds-item-label">Target Q4/2026</div><div class="ds-item-val">50 active partners</div><div class="ds-item-sub">Partner rev &gt;20% tổng revenue</div></div>
+    </div>
+    <div class="role-block">
+      <div class="role-head">
+        <div class="role-title">BD &amp; Fintech Partnership Lead × 1 (NEW HIRE — Q2, có thể kiêm Affiliate Manager ban đầu)</div>
+        <span class="role-type rt-new">🟡 New hire Q2 — critical</span>
+      </div>
+      <p style="font-size:12px;color:var(--ink4);margin-bottom:12px">Đây là vị trí quan trọng nhất cần tuyển trong Q2. Nếu không có người phụ trách Payoneer/Airwallex/Aspire partnership, 3 MOU sẽ nằm trên bàn không được execute.</p>
+      <div class="ask-grid">
+        <div class="ask-dim-block ask-a"><div class="ask-dim-tag">Attitude (A)</div><div class="ask-dim-content">Entrepreneurial — thoải mái với ambiguity, tự tạo structure khi chưa có quy trình. Không ngại làm việc liên phòng ban (RM, Banking, Finance, MKT). Nhìn từ góc độ partner — đặt câu hỏi "partner được gì từ deal này". Chịu được chu kỳ partnership dài.</div></div>
+        <div class="ask-dim-block ask-s"><div class="ask-dim-tag">Skill (S)</div><div class="ask-dim-content">Partnership negotiation và contract management. Fintech/banking product knowledge. Cross-functional project coordination. CRM pipeline management. Presentation cho external partners. Tiếng Anh fluent — làm việc với Payoneer/Airwallex (công ty nước ngoài).</div></div>
+        <div class="ask-dim-block ask-k"><div class="ask-dim-tag">Knowledge (K)</div><div class="ask-dim-content">Fintech landscape: Payoneer (NASDAQ), Airwallex, Aspire — sản phẩm, ICP, partnership model của từng bên. Quy trình mở tài khoản fintech vs ngân hàng truyền thống. CSP industry và ICP One IBC. Revenue sharing và co-marketing models.</div></div>
+      </div>
+      <div class="interview-qs">
+        <div class="iq-title">Câu hỏi phỏng vấn gợi ý</div>
+        <ul class="iq-list">
+          <li>Bạn biết gì về Payoneer và Airwallex? Theo bạn, sự khác biệt chính giữa hai platform này là gì và One IBC nên ưu tiên partner nào trước?</li>
+          <li>Nếu Payoneer gửi Partnership offer và bạn được giao review, bạn sẽ đánh giá những điều khoản nào trước tiên? (revenue share, exclusivity, co-marketing, support SLA...)</li>
+          <li>Mô tả customer journey khi một khách hàng One IBC muốn mở Payoneer account — từ lúc họ hỏi RM đến khi account active. Những friction point nào có thể xảy ra?</li>
+          <li>Bạn cần phối hợp với team RM và Banking để launch Payoneer partnership trong 30 ngày. Bạn sẽ làm gì trong tuần đầu tiên?</li>
+          <li>Làm thế nào để bạn identify top 30 existing clients của One IBC phù hợp nhất để outreach về Payoneer/Airwallex account?</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ATA + RENEWAL -->
+  <div class="dept-block">
+    <div class="dept-head" style="border-bottom-color:var(--green2)">
+      <div class="dept-name">✅ ATA &amp; Renewal Department</div>
+      <div class="dept-meta">ATA: 111.4% Q1 — Best practice model cần scale · Renewal: 90.5% — cần maintain momentum</div>
+    </div>
+    <div class="dept-summary">
+      <div><div class="ds-item-label">ATA Q1 actual</div><div class="ds-item-val">111.4% plan</div><div class="ds-item-sub">+$22,982 — duy nhất vượt plan. Model multi-jur upsell hiệu quả</div></div>
+      <div><div class="ds-item-label">Renewal Q1 actual</div><div class="ds-item-val">90.5% plan</div><div class="ds-item-sub">Gap $45,743 — phần lớn do timing AR late T3→T4</div></div>
+      <div><div class="ds-item-label">Ưu tiên nhân sự</div><div class="ds-item-val">Knowledge Transfer</div><div class="ds-item-sub">ATA SOP → apply cho Renewal + Service cross-sell</div></div>
+    </div>
+    <div class="role-block">
+      <div class="role-head">
+        <div class="role-title">ATA Senior Accountant / Tax Advisor × 1–2 (mở rộng theo demand Q3–Q4)</div>
+        <span class="role-type rt-exist">🟢 Scale khi needed</span>
+      </div>
+      <div class="ask-grid">
+        <div class="ask-dim-block ask-a"><div class="ask-dim-tag">Attitude (A)</div><div class="ask-dim-content">Chủ động identify upsell opportunity trong quá trình service. Không chỉ deliver dịch vụ — biết tư vấn thêm. Documentation habit tốt — SOP compliance. Tiếp tục update về tax law thay đổi tại các jur.</div></div>
+        <div class="ask-dim-block ask-s"><div class="ask-dim-tag">Skill (S)</div><div class="ask-dim-content">Accounting và tax filing cho BVI, HK entities. Annual return preparation. Multi-jur compliance tracking. Client communication về deadlines. Upsell conversation — identify khi khách cần thêm jur.</div></div>
+        <div class="ask-dim-block ask-k"><div class="ask-dim-tag">Knowledge (K)</div><div class="ask-dim-content">BVI/HK/SG accounting và tax requirements. Annual compliance calendar theo jur. Beneficial ownership register requirements. Common audit triggers và cách tránh. CRS/BEPS compliance basics.</div></div>
+      </div>
+      <div class="interview-qs">
+        <div class="iq-title">Câu hỏi phỏng vấn gợi ý</div>
+        <ul class="iq-list">
+          <li>Một khách hàng có công ty BVI đang hỏi về annual compliance — theo bạn, đây là cơ hội để upsell dịch vụ gì và bạn sẽ approach như thế nào?</li>
+          <li>BVI Economic Substance requirements áp dụng cho loại công ty nào? Nếu công ty bị vi phạm, hậu quả là gì?</li>
+          <li>Sự khác biệt giữa audit requirement của HK và BVI entity là gì?</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<div class="wrap"><div class="rule"></div></div>
+
+<!-- ══════════ FINTECH PARTNERSHIPS ══════════ -->
+<section id="partners">
+<div class="wrap">
+  <div class="sec-eye" style="color:var(--teal2)">08 — Fintech Partnership Scope</div>
+  <h2 class="sec-title">Scope Công Việc: Payoneer · Airwallex · Aspire Singapore</h2>
+  <p class="sec-desc">Ba partnership fintech đang được xúc tiến song song. Mục tiêu chung: mở tài khoản cho khách hàng One IBC (cũ và mới) — tương tự bank introduction nhưng qua nền tảng fintech. Phối hợp RM + Banking để maximize activation rate.</p>
+
+  <div class="callout callout-navy" style="margin-bottom:20px">
+    <p><strong>Tổng quan chiến lược:</strong> Payoneer (NASDAQ-listed), Airwallex và Aspire là các fintech có sản phẩm phù hợp với khách hàng offshore của One IBC — đặc biệt SME/Founder cần nhận thanh toán quốc tế, quản lý multi-currency, không qua ngân hàng truyền thống phức tạp. Đây là cơ hội mở rộng dịch vụ Banking mà không phụ thuộc vào bank partner chậm hiện tại. Partnership này cũng là cơ sở để tăng cross-sell ATA (invoicing, bookkeeping).</p>
+  </div>
+
+  <!-- PAYONEER -->
+  <div class="partner-card">
+    <div class="partner-head">
+      <div class="partner-logo-box" style="background:#FF4800;color:white">P</div>
+      <div>
+        <div class="partner-name">Payoneer Global Inc.</div>
+        <div class="partner-meta">NASDAQ: PAYO · Founded 2005 · Global payment platform · 5M+ businesses · ~190 countries<br>Đang gửi Partnership offer — ưu tiên review ngay trong tuần 1 (02–09/05/2026)</div>
+      </div>
+    </div>
+    <div class="partner-body">
+      <div>
+        <div class="col-lbl">Sản phẩm phù hợp cho khách One IBC</div>
+        <ul class="list-b">
+          <li>Multi-currency account (USD, EUR, GBP, JPY, HKD, SGD...)</li>
+          <li>Nhận thanh toán từ Amazon, Upwork, Fiverr, Google, các sàn quốc tế</li>
+          <li>International B2B payments — invoice và collect từ partners nước ngoài</li>
+          <li>Virtual card (Mastercard debit) cho online spending</li>
+          <li>Local bank transfer tại 190+ quốc gia</li>
+          <li>Capital advance cho Sellers (tính năng thêm)</li>
+        </ul>
+      </div>
+      <div>
+        <div class="col-lbl">ICP — Khách hàng One IBC phù hợp nhất</div>
+        <ul class="list-b">
+          <li>Freelancer/creator cần nhận thanh toán từ platform quốc tế</li>
+          <li>E-commerce seller (Amazon, eBay, Etsy...) dùng BVI/SC entity</li>
+          <li>SaaS/digital services nhận subscription từ global customers</li>
+          <li>SME xuất nhập khẩu cần nhận payment từ đối tác US/EU/UK</li>
+          <li>Khách hàng hiện có BVI/SC account nhưng chưa có banking solution</li>
+        </ul>
+      </div>
+    </div>
+    <div class="process-flow">
+      <div class="pf-title">Quy trình phối hợp RM + Banking → Payoneer Account</div>
+      <div class="pf-steps">
+        <div class="pf-step"><div class="pf-dot">1</div><div class="pf-step-lbl">RM identify nhu cầu</div><div class="pf-step-sub">Trong discovery call</div></div>
+        <div class="pf-step"><div class="pf-dot">2</div><div class="pf-step-lbl">Pre-qualify KYC</div><div class="pf-step-sub">Nationality, business type, volume</div></div>
+        <div class="pf-step"><div class="pf-dot">3</div><div class="pf-step-lbl">Refer sang Banking</div><div class="pf-step-sub">Với context đầy đủ</div></div>
+        <div class="pf-step"><div class="pf-dot">4</div><div class="pf-step-lbl">Banking hỗ trợ apply</div><div class="pf-step-sub">Document prep + submit</div></div>
+        <div class="pf-step"><div class="pf-dot">5</div><div class="pf-step-lbl">Account active</div><div class="pf-step-sub">Follow up 30 ngày</div></div>
+        <div class="pf-step"><div class="pf-dot">6</div><div class="pf-step-lbl">Cross-sell ATA</div><div class="pf-step-sub">Bookkeeping + invoicing</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AIRWALLEX -->
+  <div class="partner-card">
+    <div class="partner-head">
+      <div class="partner-logo-box" style="background:#00C4CC;color:white">A</div>
+      <div>
+        <div class="partner-name">Airwallex</div>
+        <div class="partner-meta">Founded 2015 (Melbourne) · Valuation ~$5.5B (2023) · 150+ currencies · Strong in APAC + UK<br>Đang xúc tiến — phù hợp đặc biệt với khách SG/HK B2B</div>
+      </div>
+    </div>
+    <div class="partner-body">
+      <div>
+        <div class="col-lbl">Điểm mạnh vs Payoneer</div>
+        <ul class="list-b">
+          <li><strong>Business account thuần túy</strong> — không dành cho freelancer, tập trung B2B company</li>
+          <li>API-first — tích hợp tốt với accounting software (Xero, QuickBooks)</li>
+          <li>FX rate tốt hơn ngân hàng truyền thống — phù hợp khách trade thường xuyên</li>
+          <li>Corporate card (Visa) cho team spending</li>
+          <li>Strong brand tại SG/HK/AU — trust signal cao với khách One IBC SG/HK</li>
+          <li>Expense management và payroll (tính năng thêm Q3/2026)</li>
+        </ul>
+      </div>
+      <div>
+        <div class="col-lbl">ICP — Khách hàng One IBC phù hợp nhất</div>
+        <ul class="list-b">
+          <li>SG/HK incorporated companies cần multi-currency operation</li>
+          <li>Startup nhận venture funding cần treasury management</li>
+          <li>B2B service companies invoice global clients thường xuyên</li>
+          <li>Companies sử dụng Xero/QuickBooks muốn tích hợp banking</li>
+          <li>Khách hàng One IBC đã có SG/HK entity nhưng banking truyền thống chậm</li>
+        </ul>
+      </div>
+    </div>
+    <div class="process-flow">
+      <div class="pf-title">Differentiation từ Payoneer — Khi nào recommend Airwallex</div>
+      <div class="pf-steps">
+        <div class="pf-step"><div class="pf-dot" style="background:var(--teal2)">B2B</div><div class="pf-step-lbl">Company account (không phải individual)</div></div>
+        <div class="pf-step"><div class="pf-dot" style="background:var(--teal2)">SG/HK</div><div class="pf-step-lbl">Entity đã incorporated tại SG/HK</div></div>
+        <div class="pf-step"><div class="pf-dot" style="background:var(--teal2)">FX</div><div class="pf-step-lbl">Giao dịch FX thường xuyên, volume lớn</div></div>
+        <div class="pf-step"><div class="pf-dot" style="background:var(--teal2)">API</div><div class="pf-step-lbl">Cần integrate với accounting software</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ASPIRE -->
+  <div class="partner-card">
+    <div class="partner-head">
+      <div class="partner-logo-box" style="background:#1CC8EE;color:white">AS</div>
+      <div>
+        <div class="partner-name">Aspire Financial Technologies (Singapore)</div>
+        <div class="partner-meta">Founded 2018 (Singapore) · Series C ~$100M · Focus: SEA SMEs · MAS-regulated · Strong SG presence<br>Đang xúc tiến — ưu tiên cho khách SG và ASEAN-origin founders</div>
+      </div>
+    </div>
+    <div class="partner-body">
+      <div>
+        <div class="col-lbl">Điểm mạnh vs Payoneer &amp; Airwallex</div>
+        <ul class="list-b">
+          <li><strong>MAS-regulated</strong> tại Singapore — trust cao với khách SG và regional</li>
+          <li>Built for SEA SMEs — onboarding nhanh, ít friction hơn Airwallex</li>
+          <li>Aspire Card (Visa) với cashback &amp; bill management</li>
+          <li>Invoice financing &amp; BNPL cho B2B (unique feature)</li>
+          <li>Multi-user access — phù hợp SME có team nhỏ</li>
+          <li>Local SG support — phản hồi nhanh hơn global players</li>
+        </ul>
+      </div>
+      <div>
+        <div class="col-lbl">ICP — Khách hàng One IBC phù hợp nhất</div>
+        <ul class="list-b">
+          <li>Vietnam/ASEAN founders vừa incorporated tại Singapore</li>
+          <li>SME cần banking solution nhanh (onboarding 1–3 ngày)</li>
+          <li>Startups chưa đủ track record cho ngân hàng truyền thống</li>
+          <li>Ecommerce/retail cần invoice financing cho inventory</li>
+          <li>Khách hàng muốn SG fintech (MAS-regulated) thay vì global</li>
+        </ul>
+      </div>
+    </div>
+    <div class="process-flow">
+      <div class="pf-title">30-Day Launch Plan — Cả 3 Fintech Partners</div>
+      <div class="pf-steps">
+        <div class="pf-step"><div class="pf-dot" style="background:var(--green2)">W1</div><div class="pf-step-lbl">Review Payoneer offer; Go/No-go cả 3</div><div class="pf-step-sub">02–09/05</div></div>
+        <div class="pf-step"><div class="pf-dot" style="background:var(--green2)">W2</div><div class="pf-step-lbl">Design onboarding flow; RM brief</div><div class="pf-step-sub">10–16/05</div></div>
+        <div class="pf-step"><div class="pf-dot" style="background:var(--green2)">W3</div><div class="pf-step-lbl">Identify 30 existing clients; outreach bắt đầu</div><div class="pf-step-sub">17–23/05</div></div>
+        <div class="pf-step"><div class="pf-dot" style="background:var(--green2)">W4</div><div class="pf-step-lbl">First activations; measure SLA</div><div class="pf-step-sub">24–31/05</div></div>
+        <div class="pf-step"><div class="pf-dot" style="background:var(--green2)">Q3</div><div class="pf-step-lbl">Full integration vào Bank offering; Marketing launch</div><div class="pf-step-sub">Jul–Sep</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tbl-wrap" style="margin-top:18px">
+    <table>
+      <thead><tr><th>KPI Partnership Fintech</th><th>Baseline (hiện tại)</th><th>Target 30 ngày (31/05)</th><th>Target Q3/2026</th><th>Owner</th></tr></thead>
+      <tbody>
+        <tr><td>Partnership agreement signed</td><td class="mono">0 / 3</td><td class="mono c-amber">Payoneer: signed</td><td class="mono c-green">3 / 3 signed</td><td>BD Lead + CEO</td></tr>
+        <tr><td>RM team briefed về 3 products</td><td class="mono">0%</td><td class="mono c-amber">100% RM briefed</td><td class="mono c-green">100% + re-training</td><td>BD Lead + RM Lead</td></tr>
+        <tr><td>Existing clients outreached</td><td class="mono">0</td><td class="mono c-amber">30 clients</td><td class="mono c-green">200+ clients</td><td>RM Team</td></tr>
+        <tr><td>Fintech accounts activated</td><td class="mono">0</td><td class="mono c-amber">5–10 accounts</td><td class="mono c-green">50+ accounts</td><td>Banking Team + BD</td></tr>
+        <tr><td>Revenue from fintech referrals</td><td class="mono">$0</td><td class="mono c-navy">Tracking only</td><td class="mono c-green">&gt;$10k GP</td><td>Finance + BD</td></tr>
+        <tr><td>Cross-sell ATA rate (fintech clients)</td><td class="mono">N/A</td><td class="mono c-navy">Measure only</td><td class="mono c-green">&gt;30% attach rate</td><td>ATA + RM</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</section>
+
+<div class="wrap"><div class="rule"></div></div>
+
+<!-- ══════════ BSC ══════════ -->
+<section id="bsc">
+<div class="wrap">
+  <div class="sec-eye" style="color:var(--accent2)">09 — BSC Tổng Hợp</div>
+  <h2 class="sec-title">Balanced Scorecard 2026 — Consolidated</h2>
+  <p class="sec-desc">4 perspectives × KPI đo lường được, với baseline và target. Nguồn: tổng hợp từ cả 3 tài liệu, ưu tiên số liệu có thể xác minh qua Salesforce CRM.</p>
+
+  <div class="bsc-mini">
+    <div class="bsc-p">
+      <div class="bsc-p-head"><div class="bsc-p-icon">💰</div><div><div class="bsc-p-title">Tài Chính</div><div class="bsc-p-sub">P&amp;L recovery + margin improvement</div></div></div>
+      <div class="kpi-col-head"><span class="kch">KPI</span><span class="kch">Baseline</span><span class="kch">Target 2026</span></div>
+      <div class="kpi-row"><div class="kpi-name">GP Margin</div><div class="kpi-base">64.1% (FY2025)</div><div class="kpi-target c-green">&gt;68%</div></div>
+      <div class="kpi-row"><div class="kpi-name">GP per Case</div><div class="kpi-base">$872</div><div class="kpi-target c-green">&gt;$950</div></div>
+      <div class="kpi-row"><div class="kpi-name">Full Year GP</div><div class="kpi-base">$3.78M (2025)</div><div class="kpi-target c-navy">$6.41M plan</div></div>
+      <div class="kpi-row"><div class="kpi-name">Q2 GP Recovery</div><div class="kpi-base">Q1: $954k (70.8%)</div><div class="kpi-target c-amber">≥$1.73M (97.1%)</div></div>
+      <div class="kpi-row"><div class="kpi-name">Partner Rev %</div><div class="kpi-base">&lt;10%</div><div class="kpi-target c-green">&gt;20% Q4</div></div>
+      <div class="kpi-row"><div class="kpi-name">Ads CPL</div><div class="kpi-base">$77.8 (mẫu)</div><div class="kpi-target c-green">&lt;$45</div></div>
+    </div>
+
+    <div class="bsc-p">
+      <div class="bsc-p-head"><div class="bsc-p-icon">🎯</div><div><div class="bsc-p-title">Khách Hàng</div><div class="bsc-p-sub">Win rate + retention + competitive positioning</div></div></div>
+      <div class="kpi-col-head"><span class="kch">KPI</span><span class="kch">Baseline</span><span class="kch">Target 2026</span></div>
+      <div class="kpi-row"><div class="kpi-name">Ads Lead→Won (OCC)</div><div class="kpi-base">0.14%</div><div class="kpi-target c-green">&gt;1.5%</div></div>
+      <div class="kpi-row"><div class="kpi-name">HK Bank Intro WR</div><div class="kpi-base">TBD (Q1: 7.2% GP)</div><div class="kpi-target c-green">+15pts (Bundle)</div></div>
+      <div class="kpi-row"><div class="kpi-name">SG Renewal Retention</div><div class="kpi-base">TBD</div><div class="kpi-target c-green">&gt;80%</div></div>
+      <div class="kpi-row"><div class="kpi-name">BVI Win Rate</div><div class="kpi-base">61.3%</div><div class="kpi-target c-green">&gt;65%</div></div>
+      <div class="kpi-row"><div class="kpi-name">US Win Rate</div><div class="kpi-base">13%</div><div class="kpi-target c-amber">&gt;25% (Q4)</div></div>
+      <div class="kpi-row"><div class="kpi-name">Fintech Accounts (new)</div><div class="kpi-base">0</div><div class="kpi-target c-navy">50+ Q3</div></div>
+    </div>
+
+    <div class="bsc-p">
+      <div class="bsc-p-head"><div class="bsc-p-icon">⚙️</div><div><div class="bsc-p-title">Quy Trình Nội Bộ</div><div class="bsc-p-sub">Funnel quality + SLA + tech enablement</div></div></div>
+      <div class="kpi-col-head"><span class="kch">KPI</span><span class="kch">Baseline</span><span class="kch">Target 2026</span></div>
+      <div class="kpi-row"><div class="kpi-name">Spam Opp %</div><div class="kpi-base">~10%+</div><div class="kpi-target c-green">&lt;3%</div></div>
+      <div class="kpi-row"><div class="kpi-name">HK KYC SLA</div><div class="kpi-base">7 ngày (manual)</div><div class="kpi-target c-green">≤3 ngày</div></div>
+      <div class="kpi-row"><div class="kpi-name">High-intent Response</div><div class="kpi-base">Không track</div><div class="kpi-target c-green">≤15 phút</div></div>
+      <div class="kpi-row"><div class="kpi-name">Vendor SLA Breach</div><div class="kpi-base">Không track</div><div class="kpi-target c-amber">&lt;15%/partner/quý</div></div>
+      <div class="kpi-row"><div class="kpi-name">FAQ Schema Coverage</div><div class="kpi-base">0 trang</div><div class="kpi-target c-green">70+ jur pages</div></div>
+      <div class="kpi-row"><div class="kpi-name">Qualifier Live (AgentForce)</div><div class="kpi-base">Chưa live (1 năm)</div><div class="kpi-target c-amber">T5/2026</div></div>
+    </div>
+
+    <div class="bsc-p">
+      <div class="bsc-p-head"><div class="bsc-p-icon">📈</div><div><div class="bsc-p-title">Học Hỏi &amp; Phát Triển</div><div class="bsc-p-sub">Headcount, capabilities, culture</div></div></div>
+      <div class="kpi-col-head"><span class="kch">KPI</span><span class="kch">Baseline</span><span class="kch">Target 2026</span></div>
+      <div class="kpi-row"><div class="kpi-name">RM Active HC</div><div class="kpi-base">10 RM (T1–T2)</div><div class="kpi-target c-green">≥18 từ T4</div></div>
+      <div class="kpi-row"><div class="kpi-name">Bank Convert Rate</div><div class="kpi-base">&lt;10%</div><div class="kpi-target c-amber">≥60% (Mức 3)</div></div>
+      <div class="kpi-row"><div class="kpi-name">Active Partners</div><div class="kpi-base">&lt;10 (manual)</div><div class="kpi-target c-green">50 Q4</div></div>
+      <div class="kpi-row"><div class="kpi-name">LinkedIn Webinar</div><div class="kpi-base">0</div><div class="kpi-target c-amber">100+att; 5+ SQL</div></div>
+      <div class="kpi-row"><div class="kpi-name">AI Referral Traffic</div><div class="kpi-base">Chưa track</div><div class="kpi-target c-navy">Track &amp; grow</div></div>
+      <div class="kpi-row"><div class="kpi-name">Fintech Partnerships</div><div class="kpi-base">0 signed</div><div class="kpi-target c-green">3 signed Q2</div></div>
+    </div>
+  </div>
+
+  <p class="footnote">Tài liệu này tổng hợp từ: (1) Bao_Cao_Chien_Luoc_2026_v3.pdf — v2.0 04/2026; (2) OneIBC_Governance_Report_2026.html — 04/2026; (3) OneIBC_MKT_Intelligence_Module.html — v1.0 04/2026. Fintech Partnership scope được bổ sung theo thông tin trao đổi Payoneer/Airwallex/Aspire tháng 4/2026. KPI baseline "TBD" cần Sales Ops pull từ Salesforce trước 15/05/2026. Tài liệu nội bộ — không phân phối.</p>
+</div>
+</section>
+
+<!-- FOOTER -->
+<div class="doc-footer">
+  <div class="footer-inner">
+    <span>One IBC Group · Đề Xuất Hành Động 5W1H · v2.0 · Leadership Use Only</span>
+    <span>02/05/2026 — 31/05/2026 · Không phân phối</span>
+  </div>
+</div>
+
+</body>
+</html>
