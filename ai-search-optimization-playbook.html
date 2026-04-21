@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Search Optimization Playbook</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #ffffff;
+    --bg2: #f7f6f2;
+    --bg3: #f0efe9;
+    --text: #1a1a18;
+    --text2: #5f5e5a;
+    --text3: #888780;
+    --border: rgba(0,0,0,0.12);
+    --border2: rgba(0,0,0,0.22);
+    --radius: 8px;
+    --radius-lg: 12px;
+    --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    --font-mono: 'Cascadia Code', 'Fira Code', 'Courier New', monospace;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1e1e1c;
+      --bg2: #272725;
+      --bg3: #2f2f2c;
+      --text: #f0efe9;
+      --text2: #b4b2a9;
+      --text3: #888780;
+      --border: rgba(255,255,255,0.1);
+      --border2: rgba(255,255,255,0.2);
+    }
+    .b-blue { background: #042C53 !important; color: #B5D4F4 !important; }
+    .b-teal { background: #04342C !important; color: #9FE1CB !important; }
+    .b-amber { background: #412402 !important; color: #FAC775 !important; }
+    .b-coral { background: #4A1B0C !important; color: #F5C4B3 !important; }
+    .b-purple { background: #26215C !important; color: #CECBF6 !important; }
+    .b-green { background: #173404 !important; color: #C0DD97 !important; }
+    .b-gray { background: #2C2C2A !important; color: #D3D1C7 !important; }
+    .pcard, .tcard { background: var(--bg2) !important; }
+    .tbl tr:hover td { background: var(--bg3) !important; }
+    .schema-box { background: var(--bg3) !important; }
+    .tab.active { background: var(--text) !important; color: var(--bg) !important; border-color: var(--text) !important; }
+  }
+
+  body {
+    font-family: var(--font);
+    background: var(--bg);
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* Header */
+  .header {
+    border-bottom: 0.5px solid var(--border);
+    padding: 2rem 2.5rem 1.5rem;
+    background: var(--bg);
+    position: sticky; top: 0; z-index: 10;
+  }
+  .header-top {
+    display: flex; align-items: flex-start; justify-content: space-between;
+    flex-wrap: wrap; gap: 12px; margin-bottom: 1.25rem;
+  }
+  .header-title { font-size: 22px; font-weight: 500; color: var(--text); }
+  .header-sub { font-size: 13px; color: var(--text3); margin-top: 3px; }
+  .header-meta {
+    display: flex; gap: 8px; flex-wrap: wrap; align-items: center;
+    font-size: 12px; color: var(--text3);
+  }
+  .meta-pill {
+    padding: 3px 10px; border-radius: 20px;
+    border: 0.5px solid var(--border);
+    background: var(--bg2);
+    color: var(--text2);
+    font-size: 12px;
+  }
+
+  /* Tabs */
+  .tabs {
+    display: flex; gap: 4px; flex-wrap: wrap;
+  }
+  .tab {
+    padding: 6px 14px; border-radius: var(--radius);
+    border: 0.5px solid var(--border2);
+    background: var(--bg);
+    font-size: 13px; cursor: pointer; color: var(--text2);
+    transition: all 0.15s; font-family: var(--font);
+    white-space: nowrap;
+  }
+  .tab:hover { background: var(--bg2); color: var(--text); }
+  .tab.active {
+    background: var(--text); color: var(--bg);
+    border-color: var(--text);
+  }
+
+  /* Content */
+  .content { padding: 2rem 2.5rem; max-width: 1100px; }
+
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  .section-label {
+    font-size: 11px; font-weight: 500; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--text3);
+    margin-bottom: 0.75rem;
+  }
+
+  .h3 {
+    font-size: 15px; font-weight: 500;
+    margin: 1.75rem 0 0.875rem;
+    color: var(--text);
+  }
+  .h3:first-child { margin-top: 0; }
+
+  /* Platform grid */
+  .platform-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 10px; margin-bottom: 1.5rem;
+  }
+  .pcard {
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 16px 18px;
+    background: var(--bg);
+    transition: border-color 0.15s;
+  }
+  .pcard:hover { border-color: var(--border2); }
+  .pcard-name { font-weight: 500; font-size: 14px; margin-bottom: 6px; }
+  .pcard-sub {
+    font-size: 12px; color: var(--text2);
+    margin-bottom: 12px; line-height: 1.5;
+  }
+  .pcard-tags { display: flex; flex-wrap: wrap; gap: 4px; }
+
+  /* Badges */
+  .badge {
+    display: inline-block; padding: 2px 8px; border-radius: 4px;
+    font-size: 11px; font-weight: 500; white-space: nowrap;
+    margin: 2px 2px 2px 0;
+  }
+  .b-blue { background: #E6F1FB; color: #0C447C; }
+  .b-teal { background: #E1F5EE; color: #085041; }
+  .b-amber { background: #FAEEDA; color: #633806; }
+  .b-coral { background: #FAECE7; color: #712B13; }
+  .b-purple { background: #EEEDFE; color: #3C3489; }
+  .b-green { background: #EAF3DE; color: #27500A; }
+  .b-gray { background: #F1EFE8; color: #444441; }
+
+  /* Table */
+  .tbl { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .tbl th {
+    text-align: left; padding: 9px 14px;
+    font-size: 11px; font-weight: 500;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--text3);
+    border-bottom: 0.5px solid var(--border);
+  }
+  .tbl td {
+    padding: 11px 14px; vertical-align: top;
+    border-bottom: 0.5px solid var(--border);
+    line-height: 1.5; color: var(--text);
+  }
+  .tbl tr:last-child td { border-bottom: none; }
+  .tbl tr:hover td { background: var(--bg2); }
+  .tbl-wrap { border: 0.5px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; margin-bottom: 1.5rem; }
+
+  /* Signal bars */
+  .bar-section { margin-bottom: 1.75rem; }
+  .bar-row { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+  .bar-label { font-size: 13px; color: var(--text2); width: 180px; flex-shrink: 0; }
+  .bar-track { flex: 1; height: 6px; background: var(--bg3); border-radius: 3px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 3px; transition: width 0.4s ease; }
+  .bar-val { font-size: 13px; font-weight: 500; width: 36px; text-align: right; flex-shrink: 0; }
+
+  /* Checklist */
+  .checklist { list-style: none; border: 0.5px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
+  .checklist li {
+    padding: 12px 16px;
+    border-bottom: 0.5px solid var(--border);
+    font-size: 13px; line-height: 1.6;
+    display: flex; gap: 12px; align-items: flex-start;
+    background: var(--bg);
+  }
+  .checklist li:last-child { border-bottom: none; }
+  .checklist li:hover { background: var(--bg2); }
+
+  /* Team grid */
+  .team-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 10px; }
+  .tcard {
+    border: 0.5px solid var(--border); border-radius: var(--radius-lg);
+    padding: 16px 18px; background: var(--bg);
+  }
+  .tcard-head {
+    font-weight: 500; font-size: 14px;
+    margin-bottom: 10px; display: flex; align-items: center; gap: 10px;
+    color: var(--text);
+  }
+  .tcard-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .tcard ul { list-style: none; }
+  .tcard li {
+    font-size: 12px; color: var(--text2);
+    padding: 5px 0; border-bottom: 0.5px solid var(--border);
+    line-height: 1.5; display: flex; gap: 8px;
+  }
+  .tcard li::before { content: '—'; color: var(--text3); flex-shrink: 0; }
+  .tcard li:last-child { border-bottom: none; }
+
+  /* Schema box */
+  .schema-box {
+    background: var(--bg2); border: 0.5px solid var(--border);
+    border-radius: var(--radius); padding: 14px 16px;
+    margin-bottom: 12px; font-family: var(--font-mono);
+    font-size: 12px; color: var(--text); line-height: 1.7;
+  }
+
+  /* Priority */
+  .priority-list { border: 0.5px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
+  .priority-row {
+    display: flex; align-items: flex-start; gap: 16px;
+    padding: 16px 20px;
+    border-bottom: 0.5px solid var(--border);
+    background: var(--bg);
+    transition: background 0.15s;
+  }
+  .priority-row:last-child { border-bottom: none; }
+  .priority-row:hover { background: var(--bg2); }
+  .priority-num {
+    font-size: 24px; font-weight: 500; color: var(--text3);
+    min-width: 32px; line-height: 1;
+    margin-top: 2px;
+  }
+  .priority-content { flex: 1; }
+  .priority-title {
+    font-size: 14px; font-weight: 500;
+    margin-bottom: 5px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  }
+  .priority-desc { font-size: 13px; color: var(--text2); line-height: 1.6; }
+
+  /* Footer */
+  .footer {
+    margin-top: 3rem; padding: 1.5rem 2.5rem;
+    border-top: 0.5px solid var(--border);
+    font-size: 12px; color: var(--text3);
+    display: flex; gap: 16px; flex-wrap: wrap; justify-content: space-between;
+  }
+
+  code {
+    font-family: var(--font-mono); font-size: 12px;
+    background: var(--bg3); padding: 1px 5px;
+    border-radius: 3px; color: var(--text);
+  }
+
+  @media (max-width: 600px) {
+    .header { padding: 1.25rem 1rem 1rem; }
+    .content { padding: 1.25rem 1rem; }
+    .platform-grid, .team-grid { grid-template-columns: 1fr; }
+    .bar-label { width: 130px; font-size: 12px; }
+    .header-title { font-size: 18px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-top">
+    <div>
+      <div class="header-title">AI Search Optimization Playbook</div>
+      <div class="header-sub">Cơ chế hoạt động, tín hiệu xếp hạng và hướng dẫn cho từng team</div>
+    </div>
+    <div class="header-meta">
+      <span class="meta-pill">2025–2026</span>
+      <span class="meta-pill">GEO / AIO / AEO</span>
+      <span class="meta-pill">8 Platforms</span>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <div class="tab active" onclick="switchTab('platforms')">Cơ chế AI platforms</div>
+    <div class="tab" onclick="switchTab('signals')">Tín hiệu xếp hạng</div>
+    <div class="tab" onclick="switchTab('schema')">Schema &amp; Technical</div>
+    <div class="tab" onclick="switchTab('content')">Chiến lược nội dung</div>
+    <div class="tab" onclick="switchTab('teams')">Playbook theo team</div>
+    <div class="tab" onclick="switchTab('priority')">Ưu tiên triển khai</div>
+  </div>
+</div>
+
+<div class="content">
+
+  <!-- TAB 1: PLATFORMS -->
+  <div id="tab-platforms" class="panel active">
+    <div class="section-label">8 AI platforms — cơ chế tìm kiếm và trích dẫn</div>
+
+    <div class="platform-grid">
+      <div class="pcard">
+        <div class="pcard-name">Perplexity</div>
+        <div class="pcard-sub">Crawl real-time + Bing API. Trả kết quả có citation rõ ràng. Ưu tiên nội dung có cấu trúc, headings, dữ liệu cụ thể.</div>
+        <div class="pcard-tags">
+          <span class="badge b-blue">Crawl web</span>
+          <span class="badge b-teal">Citation-based</span>
+          <span class="badge b-amber">Real-time</span>
+        </div>
+      </div>
+      <div class="pcard">
+        <div class="pcard-name">ChatGPT (GPT-4o)</div>
+        <div class="pcard-sub">Tích hợp Bing search khi bật Browse. Ưu tiên domain authority cao, nội dung có cấu trúc tốt và được chia sẻ nhiều.</div>
+        <div class="pcard-tags">
+          <span class="badge b-blue">Bing index</span>
+          <span class="badge b-purple">DA-driven</span>
+          <span class="badge b-gray">Structured data</span>
+        </div>
+      </div>
+      <div class="pcard">
+        <div class="pcard-name">Claude (Anthropic)</div>
+        <div class="pcard-sub">Không crawl real-time (trừ Projects). Dùng training data. Ưu tiên nguồn uy tín được trích dẫn nhiều — báo, wiki, docs.</div>
+        <div class="pcard-tags">
+          <span class="badge b-purple">Training data</span>
+          <span class="badge b-gray">Authoritative src</span>
+          <span class="badge b-coral">No real-time</span>
+        </div>
+      </div>
+      <div class="pcard">
+        <div class="pcard-name">Gemini (Google)</div>
+        <div class="pcard-sub">Google index + AI Overviews. Tích hợp sâu với Google Search, Knowledge Graph, SGE. Ưu tiên E-E-A-T mạnh nhất.</div>
+        <div class="pcard-tags">
+          <span class="badge b-green">Google index</span>
+          <span class="badge b-blue">SGE / AIO</span>
+          <span class="badge b-teal">E-E-A-T</span>
+        </div>
+      </div>
+      <div class="pcard">
+        <div class="pcard-name">Meta AI</div>
+        <div class="pcard-sub">Dùng Bing + dữ liệu từ Meta social graph. Ưu tiên nội dung được chia sẻ và tương tác nhiều trên FB/IG.</div>
+        <div class="pcard-tags">
+          <span class="badge b-blue">Bing + Meta</span>
+          <span class="badge b-amber">Social signals</span>
+          <span class="badge b-gray">Engagement</span>
+        </div>
+      </div>
+      <div class="pcard">
+        <div class="pcard-name">Grok (xAI)</div>
+        <div class="pcard-sub">Crawl X (Twitter) real-time + Bing. Mạnh với trending topics, news. Ưu tiên nội dung được thảo luận trên X nhiều.</div>
+        <div class="pcard-tags">
+          <span class="badge b-coral">X/Twitter data</span>
+          <span class="badge b-amber">Trending</span>
+          <span class="badge b-blue">Bing</span>
+        </div>
+      </div>
+      <div class="pcard">
+        <div class="pcard-name">SearchGPT / Bing AI</div>
+        <div class="pcard-sub">Microsoft Bing index. Ưu tiên schema markup đầy đủ, tốc độ tải trang, backlink profile tốt và nội dung fresh.</div>
+        <div class="pcard-tags">
+          <span class="badge b-blue">Bing index</span>
+          <span class="badge b-green">Schema</span>
+          <span class="badge b-teal">Fresh content</span>
+        </div>
+      </div>
+      <div class="pcard">
+        <div class="pcard-name">AI Overviews (Google)</div>
+        <div class="pcard-sub">Dựa hoàn toàn vào Google index + ranking. Snippet được chọn từ trang đã rank top. E-E-A-T + FAQ schema là chìa khóa.</div>
+        <div class="pcard-tags">
+          <span class="badge b-green">Google top rank</span>
+          <span class="badge b-teal">FAQ Schema</span>
+          <span class="badge b-amber">Featured snippet</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="h3">Cơ chế chọn nguồn để trích dẫn</div>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <thead>
+          <tr>
+            <th>Platform</th>
+            <th>Nguồn index chính</th>
+            <th>Tiêu chí ưu tiên</th>
+            <th>Điểm mù</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Perplexity</strong></td>
+            <td>Bing + crawl riêng + Reddit</td>
+            <td>Có citation rõ, heading H2/H3, bullets, dữ liệu số</td>
+            <td>Domain mới bị bỏ qua nếu DA thấp</td>
+          </tr>
+          <tr>
+            <td><strong>ChatGPT Browse</strong></td>
+            <td>Bing index + plugin</td>
+            <td>DA cao, content dài, backlink mạnh</td>
+            <td>Ưu tiên EN, domain .vn yếu hơn</td>
+          </tr>
+          <tr>
+            <td><strong>Gemini / AIO</strong></td>
+            <td>Google full index</td>
+            <td>E-E-A-T, Schema, Core Web Vitals, mobile-first</td>
+            <td>Trang không indexable hoặc JS-heavy</td>
+          </tr>
+          <tr>
+            <td><strong>Grok</strong></td>
+            <td>X posts + Bing</td>
+            <td>Được quote/repost trên X, trending hash</td>
+            <td>Nội dung không có presence trên X bị yếu</td>
+          </tr>
+          <tr>
+            <td><strong>Meta AI</strong></td>
+            <td>Bing + FB/IG social graph</td>
+            <td>Engagement (likes, shares, comments)</td>
+            <td>Rất yếu với B2B và nội dung kỹ thuật</td>
+          </tr>
+          <tr>
+            <td><strong>Claude</strong></td>
+            <td>Training data (cutoff)</td>
+            <td>Được trích dẫn bởi nguồn uy tín, Wikipedia, báo lớn</td>
+            <td>Không cập nhật real-time, tin mới bị miss</td>
+          </tr>
+          <tr>
+            <td><strong>SearchGPT / Bing AI</strong></td>
+            <td>Bing index</td>
+            <td>Schema đầy đủ, tốc độ tải, backlink, content fresh</td>
+            <td>Kém hơn Google về depth indexing</td>
+          </tr>
+          <tr>
+            <td><strong>AI Overviews</strong></td>
+            <td>Google full index</td>
+            <td>Đã rank top Google + FAQ schema</td>
+            <td>Chỉ lấy từ trang đã được Google trust cao</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- TAB 2: SIGNALS -->
+  <div id="tab-signals" class="panel">
+    <div class="section-label">Mức độ ảnh hưởng của từng tín hiệu đến AI search</div>
+
+    <div class="bar-section">
+      <div class="bar-row">
+        <span class="bar-label">E-E-A-T (Expertise)</span>
+        <div class="bar-track"><div class="bar-fill" style="width:95%; background:#1D9E75;"></div></div>
+        <span class="bar-val" style="color:#1D9E75;">95%</span>
+      </div>
+      <div class="bar-row">
+        <span class="bar-label">Structured data / Schema</span>
+        <div class="bar-track"><div class="bar-fill" style="width:90%; background:#1D9E75;"></div></div>
+        <span class="bar-val" style="color:#1D9E75;">90%</span>
+      </div>
+      <div class="bar-row">
+        <span class="bar-label">Content structure (H1–H3)</span>
+        <div class="bar-track"><div class="bar-fill" style="width:88%; background:#1D9E75;"></div></div>
+        <span class="bar-val" style="color:#1D9E75;">88%</span>
+      </div>
+      <div class="bar-row">
+        <span class="bar-label">Nội dung dạng Q&amp;A / FAQ</span>
+        <div class="bar-track"><div class="bar-fill" style="width:85%; background:#378ADD;"></div></div>
+        <span class="bar-val" style="color:#378ADD;">85%</span>
+      </div>
+      <div class="bar-row">
+        <span class="bar-label">Domain authority / Backlink</span>
+        <div class="bar-track"><div class="bar-fill" style="width:82%; background:#378ADD;"></div></div>
+        <span class="bar-val" style="color:#378ADD;">82%</span>
+      </div>
+      <div class="bar-row">
+        <span class="bar-label">Core Web Vitals / Speed</span>
+        <div class="bar-track"><div class="bar-fill" style="width:78%; background:#378ADD;"></div></div>
+        <span class="bar-val" style="color:#378ADD;">78%</span>
+      </div>
+      <div class="bar-row">
+        <span class="bar-label">Được cite bởi AI khác</span>
+        <div class="bar-track"><div class="bar-fill" style="width:75%; background:#378ADD;"></div></div>
+        <span class="bar-val" style="color:#378ADD;">75%</span>
+      </div>
+      <div class="bar-row">
+        <span class="bar-label">Fresh / updated content</span>
+        <div class="bar-track"><div class="bar-fill" style="width:65%; background:#BA7517;"></div></div>
+        <span class="bar-val" style="color:#BA7517;">65%</span>
+      </div>
+      <div class="bar-row">
+        <span class="bar-label">Social signals (X/LinkedIn)</span>
+        <div class="bar-track"><div class="bar-fill" style="width:60%; background:#BA7517;"></div></div>
+        <span class="bar-val" style="color:#BA7517;">60%</span>
+      </div>
+      <div class="bar-row">
+        <span class="bar-label">Keyword density (truyền thống)</span>
+        <div class="bar-track"><div class="bar-fill" style="width:30%; background:#888780;"></div></div>
+        <span class="bar-val" style="color:#888780;">30%</span>
+      </div>
+    </div>
+
+    <div class="h3">SEO truyền thống vs AI Search Optimization (GEO / AIO)</div>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <thead>
+          <tr><th>Yếu tố</th><th>SEO truyền thống</th><th>AI Search (GEO/AIO)</th><th>Kết luận</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Keyword placement</td>
+            <td>Title, H1, body 1–2%</td>
+            <td>Ít quan trọng hơn; AI đọc ngữ nghĩa</td>
+            <td><span class="badge b-amber">Giảm trọng số</span></td>
+          </tr>
+          <tr>
+            <td>Backlink</td>
+            <td>Số lượng + chất lượng</td>
+            <td>Vẫn quan trọng — AI chọn nguồn được cite nhiều</td>
+            <td><span class="badge b-green">Vẫn thiết yếu</span></td>
+          </tr>
+          <tr>
+            <td>Nội dung dài</td>
+            <td>3,000+ từ tốt hơn</td>
+            <td>AI ưu tiên nội dung súc tích, trả lời trực tiếp</td>
+            <td><span class="badge b-coral">Thay đổi lớn</span></td>
+          </tr>
+          <tr>
+            <td>Meta description</td>
+            <td>Tối ưu CTR</td>
+            <td>AI đọc để hiểu trang, nhưng không cite</td>
+            <td><span class="badge b-gray">Vai trò phụ</span></td>
+          </tr>
+          <tr>
+            <td>Schema Markup</td>
+            <td>Rich snippets, CTR</td>
+            <td>AI đọc schema để extract data trực tiếp</td>
+            <td><span class="badge b-teal">Tăng mạnh</span></td>
+          </tr>
+          <tr>
+            <td>FAQ section</td>
+            <td>Featured snippet</td>
+            <td>Đây chính là format AI ưa nhất</td>
+            <td><span class="badge b-green">Cực kỳ quan trọng</span></td>
+          </tr>
+          <tr>
+            <td>Author bio</td>
+            <td>Ít ai quan tâm</td>
+            <td>E-A-T signal — AI cần biết ai viết</td>
+            <td><span class="badge b-teal">Quan trọng hơn</span></td>
+          </tr>
+          <tr>
+            <td>Social proof</td>
+            <td>Off-page yếu</td>
+            <td>Meta AI / Grok đọc social; ảnh hưởng gián tiếp</td>
+            <td><span class="badge b-amber">Platform-specific</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- TAB 3: SCHEMA -->
+  <div id="tab-schema" class="panel">
+    <div class="section-label">Schema markup &amp; technical requirements</div>
+
+    <div class="h3">Schema types ưu tiên cho AI search</div>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <thead>
+          <tr><th>Schema type</th><th>Dùng khi nào</th><th>AI platform hưởng lợi</th><th>Ưu tiên</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>FAQPage</code></td>
+            <td>Mọi landing page, blog có câu hỏi</td>
+            <td>Google AIO, ChatGPT, Perplexity</td>
+            <td><span class="badge b-green">Cao nhất</span></td>
+          </tr>
+          <tr>
+            <td><code>HowTo</code></td>
+            <td>Hướng dẫn, quy trình từng bước</td>
+            <td>Google AIO, Perplexity</td>
+            <td><span class="badge b-green">Cao</span></td>
+          </tr>
+          <tr>
+            <td><code>Article / BlogPosting</code></td>
+            <td>Tất cả bài viết blog</td>
+            <td>Tất cả platforms</td>
+            <td><span class="badge b-green">Cao</span></td>
+          </tr>
+          <tr>
+            <td><code>Organization</code></td>
+            <td>Homepage, About page</td>
+            <td>Knowledge Graph, Claude training</td>
+            <td><span class="badge b-teal">Trung bình-cao</span></td>
+          </tr>
+          <tr>
+            <td><code>Person</code></td>
+            <td>Author page, team bios</td>
+            <td>E-E-A-T cho Google, Perplexity</td>
+            <td><span class="badge b-teal">Trung bình-cao</span></td>
+          </tr>
+          <tr>
+            <td><code>Product + Review</code></td>
+            <td>Trang sản phẩm, so sánh</td>
+            <td>Google Shopping, ChatGPT</td>
+            <td><span class="badge b-blue">Tùy ngành</span></td>
+          </tr>
+          <tr>
+            <td><code>Speakable</code></td>
+            <td>Nội dung muốn AI đọc to (voice)</td>
+            <td>Google Assistant, voice AI</td>
+            <td><span class="badge b-amber">Mới nổi</span></td>
+          </tr>
+          <tr>
+            <td><code>ClaimReview</code></td>
+            <td>Fact-checking, báo chí</td>
+            <td>Google News, Perplexity</td>
+            <td><span class="badge b-gray">Niche</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="h3">Technical checklist — crawlability &amp; AI readability</div>
+    <ul class="checklist">
+      <li><span class="badge b-green">Must</span><span><strong>robots.txt</strong> — không block GPTBot, ClaudeBot, PerplexityBot, Googlebot-Extended, Google-Extended, CCBot. Kiểm tra định kỳ mỗi tháng.</span></li>
+      <li><span class="badge b-green">Must</span><span><strong>Sitemap.xml</strong> cập nhật tự động, submit lên Google Search Console + Bing Webmaster Tools.</span></li>
+      <li><span class="badge b-green">Must</span><span><strong>Core Web Vitals</strong>: LCP &lt; 2.5s, INP &lt; 200ms, CLS &lt; 0.1. Dùng PageSpeed Insights để track hàng tuần.</span></li>
+      <li><span class="badge b-green">Must</span><span><strong>HTML semantic</strong>: Dùng đúng H1 &gt; H2 &gt; H3. Mỗi trang chỉ 1 thẻ H1. AI đọc outline để hiểu cấu trúc nội dung.</span></li>
+      <li><span class="badge b-teal">High</span><span><strong>llms.txt</strong> — file mới (2024–2025): đặt tại /llms.txt, liệt kê nội dung tốt nhất cho LLM đọc. Tương tự robots.txt nhưng dành cho AI crawlers.</span></li>
+      <li><span class="badge b-teal">High</span><span><strong>JSON-LD schema</strong> inject vào &lt;head&gt;, không dùng Microdata inline. Validate bằng Google Rich Results Test sau mỗi lần deploy.</span></li>
+      <li><span class="badge b-teal">High</span><span><strong>Author markup</strong>: Mỗi bài viết có author rõ ràng, link đến author page có bio + credentials đầy đủ + Person schema.</span></li>
+      <li><span class="badge b-teal">High</span><span><strong>Internal linking</strong> rõ ràng, anchor text mô tả đúng destination. AI dùng để khám phá thêm context về domain.</span></li>
+      <li><span class="badge b-blue">Medium</span><span><strong>Canonical URL</strong> đúng. Tránh duplicate content — AI bị confused khi thấy nhiều trang giống nhau trên cùng domain.</span></li>
+      <li><span class="badge b-blue">Medium</span><span><strong>Open Graph + Twitter Card</strong> đầy đủ — Grok và Meta AI đọc OG tags để hiểu context và preview nội dung.</span></li>
+      <li><span class="badge b-blue">Medium</span><span><strong>HTTPS + không lỗi 404/500</strong>. Crawl error làm giảm trust score của cả domain với AI crawlers.</span></li>
+      <li><span class="badge b-amber">New</span><span><strong>AI.txt / AEO file</strong> — đang được chuẩn hóa trong 2025–2026. Chuẩn bị sẵn cấu trúc để deploy nhanh khi có spec chính thức.</span></li>
+    </ul>
+
+    <div class="h3">User agents AI cần biết (robots.txt allowlist)</div>
+    <div class="schema-box">
+GPTBot — OpenAI (ChatGPT, SearchGPT)<br>
+ClaudeBot — Anthropic (Claude)<br>
+PerplexityBot — Perplexity AI<br>
+Google-Extended — Google Gemini training<br>
+Googlebot — Google Search + AI Overviews<br>
+CCBot — Common Crawl (dùng để train nhiều LLM)<br>
+Bytespider — ByteDance / TikTok AI<br>
+Applebot-Extended — Apple AI / Siri<br>
+YouBot — You.com<br>
+meta-externalagent — Meta AI
+    </div>
+  </div>
+
+  <!-- TAB 4: CONTENT -->
+  <div id="tab-content" class="panel">
+    <div class="section-label">Chiến lược nội dung cho GEO — Generative Engine Optimization</div>
+
+    <div class="h3">Format nội dung AI ưa nhất (theo thứ tự ưu tiên)</div>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <thead>
+          <tr><th>Format</th><th>Lý do AI ưa</th><th>Cách áp dụng</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="badge b-green">1. Q&amp;A / FAQ</span></td>
+            <td>Trực tiếp trả lời intent, dễ extract làm answer</td>
+            <td>Cuối mỗi bài: 5–8 câu hỏi thực tế kèm câu trả lời ngắn gọn, dùng FAQPage Schema</td>
+          </tr>
+          <tr>
+            <td><span class="badge b-green">2. Định nghĩa rõ ràng</span></td>
+            <td>AI tìm kiếm "X là gì" — muốn definition ngay đầu</td>
+            <td>Paragraph đầu tiên: định nghĩa súc tích trong 2–3 câu, không dẫn dắt</td>
+          </tr>
+          <tr>
+            <td><span class="badge b-teal">3. Numbered list / Steps</span></td>
+            <td>Dễ trích dẫn từng bước, có cấu trúc rõ ràng</td>
+            <td>Quy trình, hướng dẫn: dùng số thứ tự, không dùng bullet chung chung</td>
+          </tr>
+          <tr>
+            <td><span class="badge b-teal">4. Comparison table</span></td>
+            <td>AI extract bảng để trả lời "X vs Y"</td>
+            <td>So sánh sản phẩm, dịch vụ, đối thủ — HTML table có scope=col đúng</td>
+          </tr>
+          <tr>
+            <td><span class="badge b-blue">5. Statistic + source</span></td>
+            <td>AI ưu tiên nội dung có số liệu được cite</td>
+            <td>Mỗi claim quan trọng có số liệu + link nguồn uy tín (báo, nghiên cứu)</td>
+          </tr>
+          <tr>
+            <td><span class="badge b-blue">6. Expert quote</span></td>
+            <td>E-E-A-T signal, tăng trust với AI</td>
+            <td>Trích dẫn chuyên gia kèm title, tổ chức, schema Person</td>
+          </tr>
+          <tr>
+            <td><span class="badge b-amber">7. Summary / TL;DR box</span></td>
+            <td>AI đọc phần tóm tắt trước để lấy answer nhanh</td>
+            <td>Đầu bài: Key takeaways box 3–5 điểm, markup nổi bật, có thể dùng Speakable schema</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="h3">Nguyên tắc GEO — Generative Engine Optimization</div>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <thead>
+          <tr><th>Nguyên tắc</th><th>Cụ thể</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Answer-first writing</strong></td>
+            <td>Trả lời câu hỏi chính ngay trong 1–2 câu đầu tiên, không dẫn dắt dài dòng. AI lấy snippet từ đầu trang.</td>
+          </tr>
+          <tr>
+            <td><strong>Topical authority</strong></td>
+            <td>Xây topic cluster: 1 pillar page + 10–15 supporting pages cùng chủ đề. AI nhận ra domain expertise và ưu tiên nguồn đó.</td>
+          </tr>
+          <tr>
+            <td><strong>Cite từ nguồn uy tín</strong></td>
+            <td>Nếu bạn cite Wikipedia, NCBI, báo lớn — AI coi bạn là nguồn đáng tin hơn. Backlink 2 chiều càng tốt.</td>
+          </tr>
+          <tr>
+            <td><strong>Không gate nội dung</strong></td>
+            <td>Nội dung sau paywall / login không được crawl. AI sẽ không biết đến. Phần quan trọng nhất phải public hoàn toàn.</td>
+          </tr>
+          <tr>
+            <td><strong>Cập nhật định kỳ</strong></td>
+            <td>Thêm "Updated: [date]" vào bài. Perplexity và AI search ưu tiên nội dung fresh cho queries time-sensitive.</td>
+          </tr>
+          <tr>
+            <td><strong>Nội dung gốc + research</strong></td>
+            <td>Survey, case study, dữ liệu riêng → được các nguồn khác cite → AI thấy bạn là primary source, không phải aggregator.</td>
+          </tr>
+          <tr>
+            <td><strong>Ngôn ngữ tự nhiên, câu hỏi thực</strong></td>
+            <td>Dùng cách người thực sự hỏi AI: "Làm thế nào để...", "Tại sao...", "Sự khác biệt giữa... là gì". Không nhồi keyword máy móc.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- TAB 5: TEAMS -->
+  <div id="tab-teams" class="panel">
+    <div class="section-label">Playbook theo từng team — việc cụ thể cần làm</div>
+
+    <div class="team-grid">
+      <div class="tcard">
+        <div class="tcard-head">
+          <div class="tcard-dot" style="background:#1D9E75;"></div>
+          SEO Team
+        </div>
+        <ul>
+          <li>Implement FAQPage + HowTo schema trên tất cả pages</li>
+          <li>Tối ưu semantic HTML: H1 &gt; H2 &gt; H3 đúng hierarchy</li>
+          <li>Tạo llms.txt file tại root domain</li>
+          <li>Review robots.txt — không block AI bots</li>
+          <li>Xây topic cluster: 1 pillar + 10+ supporting posts</li>
+          <li>Track Featured Snippet + AI Overview appearances</li>
+          <li>Monitor Core Web Vitals hàng tuần</li>
+          <li>Viết meta description như "AI summary prompt"</li>
+          <li>Submit sitemap lên cả Google và Bing Webmaster</li>
+        </ul>
+      </div>
+
+      <div class="tcard">
+        <div class="tcard-head">
+          <div class="tcard-dot" style="background:#534AB7;"></div>
+          Content / Editorial
+        </div>
+        <ul>
+          <li>Answer-first writing: trả lời intent trong 2 câu đầu</li>
+          <li>Mỗi bài có FAQ section 5–8 câu ở cuối</li>
+          <li>Thêm author bio đầy đủ + credentials vào mỗi bài</li>
+          <li>Dùng số liệu + cite nguồn uy tín trong mọi claim</li>
+          <li>Tạo "Key Takeaways" box đầu mỗi bài dài</li>
+          <li>Update bài cũ + thêm "Last updated" date</li>
+          <li>Tạo glossary / định nghĩa cho terms ngành</li>
+          <li>Viết comparison articles (X vs Y) có structured table</li>
+        </ul>
+      </div>
+
+      <div class="tcard">
+        <div class="tcard-head">
+          <div class="tcard-dot" style="background:#D85A30;"></div>
+          Paid Ads / Performance
+        </div>
+        <ul>
+          <li>Landing page cần đủ schema để AI hiểu product</li>
+          <li>Dùng FAQ schema trên landing page quảng cáo</li>
+          <li>Test: AI Overview có xuất hiện khi search brand?</li>
+          <li>Khi AI cite đối thủ, phân tích họ viết gì để counter</li>
+          <li>AI-driven queries thường có CPC thấp hơn — cơ hội</li>
+          <li>Remarketing audience từ người đến qua AI referral</li>
+          <li>Setup UTM tracking: source=perplexity, chatgpt, copilot</li>
+        </ul>
+      </div>
+
+      <div class="tcard">
+        <div class="tcard-head">
+          <div class="tcard-dot" style="background:#BA7517;"></div>
+          Sales &amp; Marketing
+        </div>
+        <ul>
+          <li>Khi khách nói "AI recommend", hỏi platform nào</li>
+          <li>Tạo nội dung "Why [Brand]" — AI hay trả lời câu này</li>
+          <li>Testimonial + case study: AI dùng làm social proof</li>
+          <li>FAQ từ sales call → đưa vào website FAQ schema</li>
+          <li>Xây dựng brand mentions trên báo, diễn đàn ngành</li>
+          <li>LinkedIn thought leadership → tăng E-E-A-T author</li>
+          <li>Press release lên PRNewswire, 24h → AI index nhanh</li>
+        </ul>
+      </div>
+
+      <div class="tcard">
+        <div class="tcard-head">
+          <div class="tcard-dot" style="background:#185FA5;"></div>
+          Developer / Technical
+        </div>
+        <ul>
+          <li>Tạo llms.txt + llms-full.txt theo spec mới</li>
+          <li>Inject JSON-LD schema vào &lt;head&gt; động theo page type</li>
+          <li>Server-side rendering cho nội dung JS-heavy</li>
+          <li>API endpoint /sitemap.xml tự cập nhật khi publish</li>
+          <li>Monitor server logs: GPTBot, ClaudeBot crawl gì, khi nào</li>
+          <li>PageSpeed: target LCP &lt; 2s, CLS = 0</li>
+          <li>Implement hreflang cho đa ngôn ngữ VI/EN</li>
+          <li>Setup GA4 filter cho AI referral traffic</li>
+        </ul>
+      </div>
+
+      <div class="tcard">
+        <div class="tcard-head">
+          <div class="tcard-dot" style="background:#3B6D11;"></div>
+          Brand / PR
+        </div>
+        <ul>
+          <li>Wikipedia article về brand nếu chưa có</li>
+          <li>Wikidata entity cho company — AI đọc để fact-check</li>
+          <li>Được mention trong báo lớn (VnExpress, CafeF, Tuổi Trẻ)</li>
+          <li>Tham gia industry rankings, awards — AI cite chúng</li>
+          <li>Build presence trên Reddit, Quora (EN) — Perplexity index</li>
+          <li>Kiểm soát thông tin sai trên web trước khi AI học</li>
+          <li>Theo dõi brand mention trên AI platforms định kỳ</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 6: PRIORITY -->
+  <div id="tab-priority" class="panel">
+    <div class="section-label">Lộ trình triển khai theo độ ưu tiên</div>
+
+    <div class="priority-list">
+      <div class="priority-row">
+        <div class="priority-num">1</div>
+        <div class="priority-content">
+          <div class="priority-title">Kiểm tra robots.txt <span class="badge b-coral">Urgent — Làm ngay</span></div>
+          <div class="priority-desc">Nếu đang block GPTBot, ClaudeBot, PerplexityBot, Google-Extended → AI không crawl được gì cả. Mọi effort sau đều vô nghĩa. Kiểm tra tại <code>yoursite.com/robots.txt</code>.</div>
+        </div>
+      </div>
+      <div class="priority-row">
+        <div class="priority-num">2</div>
+        <div class="priority-content">
+          <div class="priority-title">Triển khai FAQPage Schema <span class="badge b-green">Tuần 1–2</span></div>
+          <div class="priority-desc">Thêm FAQ section vào 10–20 trang quan trọng nhất (homepage, landing page, blog posts hàng đầu). Validate bằng Google Rich Results Test. Đây là thay đổi có ROI cao nhất trong ngắn hạn.</div>
+        </div>
+      </div>
+      <div class="priority-row">
+        <div class="priority-num">3</div>
+        <div class="priority-content">
+          <div class="priority-title">Tạo file llms.txt <span class="badge b-green">Tuần 1–2</span></div>
+          <div class="priority-desc">Đặt tại <code>/llms.txt</code> — liệt kê trang quan trọng, mô tả công ty và sản phẩm theo format mà LLM hiểu tốt. Mất khoảng 30–60 phút nhưng đang được Perplexity và nhiều AI crawler đọc.</div>
+        </div>
+      </div>
+      <div class="priority-row">
+        <div class="priority-num">4</div>
+        <div class="priority-content">
+          <div class="priority-title">Answer-first content rewrite <span class="badge b-teal">Tháng 1</span></div>
+          <div class="priority-desc">Rewrite 20 bài quan trọng nhất theo format: Definition → Direct Answer → Evidence → FAQ. Đây là thay đổi content có impact lớn nhất với AI search. Bắt đầu từ bài có traffic cao nhất.</div>
+        </div>
+      </div>
+      <div class="priority-row">
+        <div class="priority-num">5</div>
+        <div class="priority-content">
+          <div class="priority-title">Author E-E-A-T pages <span class="badge b-teal">Tháng 1–2</span></div>
+          <div class="priority-desc">Tạo author page đầy đủ cho mỗi người viết: tên, title, credentials, LinkedIn, photo. Thêm Person schema. Link tất cả bài viết về author page. Google dùng điều này để đánh giá E-E-A-T.</div>
+        </div>
+      </div>
+      <div class="priority-row">
+        <div class="priority-num">6</div>
+        <div class="priority-content">
+          <div class="priority-title">Topic cluster architecture <span class="badge b-blue">Tháng 2–3</span></div>
+          <div class="priority-desc">Chọn 3–5 chủ đề cốt lõi. Mỗi chủ đề: 1 pillar page 2,500+ từ + 8–12 supporting posts. Interlink chặt chẽ. AI sẽ nhận ra topical authority và ưu tiên domain của bạn cho queries trong ngành.</div>
+        </div>
+      </div>
+      <div class="priority-row">
+        <div class="priority-num">7</div>
+        <div class="priority-content">
+          <div class="priority-title">Brand mentions &amp; digital PR <span class="badge b-blue">Ongoing</span></div>
+          <div class="priority-desc">Pitch báo, tham gia industry roundups, build Wikipedia presence, xuất hiện trên Quora/Reddit (EN). Mỗi unlinked mention cũng giúp AI associative learning về brand. Đây là effort dài hạn nhất nhưng compound theo thời gian.</div>
+        </div>
+      </div>
+      <div class="priority-row">
+        <div class="priority-num">8</div>
+        <div class="priority-content">
+          <div class="priority-title">Track AI referral traffic <span class="badge b-gray">Ongoing</span></div>
+          <div class="priority-desc">Setup filter trong GA4: referral từ <code>perplexity.ai</code>, <code>chatgpt.com</code>, <code>copilot.microsoft.com</code>, <code>you.com</code>, <code>claude.ai</code>. Đây là KPI mới cần theo dõi song song organic traffic. Sẽ ngày càng quan trọng hơn.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  <span>AI Search Optimization Playbook · 2025–2026</span>
+  <span>GEO · AIO · AEO · E-E-A-T · Schema.org</span>
+</div>
+
+<script>
+  function switchTab(name) {
+    var tabs = document.querySelectorAll('.tab');
+    var names = ['platforms','signals','schema','content','teams','priority'];
+    tabs.forEach(function(t, i) {
+      t.classList.toggle('active', names[i] === name);
+    });
+    document.querySelectorAll('.panel').forEach(function(p) {
+      p.classList.remove('active');
+    });
+    var el = document.getElementById('tab-' + name);
+    if (el) el.classList.add('active');
+  }
+</script>
+
+</body>
+</html>
